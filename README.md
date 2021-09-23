@@ -6,6 +6,7 @@
 
 ## General Info
 This browser based web application to ...
+* Hi, my name is Simar. I am excited about this project since I will learn many things about programming and gain insight on how developers work together
 	
 ## Technologies
 Technologies used for this project:
