@@ -8,6 +8,8 @@
 This browser based web application to ...
 * Hi, my name is Simar. I am excited about this project since I will learn many things about programming and gain insight on how developers work together
 * Hi my name is Jacob. I'm excited about this project because I get to learn more about how to create web applications.
+* Hi my name is Owen. I'm excited about this project because...
+
 	
 ## Technologies
 Technologies used for this project:
