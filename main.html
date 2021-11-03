@@ -89,9 +89,9 @@
     <div class="offcanvas-body">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <b class="list-group-item-heading">Profile Name</b>
+          <b class="list-group-item-heading" >Profile Name</b>
         </li>
-        <a href="#" class="list-group-item">John Doe</a>
+        <a href="#" class="list-group-item" id="profilename" >John Doe</a>
       </ul>
 
       <ul class="list-group list-group-flush">
@@ -199,7 +199,7 @@
             .then(userDoc => {
               var user_Name = userDoc.data().name;
               console.log(user_Name);
-              document.getElementById("offcanvasRightLabel").innerText = user_Name;
+              document.getElementById("profilename").innerText = user_Name;
             })
         } else {
           // No user is signed in.
