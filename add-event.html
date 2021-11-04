@@ -176,16 +176,84 @@
       </div>
     </div>
 
-    <img
-      src="/images/Coming Soon.png"
-      alt="Coming soon - please come back another time!"
-      style="
-        width: 100%;
-        height: auto;
-        justify-self: center;
-        align-self: center;
-      "
-    />
+    <div class="container-fluid">
+      <div class="col-md-7 col-lg-8">
+        <form>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label">Event Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="eventName"
+                placeholder="Assignment 1"
+                value=""
+                required=""
+              />
+              <div class="invalid-feedback">Valid name is required.</div>
+            </div>
+
+            <div class="col-md-5">
+              <label class="form-label">Event Type</label>
+              <select class="form-select" id="eventType" required="">
+                <option value="">Choose...</option>
+                <option>Assignment</option>
+                <option>Test</option>
+                <option>Project</option>
+                <option>Group Meeting</option>
+                <option>Exam</option>
+                <option>Break</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid event type.
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label class="form-label">Course</label>
+              <select class="form-select" id="courseName" required="">
+                <option value="">Choose...</option>
+                <option>COMP 1113</option>
+                <option>COMM 1116</option>
+                <option>COMP 1510</option>
+                <option>COMP 1537</option>
+                <option>COMP 1712</option>
+                <option>COMP 1800</option>
+              </select>
+              <div class="invalid-feedback">Please select a valid course.</div>
+            </div>
+
+            <div class="form-group">
+              <!-- Date input -->
+              <label class="control-label" for="date">Date</label>
+              <input
+                class="form-control"
+                id="date"
+                name="date"
+                placeholder="MM/DD/YYYY"
+                type="text"
+              />
+            </div>
+
+            <div class="md-form">
+              <label for="inputMDEx1">Time Due</label>
+              <input type="time" id="inputMDEx1" class="form-control" />
+            </div>
+          </div>
+
+          <br />
+
+          <div class="d-grid">
+            <input
+              class="btn btn-primary float-md-end"
+              type="submit"
+              value="Add Event"
+              onclick="location.href='calendar.html';"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
 
     <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
       <div class="container py-3" id="footer">
