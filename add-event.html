@@ -26,6 +26,17 @@
     <!-- My CSS Stylesheet-->
     <link rel="stylesheet" href="styles/my_style.css" />
 
+    <!-- Firebase 8 CDNs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <!-- Link to api keys for Firebase project -->
     <script src="scripts/firebaseAPI_BBY20.js"></script>
   </head>
@@ -72,18 +83,12 @@
               <a class="nav-link" href="links.html">Class Links</a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link disabled"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Chat
-              </a>
+              <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
             </li>
             <li class="nav-item">
               <a
-                class="nav-link disabled"
-                href="#"
+                class="nav-link"
+                href="mocktest.html"
                 tabindex="-1"
                 aria-disabled="true"
                 >Mock Test
@@ -91,8 +96,8 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link disabled"
-                href="#"
+                class="nav-link"
+                href="help.html"
                 tabindex="-1"
                 aria-disabled="true"
                 >Help
@@ -112,7 +117,7 @@
       aria-labelledby="offcanvasRightLabel"
     >
       <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">[Username]</h5>
+        <img id="accountimg" src="images/account.png" />
         <button
           type="button"
           class="btn-close text-reset"
@@ -125,7 +130,7 @@
           <li class="list-group-item">
             <b class="list-group-item-heading">Profile Name</b>
           </li>
-          <a href="#" class="list-group-item">John Doe</a>
+          <a href="#" class="list-group-item" id="profilename">John Doe</a>
         </ul>
 
         <ul class="list-group list-group-flush">
@@ -270,5 +275,29 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Javascript -->
+    <script>
+      function insertName() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid);
+            //get the document for current user.
+            currentUser.get().then((userDoc) => {
+              var user_Name = userDoc.data().name;
+              console.log(user_Name);
+              document.getElementById("profilename").innerText = user_Name;
+            });
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+      insertName();
+    </script>
   </body>
 </html>

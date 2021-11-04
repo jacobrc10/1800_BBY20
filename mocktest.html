@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Know-It-All Notifier - Class Links Page</title>
+  <title>Know-It-All Notifier - Mock Test</title>
   <meta name="comp1800 boilerplate code" content="my bcit project" />
   <meta name="author" content="BCIT" />
   <!-- Required meta tags -->
@@ -40,7 +40,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Class Links</a>
+      <a class="navbar-brand" href="#">Mock Test</a>
       <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         account_circle
@@ -121,30 +121,40 @@
     </div>
   </div>
 
-  <div style="margin-left: 5vw; margin-right: 5vw">
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action active">
-        Lecture Links
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1510</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1712</a>
+ 
+  <div class="container">
+
+    <h1 class="display-4" style="text-align: center">Create Mock Test</h1>
+
+    <br><br><br>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Test Name</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ex: COMP 1113 Midterm">
     </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <p>Choose class:</p>
+    <select class="form-select" aria-label="Default select example">    
+      <option selected>Class:</option>
+      <option value="1">COMP 1113</option>
+      <option value="2">COMM 1116</option>
+      <option value="3">COMP 1510</option>
+      <option value="4">COMP 1537</option>
+      <option value="5">COMP 1712</option>
+    </select>
 
     <br>
-    <br>
+    <form>
+      <label for="appt-time">Temporary "clock" </label>
+      <input id="appt-time" type="time" name="appt-time">
+      <button style="float: right;" type="button" class="btn btn-primary btn-sm" onclick="location.href='timer.html'">Start Mock Test</button>
+    </form>
 
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action active">
-        Lab Links
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1113</a>
-      <a href="#" class="list-group-item list-group-item-action">Comm 1116</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
-    </div>
   </div>
-
-
+  
+  
 
   <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
     <div class="container py-3" id="footer">
