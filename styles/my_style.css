@@ -59,3 +59,17 @@ button {
   margin-left: 5%;
   margin-top: 5%;
 }
+
+table {
+  font-size: 0.5rem;
+  border-spacing: 0;
+}
+
+.display-6 {
+  font-size: 1.5rem;
+}
+
+#dateDisplayName {
+  margin-left: 2%;
+  margin-right: 2%;
+}
