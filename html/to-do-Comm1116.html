@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Know-It-All Notifier - Profile Page</title>
+  <title>Know-It-All Notifier - To-Do List Comm 1116 Page</title>
   <meta name="comp1800 boilerplate code" content="my bcit project" />
   <meta name="author" content="BCIT" />
   <!-- Required meta tags -->
@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <!-- My CSS Stylesheet-->
-  <link rel="stylesheet" href="styles/my_style.css" />
+  <link rel="stylesheet" href="/styles/my_style.css" />
 
   <!-- Firebase 8 CDNs-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -30,7 +30,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
   <!-- Link to api keys for Firebase project -->
-  <script src="scripts/firebaseAPI_BBY20.js"></script>
+  <script src="/scripts/firebaseAPI_BBY20.js"></script>
+
 </head>
 
 <body>
@@ -40,7 +41,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">User Profile</a>
+      <a class="navbar-brand" href="#">To-Do List</a>
       <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         account_circle
@@ -80,7 +81,7 @@
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <img id="accountimg" src="images/account.png" />
+      <img id="accountimg" src="/images/account.png" />
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -121,12 +122,40 @@
     </div>
   </div>
 
-  <img src="/images/Coming Soon.png" alt="Coming soon - please come back another time!" style="
-        width: 100%;
-        height: auto;
-        justify-self: center;
-        align-self: center;
-      " />
+  <h1 class="display-4" style="text-align: center">Comp 1116</h1>
+
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="d-block w-100" style="padding: 10vw;">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">Watch Week 9 Video - November 5, 2021</li>
+            <li class="list-group-item list-group-item-warning">Quiz 6 - November 5, 2021</li>
+            <li class="list-group-item list-group-item-warning">Chapter 6 Discussion - November 6, 2021</li>
+          </ul>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="..." alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="..." alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="to-do-Comp1113.html" role="button" data-slide="prev"
+      style="background-color: gray;width: 8%;height: 100%">
+      <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black"></span>
+      <span aria-hidden="true">Comp 1113</span>
+    </a>
+    <a class="carousel-control-next" href="#" role="button" data-slide="next"
+      style="background-color: lightgray;width: 8%;height: 100%">
+      <span class=" carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <br>
+  <br>
+  <br>
 
   <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
     <div class="container py-3" id="footer">
@@ -140,7 +169,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
-    <!-- Javascript -->
+  <!-- Javascript -->
   <script>
     function insertName() {
       firebase.auth().onAuthStateChanged(user => {

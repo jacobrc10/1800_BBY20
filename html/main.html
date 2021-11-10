@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Know-It-All Notifier - Class Links Page</title>
+  <title>Know-It-All Notifier - Main Page</title>
   <meta name="comp1800 boilerplate code" content="my bcit project" />
   <meta name="author" content="BCIT" />
   <!-- Required meta tags -->
@@ -18,7 +18,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <!-- My CSS Stylesheet-->
-  <link rel="stylesheet" href="styles/my_style.css" />
+  <link rel="stylesheet" href="/styles/my_style.css" />
+
 
   <!-- Firebase 8 CDNs-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -29,8 +30,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
+
   <!-- Link to api keys for Firebase project -->
-  <script src="scripts/firebaseAPI_BBY20.js"></script>
+  <script src="/scripts/firebaseAPI_BBY20.js"></script>
 </head>
 
 <body>
@@ -40,7 +42,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Class Links</a>
+      <a class="navbar-brand" href="#">Know-It-All Notifier</a>
       <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         account_circle
@@ -80,7 +82,8 @@
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <img id="accountimg" src="images/account.png" />
+      <!-- <h5 id="offcanvasRightLabel">[Username]</h5> -->
+      <img id="accountimg" src="/images/account.png" />
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -121,31 +124,54 @@
     </div>
   </div>
 
-  <div style="margin-left: 5vw; margin-right: 5vw">
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action active">
-        Lecture Links
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1510</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1712</a>
-    </div>
-
-    <br>
-    <br>
-
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action active">
-        Lab Links
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1113</a>
-      <a href="#" class="list-group-item list-group-item-action">Comm 1116</a>
-      <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
-    </div>
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      ALL CLASSES
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="#">COMP 1800</a></li>
+      <li><a class="dropdown-item" href="#">COMM 1116</a></li>
+      <li><a class="dropdown-item" href="#">COMP 1537</a></li>
+    </ul>
   </div>
 
+  <br />
 
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">URGENT!</h4>
+    <p>COMP-1800 Projects 1 - Clickable Wireframe - Start coding.</p>
+    <hr />
+    <p class="mb-0">Due: October 15, 2021 11:59PM</p>
+  </div>
 
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Upcoming</h4>
+    <p>
+      Midterms for COMP1113, COMP 1510, COMM 1116, COMP 1537 and COMP1712.
+    </p>
+    <hr />
+    <p class="mb-0">Due: October 18 - 22, 2021</p>
+  </div>
+
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Upcoming Assignment</h4>
+    <p>
+      COMP-1116 Business Communications - Chapter 5 Discussion: Emails,
+      Letters, and Memos.
+    </p>
+    <hr />
+    <p class="mb-0">Due: October 17, 2021 11:59PM</p>
+  </div>
+
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Upcoming Assignment</h4>
+    <p>COMP-1537 Web Development - Assignment 3.</p>
+    <hr />
+    <p class="mb-0">Due: October 28, 2021 1:30PM</p>
+  </div>
+
+  <br><br><br><br>
   <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
     <div class="container py-3" id="footer">
       <a class="material-icons md-light" href="main.html">home</a>
@@ -155,10 +181,11 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 
-    <!-- Javascript -->
+    </script>
+
+  <!-- Javascript -->
   <script>
     function insertName() {
       firebase.auth().onAuthStateChanged(user => {
