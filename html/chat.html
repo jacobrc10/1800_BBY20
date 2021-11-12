@@ -201,31 +201,37 @@
                             <ul class="m-b-0">
                                 <li class="clearfix">
                                     <div class="message-data text-right" style="float: right">
-                                        <span class="message-data-time">10:10 AM, Today</span>
+                                        <span class="message-data-time">10:10 AM</span>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                                     </div>
+                                    <br>
+                                    <br>
+                                    <br>
                                     <div class="message other-message float-right"> Hi Aiden, how are you? How is the
                                         project coming along? </div>
                                 </li>
                                 <li class="clearfix">
                                     <div class="message-data">
-                                        <span class="message-data-time">10:12 AM, Today</span>
+                                        <span class="message-data-time">10:12 AM</span>
                                     </div>
                                     <div class="message my-message">Are we meeting today?</div>
                                 </li>
                                 <li class="clearfix">
                                     <div class="message-data">
-                                        <span class="message-data-time">10:15 AM, Today</span>
+                                        <span class="message-data-time">10:15 AM</span>
                                     </div>
                                     <div class="message my-message">Project has been already finished and I have results
                                         to
                                         show you.</div>
                                 </li>
-                                <li class="clearfix">
+                                <li class="clearfix" id="add_after_me">
                                     <div class="message-data text-right" style="float: right">
-                                        <span class="message-data-time">10:10 AM, Today</span>
+                                        <span class="message-data-time" id="date-goes-here"></span>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                                     </div>
+                                    <br>
+                                    <br>
+                                    <br>
                                     <div class="message other-message float-right" id="message-goes-here"></div>
                                 </li>
                             </ul>
@@ -262,6 +268,9 @@
 
     <!-- Javascript -->
     <script>
+        var increment = 1;
+
+
         function insertName() {
             firebase.auth().onAuthStateChanged(user => {
                 // Check if user is signed in:
@@ -287,39 +296,44 @@
         function sendMessage() {
             let Message = document.getElementById("message").value;
 
+
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
-                    var currentUser = db.collection("users").doc(user.uid)
+
                     var userID = user.uid;
-                    //get the document for current user.
-                    currentUser.get()
-                        .then(userDoc => {
-                            // Start a new collection and add all data in it.
-                            db.collection("Messages").add({
-                                Message: Message,
-                                UserID: userID
-                            });
-                        })
+                    let incrementString = "Message#: " + increment;
+
+                    db.collection("Messages").doc(incrementString).set({
+                        Message: Message,
+                        UserID: userID,
+                        Date: firebase.firestore.Timestamp.now(),
+                        MessageCount: increment
+                    });
+
                 } else {
                     // No user is signed in.
                     console.log("no user signed in");
                 }
+
             });
+            console.log(increment + " send");
         }
+
+
 
         function insertMessage() {
-
-            db.collection("Messages").doc("WIxZWPHYuMSnnx8sceiX")
+            let incrementString = "Message#: " + increment;
+            db.collection("Messages").doc(incrementString)
                 //get the document for current user.
-                .onSnapshot(Doc => { //
-                    //console.log("current document data: " + TuesdayDoc.data()); //.data() returns data object
-                    document.getElementById("message-goes-here").innerHTML = Doc.data()
-                        .Message; //using vanilla javascript
+                .onSnapshot(doc => { //
+                    console.log(increment + " insert");
+                    document.getElementById("message-goes-here").innerHTML = doc.data().Message;
+                    document.getElementById("date-goes-here").innerHTML = doc.data().Date.toDate().toLocaleString([], { hour: '2-digit', minute: '2-digit' }); //using vanilla javascript
                 })
 
-
-
         }
+        insertMessage();
+
     </script>
 </body>
 
