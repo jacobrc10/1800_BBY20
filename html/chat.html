@@ -221,14 +221,22 @@
                                         to
                                         show you.</div>
                                 </li>
+                                <li class="clearfix">
+                                    <div class="message-data text-right" style="float: right">
+                                        <span class="message-data-time">10:10 AM, Today</span>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                    </div>
+                                    <div class="message other-message float-right" id="message-goes-here"></div>
+                                </li>
                             </ul>
                         </div>
                         <div class="chat-message clearfix">
                             <div class="input-group mb-0">
                                 <div class="input-group-prepend" style="align-self: center">
-                                    <a href="#"><span class="input-group-text"><i class="fa fa-send"></i></span></a>
+                                    <a onclick="sendMessage()"><span class="input-group-text"><i
+                                                class="fa fa-send"></i></span></a>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Enter text here...">
+                                <input type="text" class="form-control" id="message" placeholder="Enter text here...">
                             </div>
                         </div>
                     </div>
@@ -275,6 +283,43 @@
             });
         }
         insertName();
+
+        function sendMessage() {
+            let Message = document.getElementById("message").value;
+
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    var currentUser = db.collection("users").doc(user.uid)
+                    var userID = user.uid;
+                    //get the document for current user.
+                    currentUser.get()
+                        .then(userDoc => {
+                            // Start a new collection and add all data in it.
+                            db.collection("Messages").add({
+                                Message: Message,
+                                UserID: userID
+                            });
+                        })
+                } else {
+                    // No user is signed in.
+                    console.log("no user signed in");
+                }
+            });
+        }
+
+        function insertMessage() {
+
+            db.collection("Messages").doc("WIxZWPHYuMSnnx8sceiX")
+                //get the document for current user.
+                .onSnapshot(Doc => { //
+                    //console.log("current document data: " + TuesdayDoc.data()); //.data() returns data object
+                    document.getElementById("message-goes-here").innerHTML = Doc.data()
+                        .Message; //using vanilla javascript
+                })
+
+
+
+        }
     </script>
 </body>
 
