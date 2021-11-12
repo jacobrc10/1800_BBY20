@@ -216,7 +216,7 @@
 
             <div class="col-md-5">
               <label class="form-label">Course</label>
-              <select class="form-select" id="courseName" required="">
+              <select class="form-select" id="courseLink" required="">
                 <option value="">Choose...</option>
                 <option>COMP 1113</option>
                 <option>COMM 1116</option>
@@ -233,7 +233,7 @@
               <label class="control-label" for="date">Date</label>
               <input
                 class="form-control"
-                id="date"
+                id="dueDate"
                 name="date"
                 placeholder="MM/DD/YYYY"
                 type="text"
@@ -241,20 +241,21 @@
             </div>
 
             <div class="md-form">
-              <label for="inputMDEx1">Time Due</label>
-              <input type="time" id="inputMDEx1" class="form-control" />
+              <label for="dueTime">Time Due</label>
+              <input type="time" id="dueTime" class="form-control" />
             </div>
           </div>
 
           <br />
 
           <div class="d-grid">
-            <input
+            <button
               class="btn btn-primary float-md-end"
-              type="submit"
-              value="Add Event"
-              onclick="location.href='calendar.html';"
-            />
+              type="button"
+              onclick="eventCreate()"
+            >
+              Add event
+            </button>
           </div>
         </form>
       </div>
@@ -298,6 +299,42 @@
         });
       }
       insertName();
+
+      function eventCreate() {
+        let nameToAdd = document.getElementById("eventName").value;
+        let typeToAdd = document.getElementById("eventType").value;
+        let courseToAdd = document.getElementById("courseLink").value;
+        let dateToAdd = document.getElementById("dueDate").value;
+        let timeToAdd = document.getElementById("dueTime").value;
+        let userToAdd;
+
+        console.log(nameToAdd);
+        console.log(typeToAdd);
+        console.log(courseToAdd);
+        console.log(dateToAdd);
+        console.log(timeToAdd);
+
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            userToAdd = uid;
+
+            db.collection("events").add({
+              title: nameToAdd,
+              eventType: typeToAdd,
+              courseLink: courseToAdd,
+              dueDate: dateToAdd,
+              dueTime: timeToAdd,
+              userID: userToAdd,
+            });
+          } else {
+            // User is signed out
+            console.log("No user is signed in");
+          }
+        });
+      }
     </script>
   </body>
 </html>
