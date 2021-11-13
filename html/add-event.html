@@ -321,14 +321,18 @@
             var uid = user.uid;
             userToAdd = uid;
 
-            db.collection("events").add({
-              title: nameToAdd,
-              eventType: typeToAdd,
-              courseLink: courseToAdd,
-              dueDate: dateToAdd,
-              dueTime: timeToAdd,
-              userID: userToAdd,
-            });
+            db.collection("events")
+              .add({
+                title: nameToAdd,
+                eventType: typeToAdd,
+                courseLink: courseToAdd,
+                dueDate: dateToAdd,
+                dueTime: timeToAdd,
+                userID: userToAdd,
+              })
+              .then(() => {
+                console.log("Event added to user " + userToAdd);
+              });
           } else {
             // User is signed out
             console.log("No user is signed in");

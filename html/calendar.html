@@ -25,6 +25,7 @@
 
     <!-- My CSS Stylesheet-->
     <link rel="stylesheet" href="/styles/my_style.css" />
+    <link rel="stylesheet" href="/syules/calendar.css" />
 
     <!-- Firebase 8 CDNs-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -39,6 +40,17 @@
 
     <!-- Link to api keys for Firebase project -->
     <script src="/scripts/firebaseAPI_BBY20.js"></script>
+
+    <!-- calender.io resources-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   </head>
 
   <body>
@@ -181,390 +193,7 @@
       </div>
     </div>
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item" id="dateDisplayName">
-          <h3 class="display-6">November 7 - November 13</h3>
-        </li>
-        <li class="page-item disabled">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Time</th>
-          <th scope="col">Sun.</th>
-          <th scope="col">Mon.</th>
-          <th scope="col">Tue.</th>
-          <th scope="col">Wed.</th>
-          <th scope="col">Thu.</th>
-          <th scope="col">Fri.</th>
-          <th scope="col">Sat.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">7:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">7:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">8:00</th>
-          <td></td>
-          <td class="table-secondary">COMMUTE</td>
-          <td></td>
-          <td class="table-secondary">COMMUTE</td>
-          <td class="table-secondary">COMMUTE</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">8:30</th>
-          <td></td>
-          <td class="table-primary">COMP 1510 - Lab</td>
-          <td></td>
-          <td class="table-primary">COMP 1510 - Tutorial</td>
-          <td class="table-danger">COMP 1800 - Lab</td>
-          <td class="table-warning">COMM 1116 - Lecuture</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">9:00</th>
-          <td></td>
-          <td class="table-primary"></td>
-          <td></td>
-          <td class="table-primary"></td>
-          <td class="table-danger"></td>
-          <td class="table-warning"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">9:30</th>
-          <td></td>
-          <td class="table-primary"></td>
-          <td></td>
-          <td></td>
-          <td class="table-danger"></td>
-          <td class="table-warning"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">10:00</th>
-          <td></td>
-          <td class="table-primary"></td>
-          <td></td>
-          <td></td>
-          <td class="table-danger"></td>
-          <td class="table-warning"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">10:30</th>
-          <td></td>
-          <td class="table-primary">COMP 1510 - Lecture</td>
-          <td class="table-danger">COMP 1800 - Lecture</td>
-          <td class="table-info">COMP 1113 - Lab</td>
-          <td class="table-warning">COMM 1116 - Lab</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">11:00</th>
-          <td></td>
-          <td class="table-primary"></td>
-          <td class="table-danger"></td>
-          <td class="table-info"></td>
-          <td class="table-warning"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">11:30</th>
-          <td></td>
-          <td class="table-secondary"></td>
-          <td class="table-danger"></td>
-          <td class="table-info"></td>
-          <td class="table-warning"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">12:00</th>
-          <td></td>
-          <td class="table-secondary">COMMUTE</td>
-          <td class="table-danger"></td>
-          <td class="table-info"></td>
-          <td class="table-warning"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">12:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="table-primary">COMP 1510 - Lab</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">13:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="table-primary"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">13:30</th>
-          <td></td>
-          <td></td>
-          <td class="table-success">COMP 1537 - Lecture</td>
-          <td class="table-primary">COMP 1510 - Lecture</td>
-          <td class="table-success">COMP 1537 - Lab</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">14:00</th>
-          <td></td>
-          <td></td>
-          <td class="table-success"></td>
-          <td class="table-primary"></td>
-          <td class="table-success"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">14:30</th>
-          <td></td>
-          <td></td>
-          <td class="table-success"></td>
-          <td class="table-secondary"></td>
-          <td class="table-success"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">15:00</th>
-          <td></td>
-          <td></td>
-          <td class="table-success"></td>
-          <td class="table-secondary">COMMUTE</td>
-          <td class="table-success"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">15:30</th>
-          <td></td>
-          <td></td>
-          <td class="table-primary">COMP 1510 - Lecture</td>
-          <td></td>
-          <td class="table-secondary"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">16:00</th>
-          <td></td>
-          <td></td>
-          <td class="table-primary"></td>
-          <td></td>
-          <td class="table-secondary">COMMUTE</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">16:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">17:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">17:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">18:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">18:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">19:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">19:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">20:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">20:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">21:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">21:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">22:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">22:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">23:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">23:30</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">24:00</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="calendar"></div>
 
     <br />
     <br />
@@ -607,6 +236,72 @@
         });
       }
       insertName();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "timeGridWeek",
+          aspectRatio: 1.17,
+          selectable: true,
+          selectHelper: true,
+          editable: true,
+          eventLimit: true,
+          headerToolbar: {
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          },
+          events: [
+            {
+              title: "All Day Event",
+              start: "2021-11-01",
+            },
+            {
+              title: "Long Event",
+              start: "2021-11-07",
+              end: "2021-11-10",
+            },
+            {
+              groupId: "999",
+              title: "Repeating Event",
+              start: "2021-11-09T16:00:00",
+            },
+            {
+              groupId: "999",
+              title: "Repeating Event",
+              start: "2021-11-16T16:00:00",
+            },
+            {
+              title: "Conference",
+              start: "2021-11-11",
+              end: "2021-11-13",
+            },
+            {
+              title: "Meeting",
+              start: "2021-11-12T10:30:00",
+              end: "2021-11-12T12:30:00",
+            },
+            {
+              title: "Lunch",
+              start: "2021-11-12T12:00:00",
+            },
+            {
+              title: "Meeting",
+              start: "2021-11-12T14:30:00",
+            },
+            {
+              title: "Birthday Party",
+              start: "2021-11-13T07:00:00",
+            },
+            {
+              title: "Click for Google",
+              url: "http://google.com/",
+              start: "2021-11-28",
+            },
+          ],
+        });
+        calendar.render();
+      });
     </script>
   </body>
 </html>

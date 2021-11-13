@@ -212,28 +212,29 @@
             </div>
 
             <div class="col-sm-6">
-              <div class="form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                />
-                <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >Lecture Delivery: Online ----- In-Person</label
-                >
+              <div class="col-md-5">
+                <label class="form-label">Lecture Delivery</label>
+                <select class="form-select" id="lectureStat" required="">
+                  <option value="">Choose...</option>
+                  <option>In-Person</option>
+                  <option>Online</option>
+                  <option>Mixed</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid delivery system.
+                </div>
               </div>
-              <div class="form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckChecked"
-                  checked
-                />
-                <label class="form-check-label" for="flexSwitchCheckChecked"
-                  >Lab Delivery: Online ----- In-Person</label
-                >
+              <div class="col-md-5">
+                <label class="form-label">Lab Delivery</label>
+                <select class="form-select" id="labStat" required="">
+                  <option value="">Choose...</option>
+                  <option>In-Person</option>
+                  <option>Online</option>
+                  <option>Mixed</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid delivery system.
+                </div>
               </div>
             </div>
 
@@ -260,7 +261,7 @@
               <button
                 class="btn btn-primary end-0"
                 type="button"
-                onclick="location.href='calendar.html';"
+                onclick="classCreate()"
               >
                 Confirm
               </button>
@@ -288,6 +289,9 @@
 
     <!-- Javascript -->
     <script>
+      var lectureStatus = "off";
+      var labStatus = "on";
+
       function insertName() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -308,6 +312,40 @@
         });
       }
       insertName();
+
+      function classCreate() {
+        let nameToAdd = document.getElementById("className").value;
+        let linkToAdd = document.getElementById("classLink").value;
+        let lectureStatus = document.getElementById("lectureStat").value;
+        let labStatus = document.getElementById("labStat").value;
+        let userToAdd;
+
+        console.log(nameToAdd);
+        console.log(linkToAdd);
+        console.log(lectureStatus);
+        console.log(labStatus);
+        console.log(userToAdd);
+
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            userToAdd = uid;
+
+            db.collection("courses").add({
+              name: nameToAdd,
+              link: linkToAdd,
+              lectureDelivery: lectureStatus,
+              labDelivery: labStatus,
+              userID: userToAdd,
+            });
+          } else {
+            // User is signed out
+            console.log("No user is signed in");
+          }
+        });
+      }
     </script>
   </body>
 </html>
