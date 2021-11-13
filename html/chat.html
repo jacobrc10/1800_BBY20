@@ -270,7 +270,6 @@
     <script>
         var increment = 1;
 
-
         function insertName() {
             firebase.auth().onAuthStateChanged(user => {
                 // Check if user is signed in:
@@ -301,8 +300,11 @@
                 if (user) {
 
                     var userID = user.uid;
+
+                    //The collection name
                     let incrementString = "Message#: " + increment;
 
+                    //Relays back the message, user ID, timestamp of date and the message number
                     db.collection("Messages").doc(incrementString).set({
                         Message: Message,
                         UserID: userID,
@@ -322,13 +324,21 @@
 
 
         function insertMessage() {
+
             let incrementString = "Message#: " + increment;
+
             db.collection("Messages").doc(incrementString)
-                //get the document for current user.
-                .onSnapshot(doc => { //
+
+                .onSnapshot(doc => {
+                    //Tests if the inserted message has the same increment as the sent message
                     console.log(increment + " insert");
+
+                    //Inserts the message to HTML
                     document.getElementById("message-goes-here").innerHTML = doc.data().Message;
-                    document.getElementById("date-goes-here").innerHTML = doc.data().Date.toDate().toLocaleString([], { hour: '2-digit', minute: '2-digit' }); //using vanilla javascript
+
+                    //Inserts the real time to HTML
+                    document.getElementById("date-goes-here").innerHTML = doc.data().Date.toDate().toLocaleString([],
+                        { hour: '2-digit', minute: '2-digit' });
                 })
 
         }
