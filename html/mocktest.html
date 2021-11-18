@@ -132,14 +132,14 @@
     <br><br><br>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Test Name</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ex: COMP 1113 Midterm">
+      <input type="text" class="form-control" id="test" placeholder="Ex: COMP 1113 Midterm">
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" id="notes" rows="3"></textarea>
     </div>
     <p>Choose class:</p>
-    <select class="form-select" aria-label="Default select example">
+    <select class="form-select" aria-label="Default select example" id="course">
       <option selected>Class:</option>
       <option value="1">COMP 1113</option>
       <option value="2">COMM 1116</option>
@@ -150,12 +150,21 @@
 
     <br>
     <div class="text-center card-body" id="chronoExample">
-      <div class="values">00:00:00</div>
+      <div class="values" id="time">00:00:00</div>
       <div>
         <button class="startButton btn btn-success btn-lg mb-1">Start</button>
-        <button class="pauseButton btn btn-primary btn-lg mb-1">Pause</button>
+        <button class="pauseButton btn btn-warning btn-lg mb-1">Pause</button>
         <button class="stopButton btn btn-danger btn-lg mb-1">Stop</button>
+        <button class="btn btn-primary btn-lg mb-1" onclick="addTest()">Submit Time</button>
       </div>
+      <br>
+      <div>
+        <button class="btn btn-primary btn-lg mb-1" onclick="insertTests()">View Tests</button>
+      </div>
+    </div>
+
+    <div id="testview">
+
     </div>
 
   </div>
@@ -223,6 +232,65 @@
     timer.addEventListener('reset', function (e) {
       $('#chronoExample .values').html(timer.getTimeValues().toString());
     });
+
+    function addTest() {
+      var testTime = document.getElementById("time").innerText;
+      var testName = document.getElementById("test").value;
+      var testNotes = document.getElementById("notes").value;
+
+      var courseIndex = document.getElementById("course");
+      var courseName = courseIndex.options[courseIndex.selectedIndex].text;
+
+      console.log(time);
+      console.log(test);
+      console.log(notes);
+      console.log(course);
+
+      firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here: 
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentUser = db.collection("users").doc(user.uid).collection("tests");
+          //get the document for current user.
+          currentUser.get()
+            .then(userDoc => {
+              ;
+              currentUser.add({
+                test: testName,
+                course: courseName,
+                notes: testNotes,
+                time: testTime
+              })
+            })
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+
+    function insertTests() {
+      firebase.auth().onAuthStateChanged(user => {
+
+        if (user) {
+          console.log(user.uid);
+
+          db.collection("users").doc(user.uid).collection("tests").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.data());
+              var test = doc.data().test + " " +  doc.data().course + " " + doc.data().notes + " " + doc.data().time + "\n";
+              document.getElementById("testview").innerText += test;
+            });
+          });
+
+
+
+        }
+      })
+
+    }
   </script>
 
 </body>
