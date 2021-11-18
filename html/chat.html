@@ -224,27 +224,32 @@
                                         to
                                         show you.</div>
                                 </li>
-                                <li class="clearfix" id="add_after_me">
+                                <li class="clearfix">
                                     <div class="message-data text-right" style="float: right">
-                                        <span class="message-data-time" id="date-goes-here"></span>
+                                        <span class="message-data-time date-goes-here" id="date-goes-here"></span>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                                     </div>
                                     <br>
                                     <br>
                                     <br>
-                                    <div class="message other-message float-right" id="message-goes-here"></div>
+                                    <div class="message other-message float-right message-goes-here"
+                                        id="message-goes-here"></div>
+                                </li>
+                                <li id="add_after_me">
+
                                 </li>
                             </ul>
                         </div>
                         <div class="chat-message clearfix">
                             <div class="input-group mb-0">
                                 <div class="input-group-prepend" style="align-self: center">
-                                    <a onclick="sendMessage()"><span class="input-group-text"><i
-                                                class="fa fa-send"></i></span></a>
+                                    <a onclick="sendMessage();addMessage();addContent()"><span
+                                            class="input-group-text"><i class="fa fa-send"></i></span></a>
                                 </div>
                                 <input type="text" class="form-control" id="message" placeholder="Enter text here...">
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -318,14 +323,16 @@
                 }
 
             });
+            increment++;
             console.log(increment + " send");
         }
 
 
 
-        function insertMessage() {
+        function insertFirstMessage() {
 
             let incrementString = "Message#: " + increment;
+
 
             db.collection("Messages").doc(incrementString)
 
@@ -339,10 +346,65 @@
                     //Inserts the real time to HTML
                     document.getElementById("date-goes-here").innerHTML = doc.data().Date.toDate().toLocaleString([],
                         { hour: '2-digit', minute: '2-digit' });
+
+
                 })
 
         }
-        insertMessage();
+        insertFirstMessage();
+
+        function addMessage() {
+            let idIncrement = "message-goes-here" + increment;
+            console.log(idIncrement);
+
+            var tag = document.createElement('div');
+            let incrementString = "Message#: " + increment;
+
+            let dateString = "date-goes-here" + increment;
+
+            tag.innerHTML = '<li class="clearfix">' +
+                '<div class="message-data text-right" style="float: right">' +
+                '<span class="message-data-time date-goes-here"></span>' +
+                '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
+                '</div>' +
+                '<br>' +
+                '<br>' +
+                '<br>' +
+                '<div class="message other-message float-right message-goes-here"></div>' +
+                '<br>' +
+                '<br>' +
+                '<br>' +
+                '</li>';
+
+            var element = document.getElementById("add_after_me");
+            element.appendChild(tag);
+
+        }
+
+        function addContent() {
+            let incrementString = "Message#: " + increment;
+
+            console.log(incrementString);
+
+            db.collection("Messages").doc(incrementString)
+
+                .onSnapshot(doc => {
+                    var message = document.getElementsByClassName("message-goes-here")[increment - 1];
+
+                    var date = document.getElementsByClassName("date-goes-here")[increment - 1];
+                    //Tests if the inserted message has the same increment as the sent message
+                    console.log(increment + " insert");
+
+                    //Inserts the message to HTML
+                    message.innerHTML = doc.data().Message;
+
+                    //Inserts the real time to HTML
+                    date.innerHTML = doc.data().Date.toDate().toLocaleString([],
+                        { hour: '2-digit', minute: '2-digit' });
+
+
+                })
+        }
 
     </script>
 </body>
