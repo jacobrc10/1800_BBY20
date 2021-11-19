@@ -138,46 +138,51 @@
                             <input type="text" class="form-control" placeholder="Search...">
                         </div>
                         <ul class="list-unstyled chat-list mt-2 mb-0">
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(0)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                            <li class="clearfix active"
+                                onclick="removeActiveClass();activeClass(1);changeActiveProfile(1)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Vincent Porter</div>
 
                                 </div>
                             </li>
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(1)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                            <li class="clearfix" onclick="removeActiveClass();activeClass(2);changeActiveProfile(2)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Aiden Chavez</div>
 
                                 </div>
                             </li>
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(2)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
+                            <li class="clearfix" onclick="removeActiveClass();activeClass(3);changeActiveProfile(3)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Brittany Thomas</div>
 
                                 </div>
                             </li>
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(3)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                            <li class="clearfix" onclick="removeActiveClass();activeClass(4);changeActiveProfile(4)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Christian Kelly</div>
 
                                 </div>
                             </li>
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(4)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar">
+                            <li class="clearfix" onclick="removeActiveClass();activeClass(5);changeActiveProfile(5)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Monica Ward</div>
-
                                 </div>
                             </li>
-                            <li class="clearfix" onclick="removeActiveClass();activeClass(5)">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
+                            <li class="clearfix" onclick="removeActiveClass();activeClass(6);changeActiveProfile(6)">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar"
+                                    class="profileImage">
                                 <div class="about">
                                     <div class="name">Dean Henry</div>
-
                                 </div>
                             </li>
                         </ul>
@@ -187,10 +192,11 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"
+                                            id="activePic">
                                     </a>
                                     <div class="chat-about">
-                                        <h6 class="m-b-0">Vincent Porter</h6>
+                                        <h6 class="m-b-0" id="activeName">Vincent Porter</h6>
                                     </div>
                                 </div>
                             </div>
@@ -405,15 +411,38 @@
         }
 
         function activeClass(i) {
-            var element = document.getElementsByClassName("clearfix")[i + 1]
+            var element = document.getElementsByClassName("clearfix")[i];
             element.classList.add("active");
         }
 
         function removeActiveClass() {
-            var element = document.getElementsByClassName("active");
+            var element = document.getElementsByClassName("active")[1];
             element.classList.remove("active");
         }
 
+        function addIdToProfile() {
+            for (var i = 0; i < 6; i++) {
+                var element = document.getElementsByClassName("profileImage")[i];
+                console.log(element);
+                element.setAttribute("id", "profile" + i);
+            }
+        }
+        addIdToProfile();
+
+        function changeActiveProfile(i) {
+            i--;
+            var currentProfile = document.getElementById("profile" + i).src;
+
+            console.log(currentProfile);
+
+            document.getElementById("activePic").src = currentProfile;
+
+            var currentName = document.getElementsByClassName("name")[i].textContent;
+
+            console.log(currentName);
+
+            document.getElementById("activeName").innerHTML = currentName;
+        }
 
 
     </script>
