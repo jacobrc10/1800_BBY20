@@ -135,7 +135,7 @@
 
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <b class="list-group-item-heading">Classes</b>
+            <b class="list-group-item-heading">Courses</b>
           </li>
           <a href="#" class="list-group-item list-group-item-action"
             >COMP 1800</a
@@ -148,7 +148,7 @@
           >
           <li class="list-group-item list-group-item-action">
             <i class="material-icons md-14">add</i>
-            <a href="add-class.html">Add another class</a>
+            <a href="add-class.html">Add another course</a>
           </li>
         </ul>
 
@@ -215,12 +215,6 @@
               <label class="form-label">Course</label>
               <select class="form-select" id="courseLink" required="">
                 <option value="">Choose...</option>
-                <option>COMP 1113</option>
-                <option>COMM 1116</option>
-                <option>COMP 1510</option>
-                <option>COMP 1537</option>
-                <option>COMP 1712</option>
-                <option>COMP 1800</option>
               </select>
               <div class="invalid-feedback">Please select a valid course.</div>
             </div>
@@ -321,7 +315,9 @@
             var uid = user.uid;
             userToAdd = uid;
 
-            db.collection("events")
+            db.collection("users")
+              .doc(uid)
+              .collection("events")
               .add({
                 title: nameToAdd,
                 eventType: typeToAdd,
@@ -338,6 +334,42 @@
           }
         });
       }
+
+      function retrieveCourses() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentCourses = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("courses");
+
+            const location = document.getElementById("courseLink");
+            //get the document for current user.
+            currentCourses
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  console.log(doc.id, " => ", doc.data());
+                  var cour = document.createElement("option");
+                  cour.textContent += doc.data().name;
+                  console.log(cour);
+                  location.appendChild(cour);
+                });
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: " + error);
+              });
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+
+      retrieveCourses();
     </script>
   </body>
 </html>
