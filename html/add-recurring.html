@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Know-It-All Notifier - Add Event Page</title>
+    <title>Know-It-All Notifier - Add Recurring Event Page</title>
     <meta name="comp1800 boilerplate code" content="my bcit project" />
     <meta name="author" content="BCIT" />
     <!-- Required meta tags -->
@@ -55,7 +55,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Add Event</a>
+        <a class="navbar-brand" href="#">Add Recurring Event</a>
         <button
           class="material-icons md-light md-36"
           type="button"
@@ -191,12 +191,10 @@
               <label class="form-label">Event Type</label>
               <select class="form-select" id="eventType" required="">
                 <option value="">Choose...</option>
-                <option>Assignment</option>
-                <option>Test</option>
-                <option>Project</option>
-                <option>Group Meeting</option>
-                <option>Exam</option>
-                <option>Break</option>
+                <option>Lecture</option>
+                <option>Lab</option>
+                <option>Tutorial</option>
+                <option>Commute</option>
               </select>
               <div class="invalid-feedback">
                 Please select a valid event type.
@@ -207,42 +205,122 @@
               <label class="form-label">Course</label>
               <select class="form-select" id="courseLink" required="">
                 <option value="">Choose...</option>
+                <option value="">Commute</option>
               </select>
               <div class="invalid-feedback">Please select a valid course.</div>
             </div>
 
             <div class="form-group">
               <!-- Date input -->
-              <label class="control-label" for="date">Date</label>
+              <label class="control-label" for="date">Start Date</label>
               <input
                 class="form-control"
-                id="dueDate"
+                id="startDate"
                 name="date"
                 placeholder="MM/DD/YYYY"
                 type="date"
               />
             </div>
 
-            <div class="md-form">
-              <label for="dueTime">Time Due</label>
-              <input type="time" id="dueTime" class="form-control" />
+            <div class="form-group">
+              <!-- Date input -->
+              <label class="control-label" for="date">End Date</label>
+              <input
+                class="form-control"
+                id="endDate"
+                name="date"
+                placeholder="MM/DD/YYYY"
+                type="date"
+              />
             </div>
-          </div>
 
-          <br />
-
-          <div class="d-grid">
-            <button
-              class="btn btn-primary float-md-end"
-              type="button"
-              onclick="eventCreate()"
+            <div
+              class="btn-group"
+              role="group"
+              aria-label="Basic checkbox toggle button group"
             >
-              Add event
-            </button>
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck1"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck1">Su</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck2"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck2">M</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck3"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck3">Tu</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck4"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck4">W</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck5"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck5">Th</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck6"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck6">F</label>
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="btncheck7"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="btncheck7">Sa</label>
+            </div>
+
+            <div class="md-form input-group">
+              <label class="input-group-text" for="dueStartTime">Start</label>
+              <input type="time" id="dueStartTime" class="form-control" />
+
+              <label class="input-group-text" for="dueEndTime">End</label>
+              <input type="time" id="dueEndTime" class="form-control" />
+            </div>
+
+            <br />
+
+            <div class="d-grid">
+              <button
+                class="btn btn-primary float-md-end"
+                type="button"
+                onclick="eventCreate()"
+              >
+                Add event
+              </button>
+            </div>
           </div>
         </form>
       </div>
     </div>
+
+    <br /><br /><br /><br /><br />
 
     <div
       class="offcanvas offcanvas-bottom"
@@ -324,50 +402,6 @@
       }
       insertName();
 
-      function eventCreate() {
-        let nameToAdd = document.getElementById("eventName").value;
-        let typeToAdd = document.getElementById("eventType").value;
-        let courseToAdd = document.getElementById("courseLink").value;
-        let dateToAdd = document.getElementById("dueDate").value;
-        let timeToAdd = document.getElementById("dueTime").value;
-        let dueToAdd = new Date(dateToAdd.concat("T", timeToAdd));
-
-        let userToAdd;
-
-        console.log(nameToAdd);
-        console.log(typeToAdd);
-        console.log(courseToAdd);
-        console.log(dateToAdd);
-        console.log(timeToAdd);
-        console.log(dueToAdd);
-
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            var uid = user.uid;
-            userToAdd = uid;
-
-            db.collection("users")
-              .doc(uid)
-              .collection("events")
-              .add({
-                title: nameToAdd,
-                eventType: typeToAdd,
-                courseLink: courseToAdd,
-                dueDate: dueToAdd,
-                userID: userToAdd,
-              })
-              .then(() => {
-                console.log("Event added to user " + userToAdd);
-              });
-          } else {
-            // User is signed out
-            console.log("No user is signed in");
-          }
-        });
-      }
-
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -406,6 +440,55 @@
         });
       }
       displayCourseList();
+
+      function eventCreate() {
+        let nameToAdd = document.getElementById("eventName").value;
+        let typeToAdd = document.getElementById("eventType").value;
+        let courseToAdd = document.getElementById("courseLink").value;
+        let startToAdd = new Date(document.getElementById("startDate").value);
+        let endToAdd = new Date(document.getElementById("endDate").value);
+        let timeStartToAdd = document.getElementById("dueStartTime").value;
+        let timeEndToAdd = document.getElementById("dueEndTime").value;
+
+        let userToAdd;
+
+        console.log(nameToAdd);
+        console.log(typeToAdd);
+        console.log(courseToAdd);
+        console.log(startToAdd);
+        console.log(endToAdd);
+        console.log(timeStartToAdd);
+        console.log(timeEndToAdd);
+
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            var uid = user.uid;
+            userToAdd = uid;
+
+            db.collection("users")
+              .doc(uid)
+              .collection("events")
+              .add({
+                title: nameToAdd,
+                eventType: typeToAdd,
+                courseLink: courseToAdd,
+                startDate: startToAdd,
+                endDate: endToAdd,
+                timeStart: timeStartToAdd,
+                timeEnd: timeEndToAdd,
+                userID: userToAdd,
+              })
+              .then(() => {
+                console.log("Recurring Event added to user " + userToAdd);
+              });
+          } else {
+            // User is signed out
+            console.log("No user is signed in");
+          }
+        });
+      }
 
       function retrieveCourses() {
         firebase.auth().onAuthStateChanged((user) => {
