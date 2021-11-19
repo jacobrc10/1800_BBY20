@@ -233,7 +233,7 @@
                 id="dueDate"
                 name="date"
                 placeholder="MM/DD/YYYY"
-                type="text"
+                type="date"
               />
             </div>
 
@@ -303,6 +303,8 @@
         let courseToAdd = document.getElementById("courseLink").value;
         let dateToAdd = document.getElementById("dueDate").value;
         let timeToAdd = document.getElementById("dueTime").value;
+        let dueToAdd = new Date(dateToAdd.concat("T", timeToAdd));
+
         let userToAdd;
 
         console.log(nameToAdd);
@@ -310,6 +312,7 @@
         console.log(courseToAdd);
         console.log(dateToAdd);
         console.log(timeToAdd);
+        console.log(dueToAdd);
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -323,8 +326,7 @@
                 title: nameToAdd,
                 eventType: typeToAdd,
                 courseLink: courseToAdd,
-                dueDate: dateToAdd,
-                dueTime: timeToAdd,
+                dueDate: dueToAdd,
                 userID: userToAdd,
               })
               .then(() => {
