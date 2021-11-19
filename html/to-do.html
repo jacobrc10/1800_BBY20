@@ -77,6 +77,48 @@
     </div>
   </nav>
 
+  <br />
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <img id="accountimg" src="/images/account.png" />
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Profile Name</b>
+        </li>
+        <a href="#" class="list-group-item" id="profilename">John Doe</a>
+      </ul>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Courses</b>
+        </li>
+        <div id="courseList"></div>
+        <li class="list-group-item list-group-item-action">
+          <i class="material-icons md-14">add</i>
+          <a href="add-class.html">Add another course</a>
+        </li>
+      </ul>
+
+      <br />
+      <ul class="list-group list-group-flush">
+        <a href="profile.html" class="list-group-item list-group-item-action">My Account</a>
+        <a href="#" class="list-group-item list-group-item-action">Connections</a>
+        <a href="settings.html" class="list-group-item list-group-item-action">App Settings</a>
+      </ul>
+
+      <div class="logout">
+        <button type="button" class="btn btn-outline-info" onclick="location.href='login.html';">
+          <i class="material-icons md-14">logout</i>
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
   <br>
   <h1 class="display-4" style="text-align: center">All Tasks</h1>
 
@@ -155,7 +197,7 @@
             var user_Name = userDoc.data().name;
             console.log(user_Name);
             document.getElementById("profilename").innerText = user_Name;
-          })
+          });
         } else {
           // No user is signed in.
         }
@@ -163,45 +205,83 @@
     }
     insertName();
 
+    function displayCourseList() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentCourses = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses");
 
-    function addTab() {
-
-      let CardTemplate = document.getElementById("CardTemplate");
-
-      db.collection("users").doc(user.uid).collection()
-        .then(snap => {
-          var i = 0;
-
-          snap.forEach(doc => {    //iterate thru each doc
-
-            var title = doc.data().title;
-            var dueDate = doc.data().dueDate;
-            let newcard = CardTemplate.content.cloneNode(true);
-
-            newcard.querySelector('.title').innerHTML = title;
-            newcard.querySelector('.dueDate').innerHTML = dueDate;
-
-            document.getElementById("add_after_me").appendChild(newcard);
-
-            // console.log("ran through " + i);
-            // var title = document.getElementsByClassName("title")[i];
-
-            // var date = document.getElementsByClassName("dueDate")[i];
-
-            // //Inserts the message to HTML
-            // title.innerHTML = doc.data().title;
-
-            // //Inserts the real time to HTML
-            // date.innerHTML = doc.data().dueDate;
-
-
-          })
-          i++;
-
-
-        })
+          const location = document.getElementById("courseList");
+          //get the document for current user.
+          currentCourses
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " => ", doc.data());
+                var cour = document.createElement("a");
+                cour.textContent += doc.data().name;
+                cour.setAttribute(
+                  "class",
+                  "list-group-item list-group-item-action"
+                );
+                console.log(cour);
+                location.appendChild(cour);
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: " + error);
+            });
+        } else {
+          // No user is signed in.
+        }
+      });
     }
-    addTab();
+    displayCourseList();
+
+    // function addTab() {
+
+    //   db.collection("users").doc(user).db.collection("events")
+    //     .then(snap => {
+    //       var i = 0;
+
+    //       snap.forEach(doc => {    //iterate thru each doc
+
+    //         var title = doc.data().title;
+    //         var dueDate = doc.data().dueDate;
+    //         let newcard = CardTemplate.content.cloneNode(true);
+
+    //         newcard.querySelector('.title').innerHTML = title;
+    //         newcard.querySelector('.dueDate').innerHTML = dueDate;
+
+    //         document.getElementById("add_after_me").appendChild(newcard);
+
+    //         // console.log("ran through " + i);
+    //         // var title = document.getElementsByClassName("title")[i];
+
+    //         // var date = document.getElementsByClassName("dueDate")[i];
+
+    //         // //Inserts the message to HTML
+    //         // title.innerHTML = doc.data().title;
+
+    //         // //Inserts the real time to HTML
+    //         // date.innerHTML = doc.data().dueDate;
+
+
+    //       })
+    //       i++;
+
+
+    //     })
+
+
+    // }
+    // addTab();
   </script>
 </body>
 
