@@ -1,615 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Know-It-All Notifier - Chat page</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project" />
-    <meta name="author" content="BCIT" />
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="utf-8" />
+  <title>Know-It-All Notifier - Chat page</title>
+  <meta name="comp1800 boilerplate code" content="my bcit project" />
+  <meta name="author" content="BCIT" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Google Icons (Material Design)-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-    <!-- My CSS Stylesheet-->
-    <link rel="stylesheet" href="/styles/my_style.css" />
-    <link rel="stylesheet" href="/styles/chatbox.css" />
+  <!-- Google Icons (Material Design)-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <!-- Firebase 8 CDNs-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- My CSS Stylesheet-->
+  <link rel="stylesheet" href="/styles/my_style.css" />
+  <link rel="stylesheet" href="/styles/chatbox.css" />
 
-    <!-- Link to api keys for Firebase project -->
-    <script src="/scripts/firebaseAPI_BBY20.js"></script>
-  </head>
+  <!-- Firebase 8 CDNs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">Chat</a>
-        <button
-          class="material-icons md-light md-36"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          account_circle
-        </button>
+  <!-- Link to api keys for Firebase project -->
+  <script src="/scripts/firebaseAPI_BBY20.js"></script>
+</head>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="main.html"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="calendar.html">Calendar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="to-do.html">To-Do List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="links.html">Class Links</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="chat.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Chat
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="mocktest.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Mock Test
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="help.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Help
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Chat</a>
+      <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        account_circle
+      </button>
 
-    <br />
-
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasRight"
-      aria-labelledby="offcanvasRightLabel"
-    >
-      <div class="offcanvas-header">
-        <img id="accountimg" src="/images/account.png" />
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Profile Name</b>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="main.html">Home</a>
           </li>
-          <a href="#" class="list-group-item" id="profilename">John Doe</a>
-        </ul>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Courses</b>
+          <li class="nav-item">
+            <a class="nav-link" href="calendar.html">Calendar</a>
           </li>
-          <div id="courseList"></div>
-          <li class="list-group-item list-group-item-action">
-            <i class="material-icons md-14">add</i>
-            <a href="add-class.html">Add another course</a>
+          <li class="nav-item">
+            <a class="nav-link" href="to-do.html">To-Do List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="links.html">Class Links</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chat.html" tabindex="-1" aria-disabled="true">Chat
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mocktest.html" tabindex="-1" aria-disabled="true">Mock Test
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html" tabindex="-1" aria-disabled="true">Help
+            </a>
           </li>
         </ul>
-
-        <br />
-        <ul class="list-group list-group-flush">
-          <a href="profile.html" class="list-group-item list-group-item-action"
-            >My Account</a
-          >
-          <a href="#" class="list-group-item list-group-item-action"
-            >Connections</a
-          >
-          <a href="settings.html" class="list-group-item list-group-item-action"
-            >App Settings</a
-          >
-        </ul>
-
-        <div class="logout">
-          <button
-            type="button"
-            class="btn btn-outline-info"
-            onclick="location.href='login.html';"
-          >
-            <i class="material-icons md-14">logout</i>
-            Log Out
-          </button>
-        </div>
       </div>
     </div>
+  </nav>
 
-    <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
+  <br />
 
-    <div class="container">
-      <div class="row clearfix">
-        <div class="col-lg-12">
-          <div class="card chat-app">
-            <div id="plist" class="people-list">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"
-                    ><i class="fa fa-search"></i
-                  ></span>
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                />
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <img id="accountimg" src="/images/account.png" />
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Profile Name</b>
+        </li>
+        <a href="#" class="list-group-item" id="profilename">John Doe</a>
+      </ul>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Courses</b>
+        </li>
+        <div id="courseList"></div>
+        <li class="list-group-item list-group-item-action">
+          <i class="material-icons md-14">add</i>
+          <a href="add-class.html">Add another course</a>
+        </li>
+      </ul>
+
+      <br />
+      <ul class="list-group list-group-flush">
+        <a href="profile.html" class="list-group-item list-group-item-action">My Account</a>
+        <a href="#" class="list-group-item list-group-item-action">Connections</a>
+        <a href="settings.html" class="list-group-item list-group-item-action">App Settings</a>
+      </ul>
+
+      <div class="logout">
+        <button type="button" class="btn btn-outline-info" onclick="location.href='login.html';">
+          <i class="material-icons md-14">logout</i>
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card chat-app">
+          <div id="plist" class="people-list">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
               </div>
-              <ul class="list-unstyled chat-list mt-2 mb-0">
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(0)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Vincent Porter</div>
-                  </div>
-                </li>
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(1)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Aiden Chavez</div>
-                  </div>
-                </li>
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(2)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Brittany Thomas</div>
-                  </div>
-                </li>
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(3)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Christian Kelly</div>
-                  </div>
-                </li>
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(4)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar8.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Monica Ward</div>
-                  </div>
-                </li>
-                <li
-                  class="clearfix"
-                  onclick="removeActiveClass();activeClass(5)"
-                >
-                  <img
-                    src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                    alt="avatar"
-                  />
-                  <div class="about">
-                    <div class="name">Dean Henry</div>
-                  </div>
-                </li>
-              </ul>
+              <input type="text" class="form-control" placeholder="Search..." />
             </div>
-            <div class="chat">
-              <div class="chat-header clearfix">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <a
-                      href="javascript:void(0);"
-                      data-toggle="modal"
-                      data-target="#view_info"
-                    >
-                      <img
-                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                        alt="avatar"
-                      />
-                    </a>
-                    <div class="chat-about">
-                      <h6 class="m-b-0">Vincent Porter</h6>
-                    </div>
+            <ul class="list-unstyled chat-list mt-2 mb-0">
+              <li class="clearfix" onclick="removeActiveClass();activeClass(1);changeActiveProfile(1)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Vincent Porter</div>
+                </div>
+              </li>
+              <li class="clearfix" onclick="removeActiveClass();activeClass(2);changeActiveProfile(2)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Aiden Chavez</div>
+                </div>
+              </li>
+              <li class="clearfix" onclick="removeActiveClass();activeClass(3);changeActiveProfile(3)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Brittany Thomas</div>
+                </div>
+              </li>
+              <li class="clearfix" onclick="removeActiveClass();activeClass(4);changeActiveProfile(4)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Christian Kelly</div>
+                </div>
+              </li>
+              <li class="clearfix" onclick="removeActiveClass();activeClass(5);changeActiveProfile(5)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Monica Ward</div>
+                </div>
+              </li>
+              <li class="clearfix" onclick="removeActiveClass();activeClass(6);changeActiveProfile(6)">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" class="profileImage">
+                <div class="about">
+                  <div class="name">Dean Henry</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat">
+            <div class="chat-header clearfix">
+              <div class="row">
+                <div class="col-lg-6">
+                  <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" id="activePic">
+                  </a>
+                  <div class="chat-about">
+                    <h6 class="m-b-0" id="activeName">Vincent Porter</h6>
                   </div>
                 </div>
               </div>
-              <div class="chat-history">
-                <ul class="m-b-0">
-                  <!-- <li class="clearfix">
+            </div>
+            <div class="chat-history">
+              <ul class="m-b-0">
+                <!-- <li class="clearfix">
                                     <div class="message-data text-right" style="float: right">
                                         <span class="message-data-time">10:10 AM</span>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="message other-message float-right"> Hi Aiden, how are you? How is the
-                                        project coming along? </div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">10:12 AM</span>
-                                    </div>
-                                    <div class="message my-message">Are we meeting today?</div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">10:15 AM</span>
-                                    </div>
-                                    <div class="message my-message">Project has been already finished and I have results
+	@@ -228,224 +321,295 @@ <h6 class="m-b-0" id="activeName">Vincent Porter</h6>
                                         to
                                         show you.</div>
                                 </li> -->
-                  <li class="clearfix">
-                    <div class="message-data text-right" style="float: right">
-                      <span
-                        class="message-data-time date-goes-here"
-                        id="date-goes-here"
-                      ></span>
-                      <img
-                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                        alt="avatar"
-                      />
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <div
-                      class="
+                <li class="clearfix">
+                  <div class="message-data text-right" style="float: right">
+                    <span class="message-data-time date-goes-here" id="date-goes-here"></span>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" />
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+                  <div class="
                         message
                         other-message
                         float-right
                         message-goes-here
-                      "
-                      id="message-goes-here"
-                    ></div>
-                  </li>
-                  <li id="add_after_me"></li>
-                </ul>
-              </div>
-              <div class="chat-message clearfix">
-                <div class="input-group mb-0">
-                  <div class="input-group-prepend" style="align-self: center">
-                    <a onclick="sendMessage();addMessage();addContent()"
-                      ><span class="input-group-text"
-                        ><i class="fa fa-send"></i></span
-                    ></a>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="message"
-                    placeholder="Enter text here..."
-                  />
+                      " id="message-goes-here"></div>
+                </li>
+                <li id="add_after_me"></li>
+              </ul>
+            </div>
+            <div class="chat-message clearfix">
+              <div class="input-group mb-0">
+                <div class="input-group-prepend" style="align-self: center">
+                  <a onclick="sendMessage();addMessage();addContent()"><span class="input-group-text"><i
+                        class="fa fa-send"></i></span></a>
                 </div>
+                <input type="text" class="form-control" id="message" placeholder="Enter text here..." />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <br />
-    <br />
+  <br />
+  <br />
 
-    <div
-      class="offcanvas offcanvas-bottom"
-      tabindex="-1"
-      id="offcanvasBottom"
-      aria-labelledby="offcanvasBottomLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomLabel">
-          Type of Event?
-        </h5>
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body small" id="eventSelector">
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="eventSelect1"
-          onclick="location.href='add-event.html';"
-        >
-          Single Event (Deadlines)
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          id="eventSelect2"
-          onclick="location.href='add-recurring.html';"
-        >
-          Recurring Events (Lectures/Labs)
-        </button>
-      </div>
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+        Type of Event?
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    <div class="offcanvas-body small" id="eventSelector">
+      <button type="button" class="btn btn-primary" id="eventSelect1" onclick="location.href='add-event.html';">
+        Single Event (Deadlines)
+      </button>
+      <button type="button" class="btn btn-secondary" id="eventSelect2" onclick="location.href='add-recurring.html';">
+        Recurring Events (Lectures/Labs)
+      </button>
+    </div>
+  </div>
 
-    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-      <div class="container py-3" id="footer">
-        <a class="material-icons md-light" href="main.html">home</a>
-        <a
-          class="material-icons md-light md-36"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasBottom"
-          aria-controls="offcanvasBottom"
-          >add_circle_outline</a
-        >
-        <a class="material-icons md-light" href="calendar.html">event</a>
-      </div>
-    </footer>
+  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+    <div class="container py-3" id="footer">
+      <a class="material-icons md-light" href="main.html">home</a>
+      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">add_circle_outline</a>
+      <a class="material-icons md-light" href="calendar.html">event</a>
+    </div>
+  </footer>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <!-- Javascript -->
-    <script>
-      var increment = 1;
+  <!-- Javascript -->
+  <script>
+    var increment = 1;
 
-      function insertName() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid);
-            //get the document for current user.
-            currentUser.get().then((userDoc) => {
-              var user_Name = userDoc.data().name;
-              console.log(user_Name);
-              document.getElementById("profilename").innerText = user_Name;
-            });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      insertName();
+    function insertName() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentUser = db.collection("users").doc(user.uid);
+          //get the document for current user.
+          currentUser.get().then((userDoc) => {
+            var user_Name = userDoc.data().name;
+            console.log(user_Name);
+            document.getElementById("profilename").innerText = user_Name;
+          });
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    insertName();
 
-      function displayCourseList() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentCourses = db
-              .collection("users")
-              .doc(user.uid)
-              .collection("courses");
+    function displayCourseList() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentCourses = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses");
 
-            const location = document.getElementById("courseList");
-            //get the document for current user.
-            currentCourses
-              .get()
-              .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
-                  var cour = document.createElement("a");
-                  cour.textContent += doc.data().name;
-                  cour.setAttribute(
-                    "class",
-                    "list-group-item list-group-item-action"
-                  );
-                  console.log(cour);
-                  location.appendChild(cour);
-                });
-              })
-              .catch(function (error) {
-                console.log("Error getting documents: " + error);
+          const location = document.getElementById("courseList");
+          //get the document for current user.
+          currentCourses
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " => ", doc.data());
+                var cour = document.createElement("a");
+                cour.textContent += doc.data().name;
+                cour.setAttribute(
+                  "class",
+                  "list-group-item list-group-item-action"
+                );
+                console.log(cour);
+                location.appendChild(cour);
               });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      displayCourseList();
-
-      function sendMessage() {
-        let Message = document.getElementById("message").value;
-
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            var userID = user.uid;
-
-            //The collection name
-            let incrementString = "Message#: " + increment;
-
-            //Relays back the message, user ID, timestamp of date and the message number
-            db.collection("Messages").doc(incrementString).set({
-              Message: Message,
-              UserID: userID,
-              Date: firebase.firestore.Timestamp.now(),
-              MessageCount: increment,
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: " + error);
             });
-          } else {
-            // No user is signed in.
-            console.log("no user signed in");
-          }
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    displayCourseList();
+
+    function sendMessage() {
+      let Message = document.getElementById("message").value;
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          var userID = user.uid;
+
+          //The collection name
+          let incrementString = "Message#: " + increment;
+
+          //Relays back the message, user ID, timestamp of date and the message number
+          db.collection("Messages").doc(incrementString).set({
+            Message: Message,
+            UserID: userID,
+            Date: firebase.firestore.Timestamp.now(),
+            MessageCount: increment,
+          });
+        } else {
+          // No user is signed in.
+          console.log("no user signed in");
+        }
+      });
+      increment++;
+      console.log(increment + " send");
+    }
+
+    function insertFirstMessage() {
+      let incrementString = "Message#: " + increment;
+
+      db.collection("Messages")
+        .doc(incrementString)
+
+        .onSnapshot((doc) => {
+          //Tests if the inserted message has the same increment as the sent message
+          console.log(increment + " insert");
+
+          //Inserts the message to HTML
+          document.getElementById("message-goes-here").innerHTML =
+            doc.data().Message;
+
+          //Inserts the real time to HTML
+          document.getElementById("date-goes-here").innerHTML = doc
+            .data()
+            .Date.toDate()
+            .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
         });
-        increment++;
-        console.log(increment + " send");
+    }
+    insertFirstMessage();
+
+    function addMessage() {
+      let idIncrement = "message-goes-here" + increment;
+      console.log(idIncrement);
+
+      var tag = document.createElement("div");
+      let incrementString = "Message#: " + increment;
+
+      let dateString = "date-goes-here" + increment;
+
+      tag.innerHTML =
+        '<li class="clearfix">' +
+        '<div class="message-data text-right" style="float: right">' +
+        '<span class="message-data-time date-goes-here"></span>' +
+        '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
+        "</div>" +
+        "<br>" +
+        "<br>" +
+        "<br>" +
+        '<div class="message other-message float-right message-goes-here"></div>' +
+        "<br>" +
+        "<br>" +
+        "<br>" +
+        "</li>";
+
+      var element = document.getElementById("add_after_me");
+      element.appendChild(tag);
+    }
+
+    function addContent() {
+      let incrementString = "Message#: " + increment;
+
+      console.log(incrementString);
+
+      db.collection("Messages")
+        .doc(incrementString)
+
+        .onSnapshot((doc) => {
+          var message =
+            document.getElementsByClassName("message-goes-here")[
+            increment - 1
+            ];
+
+          var date =
+            document.getElementsByClassName("date-goes-here")[increment - 1];
+          //Tests if the inserted message has the same increment as the sent message
+          console.log(increment + " insert");
+
+          //Inserts the message to HTML
+          message.innerHTML = doc.data().Message;
+
+          //Inserts the real time to HTML
+          date.innerHTML = doc
+            .data()
+            .Date.toDate()
+            .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+        });
+    }
+
+    function activeClass(i) {
+      var element = document.getElementsByClassName("clearfix")[i];
+      element.classList.add("active");
+    }
+
+    function removeActiveClass() {
+      var element = document.getElementsByClassName("active")[0];
+      element.classList.remove("active");
+    }
+
+    function addIdToProfile() {
+      for (var i = 0; i < 6; i++) {
+        var element = document.getElementsByClassName("profileImage")[i];
+        console.log(element);
+        element.setAttribute("id", "profile" + i);
       }
+    }
+    addIdToProfile();
 
-      function insertFirstMessage() {
-        let incrementString = "Message#: " + increment;
+    function changeActiveProfile(i) {
+      i--;
+      var currentProfile = document.getElementById("profile" + i).src;
 
-        db.collection("Messages")
-          .doc(incrementString)
+      console.log(currentProfile);
 
-          .onSnapshot((doc) => {
-            //Tests if the inserted message has the same increment as the sent message
-            console.log(increment + " insert");
+      document.getElementById("activePic").src = currentProfile;
 
-            //Inserts the message to HTML
-            document.getElementById("message-goes-here").innerHTML =
-              doc.data().Message;
+      var currentName = document.getElementsByClassName("name")[i].textContent;
 
-            //Inserts the real time to HTML
-            document.getElementById("date-goes-here").innerHTML = doc
-              .data()
-              .Date.toDate()
-              .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-          });
-      }
-      insertFirstMessage();
+      console.log(currentName);
 
-      function addMessage() {
-        let idIncrement = "message-goes-here" + increment;
-        console.log(idIncrement);
+      document.getElementById("activeName").innerHTML = currentName;
+    }
+  </script>
+</body>
 
-        var tag = document.createElement("div");
-        let incrementString = "Message#: " + increment;
-
-        let dateString = "date-goes-here" + increment;
-
-        tag.innerHTML =
-          '<li class="clearfix">' +
-          '<div class="message-data text-right" style="float: right">' +
-          '<span class="message-data-time date-goes-here"></span>' +
-          '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
-          "</div>" +
-          "<br>" +
-          "<br>" +
-          "<br>" +
-          '<div class="message other-message float-right message-goes-here"></div>' +
-          "<br>" +
-          "<br>" +
-          "<br>" +
-          "</li>";
-
-        var element = document.getElementById("add_after_me");
-        element.appendChild(tag);
-      }
-
-      function addContent() {
-        let incrementString = "Message#: " + increment;
-
-        console.log(incrementString);
-
-        db.collection("Messages")
-          .doc(incrementString)
-
-          .onSnapshot((doc) => {
-            var message =
-              document.getElementsByClassName("message-goes-here")[
-                increment - 1
-              ];
-
-            var date =
-              document.getElementsByClassName("date-goes-here")[increment - 1];
-            //Tests if the inserted message has the same increment as the sent message
-            console.log(increment + " insert");
-
-            //Inserts the message to HTML
-            message.innerHTML = doc.data().Message;
-
-            //Inserts the real time to HTML
-            date.innerHTML = doc
-              .data()
-              .Date.toDate()
-              .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-          });
-      }
-
-      function activeClass(i) {
-        var element = document.getElementsByClassName("clearfix")[i + 1];
-        element.classList.add("active");
-      }
-
-      function removeActiveClass() {
-        var element = document.getElementsByClassName("active");
-        element.classList.remove("active");
-      }
-    </script>
-  </body>
 </html>
