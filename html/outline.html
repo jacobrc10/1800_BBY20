@@ -137,15 +137,7 @@
           <li class="list-group-item">
             <b class="list-group-item-heading">Courses</b>
           </li>
-          <a href="#" class="list-group-item list-group-item-action"
-            >COMP 1800</a
-          >
-          <a href="#" class="list-group-item list-group-item-action"
-            >COMM 1116</a
-          >
-          <a href="#" class="list-group-item list-group-item-action"
-            >COMP 1537</a
-          >
+          <div id="courseList"></div>
           <li class="list-group-item list-group-item-action">
             <i class="material-icons md-14">add</i>
             <a href="add-class.html">Add another course</a>
@@ -188,11 +180,51 @@
         align-self: center;
       "
     />
+    <div
+      class="offcanvas offcanvas-bottom"
+      tabindex="-1"
+      id="offcanvasBottom"
+      aria-labelledby="offcanvasBottomLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+          Type of Event?
+        </h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body small" id="eventSelector">
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="eventSelect1"
+          onclick="location.href='add-event.html';"
+        >
+          Single Event (Deadlines)
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="eventSelect2"
+          onclick="location.href='add-recurring.html';"
+        >
+          Recurring Events (Lectures/Labs)
+        </button>
+      </div>
+    </div>
 
     <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
       <div class="container py-3" id="footer">
         <a class="material-icons md-light" href="main.html">home</a>
-        <a class="material-icons md-light md-36" href="add-event.html"
+        <a
+          class="material-icons md-light md-36"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasBottom"
+          aria-controls="offcanvasBottom"
           >add_circle_outline</a
         >
         <a class="material-icons md-light" href="calendar.html">event</a>
@@ -227,6 +259,45 @@
         });
       }
       insertName();
+
+      function displayCourseList() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentCourses = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("courses");
+
+            const location = document.getElementById("courseList");
+            //get the document for current user.
+            currentCourses
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  console.log(doc.id, " => ", doc.data());
+                  var cour = document.createElement("a");
+                  cour.textContent += doc.data().name;
+                  cour.setAttribute(
+                    "class",
+                    "list-group-item list-group-item-action"
+                  );
+                  console.log(cour);
+                  location.appendChild(cour);
+                });
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: " + error);
+              });
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+      displayCourseList();
     </script>
   </body>
 </html>

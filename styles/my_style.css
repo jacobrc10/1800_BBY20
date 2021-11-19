@@ -74,3 +74,14 @@ table {
   margin-right: 2%;
   text-align: center;
 }
+
+#eventSelector {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  margin: 0.5em;
+}
+
+#eventSelector > button {
+  margin: 1em;
+}
