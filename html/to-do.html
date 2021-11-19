@@ -244,44 +244,47 @@
     }
     displayCourseList();
 
-    // function addTab() {
+    function addTab() {
 
-    //   db.collection("users").doc(user).db.collection("events")
-    //     .then(snap => {
-    //       var i = 0;
+      firebase.auth().onAuthStateChanged((user) => {
+        db.collection("users")
+          .doc(user.uid)
+          .collection("events")
+          .onSnapshot(snap => {
+            var i = 0;
 
-    //       snap.forEach(doc => {    //iterate thru each doc
+            snap.forEach(doc => {    //iterate thru each doc
 
-    //         var title = doc.data().title;
-    //         var dueDate = doc.data().dueDate;
-    //         let newcard = CardTemplate.content.cloneNode(true);
+              var title = doc.data().title;
+              var dueDate = doc.data().dueDate;
+              let newcard = CardTemplate.content.cloneNode(true);
 
-    //         newcard.querySelector('.title').innerHTML = title;
-    //         newcard.querySelector('.dueDate').innerHTML = dueDate;
+              newcard.querySelector('.title').innerHTML = title;
+              newcard.querySelector('.dueDate').innerHTML = "Due date:  " + dueDate.toDate().toLocaleString([], { month: "2-digit", day: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit" });
 
-    //         document.getElementById("add_after_me").appendChild(newcard);
+              document.getElementById("add_after_me").appendChild(newcard);
 
-    //         // console.log("ran through " + i);
-    //         // var title = document.getElementsByClassName("title")[i];
+              // console.log("ran through " + i);
+              // var title = document.getElementsByClassName("title")[i];
 
-    //         // var date = document.getElementsByClassName("dueDate")[i];
+              // var date = document.getElementsByClassName("dueDate")[i];
 
-    //         // //Inserts the message to HTML
-    //         // title.innerHTML = doc.data().title;
+              // //Inserts the message to HTML
+              // title.innerHTML = doc.data().title;
 
-    //         // //Inserts the real time to HTML
-    //         // date.innerHTML = doc.data().dueDate;
-
-
-    //       })
-    //       i++;
-
-
-    //     })
+              // //Inserts the real time to HTML
+              // date.innerHTML = doc.data().dueDate;
 
 
-    // }
-    // addTab();
+            })
+            i++;
+
+
+          })
+      })
+
+    }
+    addTab();
   </script>
 </body>
 
