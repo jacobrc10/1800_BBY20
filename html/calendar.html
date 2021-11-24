@@ -51,6 +51,12 @@
       href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+
+    <!-- rrule lib -->
+    <script src="https://cdn.jsdelivr.net/npm/rrule@2.6.4/dist/es5/rrule.min.js"></script>
+
+    <!-- the rrule-to-fullcalendar connector. must go AFTER the rrule lib -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/rrule@5.5.0/main.global.min.js"></script>
   </head>
 
   <body>
@@ -308,6 +314,7 @@
       displayCourseList();
 
       document.addEventListener("DOMContentLoaded", function () {
+        var eventList = gatherEvent();
         var calendarEl = document.getElementById("calendar");
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: "timeGridWeek",
@@ -321,55 +328,9 @@
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
-          events: [
-            {
-              title: "All Day Event",
-              start: "2021-11-01",
-            },
-            {
-              title: "Long Event",
-              start: "2021-11-07",
-              end: "2021-11-10",
-            },
-            {
-              groupId: "999",
-              title: "Repeating Event",
-              start: "2021-11-09T16:00:00",
-            },
-            {
-              groupId: "999",
-              title: "Repeating Event",
-              start: "2021-11-16T16:00:00",
-            },
-            {
-              title: "Conference",
-              start: "2021-11-11",
-              end: "2021-11-13",
-            },
-            {
-              title: "Meeting",
-              start: "2021-11-12T10:30:00",
-              end: "2021-11-12T12:30:00",
-            },
-            {
-              title: "Lunch",
-              start: "2021-11-12T12:00:00",
-            },
-            {
-              title: "Meeting",
-              start: "2021-11-12T14:30:00",
-            },
-            {
-              title: "Birthday Party",
-              start: "2021-11-13T07:00:00",
-            },
-            {
-              title: "Click for Google",
-              url: "http://google.com/",
-              start: "2021-11-28",
-            },
-          ],
+          events: [],
         });
+        console.log(calendar);
         calendar.render();
       });
 
@@ -392,6 +353,95 @@
           }
         });
       }
+
+      function gatherEvent() {
+        var events = [];
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid);
+            //get the document for current user.
+            eventData = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("events");
+            //get the document for current user.
+
+            eventData
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  /*
+                  db.collection("users")
+                    .doc(user.uid)
+                    .collection("courses")
+                    .where("name", "==", doc.eventType)
+                    .get()
+                    .then(function (querySnapshot) {
+                      //this should hopefully only be one
+                      querySnapshot.forEach(function (doc) {
+                        var color = doc.color;
+                      });
+                    });
+                    */
+                  //Different entry attempts based on the type of event in database
+                  switch (doc.data().eventType) {
+                    case "Commute":
+                    case "Lecture":
+                    case "Lab":
+                    case "Tutorial":
+                      /* Deal with this later.
+                      console.log(doc.data().eventType);
+                      let entry = {
+                        id: doc.data().id,
+                        title: doc.data().title,
+                        //backgroundColor: color,
+                        start: doc.data().startDate.toDate(),
+                        end: doc.data().endDate.toDate(),
+                        startRecur: doc.data().startDate.toDate(),
+                        endRecur: doc.data().endDate.toDate(),
+                        daysOfWeek: doc.data().daysOfTheWeek,
+                        startTime: doc.data().timeStart,
+                        endTime: doc.data().timeEnd,
+                      };
+                      console.log(entry);
+
+                      events.push(entry);
+
+                      console.log(events);
+                      */
+                      break;
+                    case "Assignment":
+                    case "Test":
+                    case "Project":
+                    case "Group Meeting":
+                    case "Exam":
+                    case "Break":
+                      let event = {
+                        id: doc.id,
+                        title: doc.data().title,
+                        start: doc.data().dueDate.toDate(),
+                      };
+                      console.log(event);
+                      events.push(event);
+                      calendar.addEvent(event);
+                      break;
+                  }
+                });
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: " + error);
+              });
+          } else {
+            // No user is signed in.
+          }
+        });
+        return events;
+      }
+      console.log(gatherEvent());
     </script>
   </body>
 </html>

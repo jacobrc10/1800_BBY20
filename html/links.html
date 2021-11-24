@@ -171,23 +171,10 @@
     </div>
 
     <div style="margin-left: 5vw; margin-right: 5vw">
-      <div class="list-group">
+      <div class="list-group" id="links">
         <a class="list-group-item list-group-item-action active">
           Lecture Links
         </a>
-        <a href="#" class="list-group-item list-group-item-action">Comp 1510</a>
-        <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
-        <a href="#" class="list-group-item list-group-item-action">Comp 1712</a>
-      </div>
-
-      <br />
-      <br />
-
-      <div class="list-group">
-        <a class="list-group-item list-group-item-action active"> Lab Links </a>
-        <a href="#" class="list-group-item list-group-item-action">Comp 1113</a>
-        <a href="#" class="list-group-item list-group-item-action">Comm 1116</a>
-        <a href="#" class="list-group-item list-group-item-action">Comp 1800</a>
       </div>
     </div>
 
@@ -309,6 +296,47 @@
         });
       }
       displayCourseList();
+
+      function displayCourseLinks() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentCourses = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("courses");
+
+            const location = document.getElementById("links");
+            //get the document for current user.
+            currentCourses
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  console.log(doc.id, " => ", doc.data());
+                  var cour = document.createElement("a");
+                  cour.textContent += doc.data().name;
+                  cour.setAttribute(
+                    "class",
+                    "list-group-item list-group-item-action"
+                  );
+                  cour.setAttribute("href", doc.data().link);
+                  cour.setAttribute("target", "_blank");
+                  console.log(cour);
+                  location.appendChild(cour);
+                });
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: " + error);
+              });
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+      displayCourseLinks();
     </script>
   </body>
 </html>
