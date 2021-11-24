@@ -249,7 +249,7 @@
       firebase.auth().onAuthStateChanged((user) => {
         db.collection("users")
           .doc(user.uid)
-          .collection("events")
+          .collection("events").orderBy('dueDate')
           .onSnapshot(snap => {
             var i = 0;
 

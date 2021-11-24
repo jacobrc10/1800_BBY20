@@ -352,6 +352,8 @@
     }
 
     function insertFirstMessage() {
+      increment = 1;
+      console.log(increment);
       let incrementString = "Message#: " + increment;
 
       db.collection("Messages")
@@ -465,6 +467,89 @@
 
       document.getElementById("activeName").innerHTML = currentName;
     }
+
+    function loadPreviousChat() {
+      db.collection("Messages").get().then(snap => {
+        size = snap.size // will return the collection size
+        localStorage.setItem("collectionSize", size);
+        console.log(localStorage.getItem("collectionSize"));
+      });
+
+      while (increment < localStorage.getItem("collectionSize")) {
+
+        var tag = document.createElement("div");
+        let incrementString = "Message#: " + increment;
+
+        let dateString = "date-goes-here" + increment;
+
+        tag.innerHTML =
+          '<li class="clearfix">' +
+          '<div class="message-data text-right" style="float: right">' +
+          '<span class="message-data-time date-goes-here"></span>' +
+          '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
+          "</div>" +
+          "<br>" +
+          "<br>" +
+          "<br>" +
+          '<div class="message other-message float-right message-goes-here"></div>' +
+          "<br>" +
+          "<br>" +
+          "<br>" +
+          "</li>";
+
+        var element = document.getElementById("add_after_me");
+        element.appendChild(tag);
+        console.log(incrementString);
+
+        console.log("load previous" + increment)
+        increment++;
+      }
+
+
+
+    }
+
+    loadPreviousChat();
+
+    function updatePreviousChat() {
+      db.collection("Messages").orderBy('Date').get().then(snap => {
+        i = 1
+        snap.forEach(doc => {
+          console.log("Check");
+          var message =
+            document.getElementsByClassName("message-goes-here")[
+            i - 1
+            ];
+
+          var date =
+            document.getElementsByClassName("date-goes-here")[i - 1];
+          //Tests if the inserted message has the same increment as the sent message
+          console.log(i + " insert");
+
+          //Inserts the message to HTML
+          message.innerHTML = doc.data().Message;
+
+          //Inserts the real time to HTML
+          date.innerHTML = doc
+            .data()
+            .Date.toDate()
+            .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+          i++;
+        })
+
+      });
+    }
+    updatePreviousChat();
+
+    function orderByTimeStamp() {
+      db.collection("Messages")
+        .orderBy("timestamp", "Date")
+        .onSnapshot((snapshot) => {
+
+        });
+    }
+    orderByTimeStamp();
+
   </script>
 </body>
 
