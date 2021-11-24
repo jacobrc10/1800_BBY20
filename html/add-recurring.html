@@ -236,6 +236,7 @@
 
             <div
               class="btn-group"
+              id="daysOfWeek"
               role="group"
               aria-label="Basic checkbox toggle button group"
             >
@@ -243,6 +244,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck1"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck1">Su</label>
@@ -251,6 +253,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck2"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck2">M</label>
@@ -259,6 +262,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck3"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck3">Tu</label>
@@ -267,6 +271,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck4"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck4">W</label>
@@ -275,6 +280,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck5"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck5">Th</label>
@@ -283,6 +289,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck6"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck6">F</label>
@@ -291,6 +298,7 @@
                 type="checkbox"
                 class="btn-check"
                 id="btncheck7"
+                name="dayOfWeek"
                 autocomplete="off"
               />
               <label class="btn btn-outline-primary" for="btncheck7">Sa</label>
@@ -449,6 +457,13 @@
         let endToAdd = new Date(document.getElementById("endDate").value);
         let timeStartToAdd = document.getElementById("dueStartTime").value;
         let timeEndToAdd = document.getElementById("dueEndTime").value;
+        let daysOfWeekToAdd = document.getElementsByName("dayOfWeek");
+        let daysArrayToAdd = [];
+
+        //An array storing the day indecies of days this recurring event take place.
+        for (var i = 0; i < daysOfWeekToAdd.length; i++) {
+          if (daysOfWeekToAdd[i].checked) daysArrayToAdd.push(i);
+        }
 
         let userToAdd;
 
@@ -459,6 +474,7 @@
         console.log(endToAdd);
         console.log(timeStartToAdd);
         console.log(timeEndToAdd);
+        console.log(daysArrayToAdd);
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -476,6 +492,7 @@
                 courseLink: courseToAdd,
                 startDate: startToAdd,
                 endDate: endToAdd,
+                daysOfTheWeek: daysArrayToAdd,
                 timeStart: timeStartToAdd,
                 timeEnd: timeEndToAdd,
                 userID: userToAdd,
