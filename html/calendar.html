@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" /> -->
 
   <!-- Google Icons (Material Design)-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -126,11 +126,13 @@
     </div>
   </div>
 
-  <div id="calendar"></div>
 
-  <br />
-  <br />
-  <br />
+
+  <div class="contents">
+    <div id="myCalendar" class="calendar"></div>
+  </div>
+
+
 
   <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
     <div class="offcanvas-header">
@@ -222,32 +224,57 @@
       });
     }
 
-    displayCourseList();
 
-    function displayCalendar() {
-      // calendarJs(id, options, startDateTime)
-      var calendarInstance = new calendarJs("calendar", {
-        // options here
-      }),
-      events = [
-        {
-          from: previousDay,
-          to: previousDay,
-          title: "Previous Day",
-          description: "This is a another description of the event that has been added, so it can be shown in the pop-up dialog.",
-          location: "Teams Meeting",
-          isAllDayEvent: true,
-          color: "#FF0000",
-          colorText: "#FFFF00",
-          colorBorder: "#00FF00"
-        },
-        // more events here
-      ];
+    // calendarJs(id, options, startDateTime)
+    var calendarInstance = new calendarJs("myCalendar", {
+      // options here
+      exportEventsEnabled: false,
+      manualEditingEnabled: false,
+      maximumEventsPerDayDisplay: 0,
+      showTimesInMainCalendarEvents: true,
+      minimumDayHeight: 0,
+      visibleDays: [0, 1, 2, 3, 4, 5, 6],
+    });
 
-      calendarInstance.addEvents(events);
+
+    // calendarInstance.addEvents(getEvents());
+    getEvents();
+
+    function getEvents() {
+
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentEvents = db.collection("users").doc(user.uid).collection("events");
+          //get the document for current user.
+          currentEvents.get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              var eventTitle = doc.data().title;
+              var eventTime = doc.data().dueDate.toDate();
+
+              var newEvent = {
+                from: eventTime,
+                to: eventTime,
+                title: eventTitle
+              }
+
+              calendarInstance.addEvent(newEvent);
+
+            });
+          })
+        } else {
+          // No user is signed in.
+        }
+      });
+
+
+
     }
 
-    displayCalendar();
+
 
 
   </script>
