@@ -80,6 +80,8 @@
 
   <br />
 
+
+
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <img id="accountimg" src="/images/account.png" />
@@ -122,114 +124,48 @@
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-  <div class="container">
-    <div class="row clearfix">
-      <div class="col-lg-12">
-        <div class="card chat-app">
-          <div id="plist" class="people-list">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-              </div>
-              <input type="text" class="form-control" placeholder="Search..." />
-            </div>
-            <ul class="list-unstyled chat-list mt-2 mb-0">
-              <li class="clearfix" onclick="removeActiveClass();activeClass(1);changeActiveProfile(1)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Vincent Porter</div>
-                </div>
-              </li>
-              <li class="clearfix" onclick="removeActiveClass();activeClass(2);changeActiveProfile(2)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Aiden Chavez</div>
-                </div>
-              </li>
-              <li class="clearfix" onclick="removeActiveClass();activeClass(3);changeActiveProfile(3)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Brittany Thomas</div>
-                </div>
-              </li>
-              <li class="clearfix" onclick="removeActiveClass();activeClass(4);changeActiveProfile(4)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Christian Kelly</div>
-                </div>
-              </li>
-              <li class="clearfix" onclick="removeActiveClass();activeClass(5);changeActiveProfile(5)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Monica Ward</div>
-                </div>
-              </li>
-              <li class="clearfix" onclick="removeActiveClass();activeClass(6);changeActiveProfile(6)">
-                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" class="profileImage">
-                <div class="about">
-                  <div class="name">Dean Henry</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="chat">
-            <div class="chat-header clearfix">
-              <div class="row">
-                <div class="col-lg-6">
-                  <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" id="activePic">
-                  </a>
-                  <div class="chat-about">
-                    <h6 class="m-b-0" id="activeName">Vincent Porter</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="chat-history">
-              <ul class="m-b-0">
-                <!-- <li class="clearfix">
-                                    <div class="message-data text-right" style="float: right">
-                                        <span class="message-data-time">10:10 AM</span>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-	@@ -228,224 +321,295 @@ <h6 class="m-b-0" id="activeName">Vincent Porter</h6>
-                                        to
-                                        show you.</div>
-                                </li> -->
-                <li class="clearfix">
-                  <div class="message-data text-right" style="float: right">
-                    <span class="message-data-time date-goes-here" id="date-goes-here"></span>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" />
-                  </div>
-                  <br />
-                  <br />
-                  <br />
-                  <div class="
-                        message
-                        other-message
-                        float-right
-                        message-goes-here
-                      " id="message-goes-here"></div>
-                </li>
-                <li id="add_after_me"></li>
-              </ul>
-            </div>
-            <div class="chat-message clearfix">
-              <div class="input-group mb-0">
-                <div class="input-group-prepend" style="align-self: center">
-                  <a onclick="sendMessage();addMessage();addContent()"><span class="input-group-text"><i
-                        class="fa fa-send"></i></span></a>
-                </div>
-                <input type="text" class="form-control" id="message" placeholder="Enter text here..." />
-              </div>
-            </div>
+
+  <div class="chat">
+    <div class="chat-header clearfix">
+      <div class="row">
+        <div class="col-lg-6">
+          <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info"></a>
+          <div class="chat-about" style="margin: 0vw">
+            <h2>Student Feed</h2>
+            <a href="#bottom"><button type="button" class="btn btn-secondary">See most recent threads</button></a>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="chat-history">
+      <ul class="m-b-0">
+        <li id="add_after_me"></li>
+      </ul>
+    </div>
+    <div class="chat-message clearfix">
+      <div class="input-group mb-0">
+        <div class="input-group-prepend" style="align-self: center">
+          <a onclick="sendMessage();addMessage();addContent()"><span class="input-group-text"><i
+                class="fa fa-send"></i></span></a>
+        </div>
+        <input type="text" class="form-control" id="message" placeholder="Enter text here..." />
       </div>
     </div>
   </div>
 
   <br />
   <br />
+  <br>
+  <div id="bottom"></div>
+
+  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+    <div class="container py-3" id="footer">
+      <a class="material-icons md-light" href="main.html">home</a>
+      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">add_circle_outline</a>
+      <a class="material-icons md-light" href="calendar.html">event</a>
+    </div>
+  </footer>
 
   <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
     <div class="offcanvas-header">
@@ -247,15 +183,6 @@
       </button>
     </div>
   </div>
-
-  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-    <div class="container py-3" id="footer">
-      <a class="material-icons md-light" href="main.html">home</a>
-      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
-        aria-controls="offcanvasBottom">add_circle_outline</a>
-      <a class="material-icons md-light" href="calendar.html">event</a>
-    </div>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -276,7 +203,6 @@
           //get the document for current user.
           currentUser.get().then((userDoc) => {
             var user_Name = userDoc.data().name;
-            console.log(user_Name);
             document.getElementById("profilename").innerText = user_Name;
           });
         } else {
@@ -292,6 +218,7 @@
         if (user) {
           // Do something for the current logged-in user here:
           console.log(user.uid);
+          localStorage.setItem("userid", user.uid);
           //go to the correct user document by referencing to the user uid
           currentCourses = db
             .collection("users")
@@ -328,6 +255,8 @@
     function sendMessage() {
       let Message = document.getElementById("message").value;
 
+      let nameOfMessage = document.getElementById("profilename").textContent;
+
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           var userID = user.uid;
@@ -341,6 +270,7 @@
             UserID: userID,
             Date: firebase.firestore.Timestamp.now(),
             MessageCount: increment,
+            Name: nameOfMessage,
           });
         } else {
           // No user is signed in.
@@ -351,30 +281,7 @@
       console.log(increment + " send");
     }
 
-    function insertFirstMessage() {
-      increment = 1;
-      console.log(increment);
-      let incrementString = "Message#: " + increment;
 
-      db.collection("Messages")
-        .doc(incrementString)
-
-        .onSnapshot((doc) => {
-          //Tests if the inserted message has the same increment as the sent message
-          console.log(increment + " insert");
-
-          //Inserts the message to HTML
-          document.getElementById("message-goes-here").innerHTML =
-            doc.data().Message;
-
-          //Inserts the real time to HTML
-          document.getElementById("date-goes-here").innerHTML = doc
-            .data()
-            .Date.toDate()
-            .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-        });
-    }
-    insertFirstMessage();
 
     function addMessage() {
       let idIncrement = "message-goes-here" + increment;
@@ -385,20 +292,45 @@
 
       let dateString = "date-goes-here" + increment;
 
+
+
       tag.innerHTML =
         '<li class="clearfix">' +
-        '<div class="message-data text-right" style="float: right">' +
-        '<span class="message-data-time date-goes-here"></span>' +
-        '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
-        "</div>" +
-        "<br>" +
-        "<br>" +
-        "<br>" +
-        '<div class="message other-message float-right message-goes-here"></div>' +
-        "<br>" +
-        "<br>" +
-        "<br>" +
-        "</li>";
+        '<br />' +
+        '<br />' +
+        '<br />' +
+        '<div class="container"' +
+        'style="border: black 1px solid; padding: 40px; float: right; background-color: #1d8fcd23; border-radius: 3%;">' +
+        '<div class="row">' +
+        '<div class="col-md-8">' +
+        '<div class="media g-mb-30 media-comment">' +
+        '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
+        'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+        '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
+        '<div class ="g-mb-15">' +
+        '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
+        '<span class ="g-color-gray-dark-v4 g-font-size-12 date-goes-here">5 days ago</span>' +
+        '</div>' +
+        '<br>' +
+
+        '<p style="font-size: 20px" class ="message-goes-here"></p>' +
+
+        '<ul class ="list-inline d-sm-flex my-0">' +
+        '<li class ="list-inline-item ml-auto">' +
+        '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+        '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
+        'Reply' +
+        '</a>' +
+        '</li>' +
+        '</ul> ' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</li>'
+
+
 
       var element = document.getElementById("add_after_me");
       element.appendChild(tag);
@@ -426,89 +358,131 @@
           //Inserts the message to HTML
           message.innerHTML = doc.data().Message;
 
+          var name = document.getElementsByClassName("messageName")[i - 1];
+
           //Inserts the real time to HTML
           date.innerHTML = doc
             .data()
             .Date.toDate()
             .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+          name.innerHTML = doc.data().Name;
         });
     }
 
-    function activeClass(i) {
-      var element = document.getElementsByClassName("clearfix")[i];
-      element.classList.add("active");
-    }
-
-    function removeActiveClass() {
-      var element = document.getElementsByClassName("active")[0];
-      element.classList.remove("active");
-    }
-
-    function addIdToProfile() {
-      for (var i = 0; i < 6; i++) {
-        var element = document.getElementsByClassName("profileImage")[i];
-        console.log(element);
-        element.setAttribute("id", "profile" + i);
-      }
-    }
-    addIdToProfile();
-
-    function changeActiveProfile(i) {
-      i--;
-      var currentProfile = document.getElementById("profile" + i).src;
-
-      console.log(currentProfile);
-
-      document.getElementById("activePic").src = currentProfile;
-
-      var currentName = document.getElementsByClassName("name")[i].textContent;
-
-      console.log(currentName);
-
-      document.getElementById("activeName").innerHTML = currentName;
-    }
 
     function loadPreviousChat() {
       db.collection("Messages").get().then(snap => {
         size = snap.size // will return the collection size
         localStorage.setItem("collectionSize", size);
-        console.log(localStorage.getItem("collectionSize"));
+        console.log("Collection size: " + localStorage.getItem("collectionSize"));
       });
 
-      while (increment < localStorage.getItem("collectionSize")) {
+      db.collection("Messages").orderBy('Date').get().then(snap => {
 
-        var tag = document.createElement("div");
-        let incrementString = "Message#: " + increment;
+        snap.forEach(doc => {
 
-        let dateString = "date-goes-here" + increment;
+          var tagSelf = document.createElement("div");
+          var tagElse = document.createElement("div");
 
-        tag.innerHTML =
-          '<li class="clearfix">' +
-          '<div class="message-data text-right" style="float: right">' +
-          '<span class="message-data-time date-goes-here"></span>' +
-          '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">' +
-          "</div>" +
-          "<br>" +
-          "<br>" +
-          "<br>" +
-          '<div class="message other-message float-right message-goes-here"></div>' +
-          "<br>" +
-          "<br>" +
-          "<br>" +
-          "</li>";
+          let incrementString = "Message#: " + increment;
 
-        var element = document.getElementById("add_after_me");
-        element.appendChild(tag);
-        console.log(incrementString);
+          let dateString = "date-goes-here" + increment;
 
-        console.log("load previous" + increment)
-        increment++;
-      }
+          tagSelf.innerHTML =
+            '<li class="clearfix">' +
+            '<br />' +
+            '<br />' +
+            '<br />' +
+            '<div class="container"' +
+            'style="border: black 1px solid; padding: 40px; float: right; background-color: #1d8fcd23; border-radius: 3%;">' +
+            '<div class="row">' +
+            '<div class="col-md-8">' +
+            '<div class="media g-mb-30 media-comment">' +
+            '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
+            'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+            '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
+            '<div class ="g-mb-15">' +
+            '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
+            '<span class ="g-color-gray-dark-v4 g-font-size-12 date-goes-here">5 days ago</span>' +
+            '</div>' +
+            '<br>' +
+
+            '<p style="font-size: 20px" class ="message-goes-here"></p>' +
+
+            '<ul class ="list-inline d-sm-flex my-0">' +
+            '<li class ="list-inline-item ml-auto">' +
+            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+            '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
+            'Reply' +
+            '</a>' +
+            '</li>' +
+            '</ul> ' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</li>';
+
+          tagElse.innerHTML =
+            '<li class="clearfix">' +
+            '<br />' +
+            '<br />' +
+            '<br />' +
+            '<div class="container"' +
+            'style="border: black 1px solid; padding: 40px; float: left; background-color: #d3d3d35e; border-radius: 3%;">' +
+            '<div class="row">' +
+            '<div class="col-md-8">' +
+            '<div class="media g-mb-30 media-comment">' +
+            '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
+            'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+            '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
+            '<div class ="g-mb-15">' +
+            '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
+            '<span class ="g-color-gray-dark-v4 g-font-size-12 date-goes-here">5 days ago</span>' +
+            '</div>' +
+            '<br>' +
+
+            '<p style="font-size: 20px" class ="message-goes-here"></p>' +
+
+            '<ul class ="list-inline d-sm-flex my-0">' +
+            '<li class ="list-inline-item ml-auto">' +
+            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+            '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
+            'Reply' +
+            '</a>' +
+            '</li>' +
+            '</ul> ' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</li>';
+
+          var element = document.getElementById("add_after_me");
+
+          firebase.auth().onAuthStateChanged((user) => {
+            // Check if user is signed in:
+            if (doc.data().UserID == user.uid) {
+              element.appendChild(tagSelf);
+            } else {
+              element.appendChild(tagElse);
+            }
+          })
 
 
+          console.log(incrementString);
 
+
+          increment++;
+
+
+        })
+      });
+      increment--;
     }
-
     loadPreviousChat();
 
     function updatePreviousChat() {
@@ -526,6 +500,9 @@
           //Tests if the inserted message has the same increment as the sent message
           console.log(i + " insert");
 
+          var name = document.getElementsByClassName("messageName")[i - 1];
+
+
           //Inserts the message to HTML
           message.innerHTML = doc.data().Message;
 
@@ -534,22 +511,14 @@
             .data()
             .Date.toDate()
             .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+          name.innerHTML = doc.data().Name;
           i++;
         })
 
       });
     }
     updatePreviousChat();
-
-    function orderByTimeStamp() {
-      db.collection("Messages")
-        .orderBy("timestamp", "Date")
-        .onSnapshot((snapshot) => {
-
-        });
-    }
-    orderByTimeStamp();
-
   </script>
 </body>
 
