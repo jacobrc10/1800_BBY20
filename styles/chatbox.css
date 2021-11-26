@@ -103,18 +103,27 @@
     margin-bottom: 0px
 }
 
-.chat .chat-history .message-data {
+.chat .chat-history {
     margin-bottom: 15px
 }
 
-.chat .chat-history .message-data img {
+.chat .chat-history img {
     border-radius: 40px;
     width: 40px
 }
 
-.chat .chat-history .message-data-time {
+.chat .chat-history {
     color: #434651;
     padding-left: 6px
+}
+
+.message-data {
+    margin-bottom: 15px;
+}
+
+.message-data-time {
+    color: #a8aab1;
+    padding-left: 6px;
 }
 
 .chat .chat-history .message {

@@ -137,6 +137,7 @@
         </div>
       </div>
     </div>
+
     <div class="chat-history">
       <ul class="m-b-0">
         <li id="add_after_me"></li>
@@ -196,8 +197,6 @@
       firebase.auth().onAuthStateChanged((user) => {
         // Check if user is signed in:
         if (user) {
-          // Do something for the current logged-in user here:
-          console.log(user.uid);
           //go to the correct user document by referencing to the user uid
           currentUser = db.collection("users").doc(user.uid);
           //get the document for current user.
@@ -216,8 +215,6 @@
       firebase.auth().onAuthStateChanged((user) => {
         // Check if user is signed in:
         if (user) {
-          // Do something for the current logged-in user here:
-          console.log(user.uid);
           localStorage.setItem("userid", user.uid);
           //go to the correct user document by referencing to the user uid
           currentCourses = db
@@ -257,6 +254,8 @@
 
       let nameOfMessage = document.getElementById("profilename").textContent;
 
+
+
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           var userID = user.uid;
@@ -271,6 +270,7 @@
             Date: firebase.firestore.Timestamp.now(),
             MessageCount: increment,
             Name: nameOfMessage,
+
           });
         } else {
           // No user is signed in.
@@ -305,7 +305,7 @@
         '<div class="col-md-8">' +
         '<div class="media g-mb-30 media-comment">' +
         '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
-        'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+        'src="/images/account.png" alt="Image Description" style="width: 4vw">' +
         '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
         '<div class ="g-mb-15">' +
         '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
@@ -315,9 +315,13 @@
 
         '<p style="font-size: 20px" class ="message-goes-here"></p>' +
 
+        '<a><button type="button" style="color: #0096FF" id="showReply' + increment
+        + '" class="showReplyClass" onclick="showReplies(' + increment +
+        ')">Show Replies</button></a>' + '<br>' +
+
         '<ul class ="list-inline d-sm-flex my-0">' +
         '<li class ="list-inline-item ml-auto">' +
-        '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+        '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!" onclick="findReplyClicked(this)">' +
         '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
         'Reply' +
         '</a>' +
@@ -330,7 +334,7 @@
         '</div>' +
         '</li>'
 
-
+      messagesArray.push(tag);
 
       var element = document.getElementById("add_after_me");
       element.appendChild(tag);
@@ -400,7 +404,7 @@
             '<div class="col-md-8">' +
             '<div class="media g-mb-30 media-comment">' +
             '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
-            'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+            'src="/images/account.png" alt="Image Description" style="width: 4em">' +
             '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
             '<div class ="g-mb-15">' +
             '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
@@ -410,9 +414,14 @@
 
             '<p style="font-size: 20px" class ="message-goes-here"></p>' +
 
+            '<a><button type="button" style="color: #0096FF" id="showReply' + increment
+            + '" class="showReplyClass" onclick="showReplies(' + increment +
+            ')">Show Replies</button></a>' + '<br>' +
+
             '<ul class ="list-inline d-sm-flex my-0">' +
             '<li class ="list-inline-item ml-auto">' +
-            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" onclick="findReplyClicked(' + increment +
+            ')">' +
             '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
             'Reply' +
             '</a>' +
@@ -436,7 +445,7 @@
             '<div class="col-md-8">' +
             '<div class="media g-mb-30 media-comment">' +
             '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
-            'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4vw">' +
+            'src="/images/account.png" alt="Image Description" style="width: 4em">' +
             '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
             '<div class ="g-mb-15">' +
             '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
@@ -446,9 +455,14 @@
 
             '<p style="font-size: 20px" class ="message-goes-here"></p>' +
 
+            '<a><button type="button" style="color: #0096FF" id="showReply' + increment
+            + '" class="showReplyClass" onclick="showReplies(' + increment +
+            ')">Show Replies</button></a>' + '<br>' +
+
             '<ul class ="list-inline d-sm-flex my-0">' +
             '<li class ="list-inline-item ml-auto">' +
-            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">' +
+            '<a class ="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" onclick="findReplyClicked(' + increment +
+            ')">' +
             '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
             'Reply' +
             '</a>' +
@@ -489,7 +503,6 @@
       db.collection("Messages").orderBy('Date').get().then(snap => {
         i = 1
         snap.forEach(doc => {
-          console.log("Check");
           var message =
             document.getElementsByClassName("message-goes-here")[
             i - 1
@@ -519,6 +532,133 @@
       });
     }
     updatePreviousChat();
+
+    function findReplyClicked(messageNum) {
+      var element = document.getElementsByClassName("u-link-v5")[messageNum];
+
+      element.classList.add("activeMessage");
+
+      tag = document.createElement("div");
+
+      tag.innerHTML = '<div id="remove-reply">' +
+        '<br>' +
+        '<label for="inputPassword5" class="form-label">Enter a reply message</label>' +
+        '<input type="text" id="inputReply" class="form-control" aria-describedby="passwordHelpBlock">' +
+        '<div id="passwordHelpBlock" class="form-text">' +
+        '<button type="button" class="btn btn-primary" onclick="sendReplyInfo(' +
+        messageNum +
+        '); insertReply()">Submit</button>' +
+        '</div>' +
+        '</div>';
+
+      var element = document.getElementsByClassName("activeMessage")[0];
+      element.insertAdjacentElement('afterend', tag);
+
+    }
+
+    function insertReply() {
+
+      document.getElementById("remove-reply").remove();
+
+      tag.innerHTML = '<li class="clearfix" style="border: black 1px solid">' +
+        '<div class="message-data">' +
+        '<span class="message-data-name"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"' +
+        'style="width: 2em"> <b>You</b><p class="reply-time-goes-here"> 11: 43 AM</p></span>' +
+        '</div>' +
+        '<div class="reply-goes-here"></div>' +
+        '</li>';
+
+      var element = document.getElementsByClassName("activeMessage")[0];
+      element.insertAdjacentElement('afterend', tag);
+
+
+    }
+
+    let count = 0;
+    function sendReplyInfo(messageNum) {
+      let Message = document.getElementById("inputReply").value;
+      messageNum++;
+      firebase.auth().onAuthStateChanged(user => {
+        var userID = user.uid;
+        //The collection name
+        let incrementString = "Message#: " + messageNum;
+
+        db.collection("Messages").doc(incrementString).collection("Reply Thread").get().then(function (querySnapshot) {
+          count = querySnapshot.size;
+        });
+
+        count++;
+
+        let replyIncrementString = "Reply#: " + count;
+
+        //Relays back the message, user ID, timestamp of date and the message number
+        db.collection("Messages").doc(incrementString).collection("Reply Thread").doc(replyIncrementString).set({
+          Message: Message,
+          UserID: userID,
+          Date: firebase.firestore.Timestamp.now(),
+        });
+
+      });
+    }
+
+    function showReplies(replyNum) {
+      var element = document.getElementsByClassName("showReplyClass")[replyNum];
+
+      element.disabled = true;
+
+      replyNum++;
+
+      let incrementString = "Message#: " + replyNum;
+
+      db.collection("Messages").doc(incrementString).collection("Reply Thread").orderBy('Date').get().then(snap => {
+
+        snap.forEach(doc => {
+          var tag = document.createElement("div");
+
+          tag.innerHTML = '<li class="clearfix" style="border: black 1px solid">' +
+            '<div class="message-data">' +
+            '<span class="message-data-name"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"' +
+            'style="width: 2em"> <b>You</b><p class="reply-time-goes-here"></p></span>' +
+            '<div class="reply-goes-here" style="float: right"></div>' +
+            '</div>' +
+
+            '</li>';
+
+          element.appendChild(tag);
+        })
+      })
+      updateShowReply(incrementString);
+    }
+
+    function updateShowReply(incrementString) {
+      db.collection("Messages").doc(incrementString).collection("Reply Thread").orderBy('Date').get().then(snap => {
+        i = 1
+        snap.forEach(doc => {
+          var message =
+            document.getElementsByClassName("reply-goes-here")[
+            i - 1
+            ];
+
+          var date =
+            document.getElementsByClassName("reply-time-goes-here")[i - 1];
+          //Tests if the inserted message has the same increment as the sent message
+          console.log(i + " insert");
+
+          //Inserts the message to HTML
+          message.innerHTML = doc.data().Message;
+
+          //Inserts the real time to HTML
+          date.innerHTML = doc
+            .data()
+            .Date.toDate()
+            .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+          i++;
+        })
+
+      });
+    }
+
   </script>
 </body>
 

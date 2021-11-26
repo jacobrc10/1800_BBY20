@@ -1,371 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Know-It-All Notifier - Main Page</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project" />
-    <meta name="author" content="BCIT" />
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="utf-8" />
+  <title>Know-It-All Notifier - Main Page</title>
+  <meta name="comp1800 boilerplate code" content="my bcit project" />
+  <meta name="author" content="BCIT" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Google Icons (Material Design)-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-    <!-- My CSS Stylesheet-->
-    <link rel="stylesheet" href="/styles/my_style.css" />
+  <!-- Google Icons (Material Design)-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <!-- Firebase 8 CDNs-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- My CSS Stylesheet-->
+  <link rel="stylesheet" href="/styles/my_style.css" />
 
-    <!-- Link to api keys for Firebase project -->
-    <script src="/scripts/firebaseAPI_BBY20.js"></script>
-  </head>
+  <!-- Firebase 8 CDNs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">Know-It-All Notifier</a>
-        <button
-          class="material-icons md-light md-36"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          account_circle
-        </button>
+  <!-- Link to api keys for Firebase project -->
+  <script src="/scripts/firebaseAPI_BBY20.js"></script>
+</head>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="main.html"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="calendar.html">Calendar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="to-do.html">To-Do List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="links.html">Class Links</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="mocktest.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Mock Test
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="help.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Help
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <br />
-
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasRight"
-      aria-labelledby="offcanvasRightLabel"
-    >
-      <div class="offcanvas-header">
-        <img id="accountimg" src="/images/account.png" />
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Profile Name</b>
-          </li>
-          <a href="#" class="list-group-item" id="profilename">John Doe</a>
-        </ul>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Courses</b>
-          </li>
-          <div id="courseList"></div>
-          <li class="list-group-item list-group-item-action">
-            <i class="material-icons md-14">add</i>
-            <a href="add-class.html">Add another course</a>
-          </li>
-        </ul>
-
-        <br />
-        <ul class="list-group list-group-flush">
-          <a href="profile.html" class="list-group-item list-group-item-action"
-            >My Account</a
-          >
-          <a href="#" class="list-group-item list-group-item-action"
-            >Connections</a
-          >
-          <a href="settings.html" class="list-group-item list-group-item-action"
-            >App Settings</a
-          >
-        </ul>
-
-        <div class="logout">
-          <button
-            type="button"
-            class="btn btn-outline-info"
-            onclick="location.href='login.html';"
-          >
-            <i class="material-icons md-14">logout</i>
-            Log Out
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary btn-sm dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton1"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        ALL CLASSES
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">COMP 1800</a></li>
-        <li><a class="dropdown-item" href="#">COMM 1116</a></li>
-        <li><a class="dropdown-item" href="#">COMP 1537</a></li>
+      <a class="navbar-brand" href="#">Know-It-All Notifier</a>
+      <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        account_circle
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="main.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="calendar.html">Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="to-do.html">To-Do List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="links.html">Class Links</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mocktest.html" tabindex="-1" aria-disabled="true">Mock Test
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html" tabindex="-1" aria-disabled="true">Help
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br />
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <img id="accountimg" src="/images/account.png" />
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Profile Name</b>
+        </li>
+        <a href="#" class="list-group-item" id="profilename">John Doe</a>
       </ul>
-    </div>
 
-    <br />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Courses</b>
+        </li>
+        <div id="courseList"></div>
+        <li class="list-group-item list-group-item-action">
+          <i class="material-icons md-14">add</i>
+          <a href="add-class.html">Add another course</a>
+        </li>
+      </ul>
 
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading">URGENT!</h4>
-      <p>COMP-1800 Projects 1 - Clickable Wireframe - Start coding.</p>
-      <hr />
-      <p class="mb-0">Due: October 15, 2021 11:59PM</p>
-    </div>
+      <br />
+      <ul class="list-group list-group-flush">
+        <a href="profile.html" class="list-group-item list-group-item-action">My Account</a>
+        <a href="#" class="list-group-item list-group-item-action">Connections</a>
+        <a href="settings.html" class="list-group-item list-group-item-action">App Settings</a>
+      </ul>
 
-    <div class="alert alert-warning" role="alert">
-      <h4 class="alert-heading">Upcoming</h4>
-      <p>
-        Midterms for COMP1113, COMP 1510, COMM 1116, COMP 1537 and COMP1712.
-      </p>
-      <hr />
-      <p class="mb-0">Due: October 18 - 22, 2021</p>
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">Upcoming Assignment</h4>
-      <p>
-        COMP-1116 Business Communications - Chapter 5 Discussion: Emails,
-        Letters, and Memos.
-      </p>
-      <hr />
-      <p class="mb-0">Due: October 17, 2021 11:59PM</p>
-    </div>
-
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">Upcoming Assignment</h4>
-      <p>COMP-1537 Web Development - Assignment 3.</p>
-      <hr />
-      <p class="mb-0">Due: October 28, 2021 1:30PM</p>
-    </div>
-
-    <div class="toast bg-primary text-white fade show" id="myToast">
-      <div class="toast-header bg-primary text-white">
-        <strong class="me-auto"
-          ><i class="bi-gift-fill"></i> Important Feature</strong
-        >
-        <small>10 mins ago</small>
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="toast"
-          id="hideBtn"
-        ></button>
-      </div>
-      <div class="toast-body">
-        Check out the calendar!
-        <a href="calendar.html" class="text-white">Click here!</a>
-      </div>
-    </div>
-
-    <br /><br /><br /><br />
-    <div
-      class="offcanvas offcanvas-bottom"
-      tabindex="-1"
-      id="offcanvasBottom"
-      aria-labelledby="offcanvasBottomLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomLabel">
-          Type of Event?
-        </h5>
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body small" id="eventSelector">
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="eventSelect1"
-          onclick="location.href='add-event.html';"
-        >
-          Single Event (Deadlines)
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          id="eventSelect2"
-          onclick="location.href='add-recurring.html';"
-        >
-          Recurring Events (Lectures/Labs)
+      <div class="logout">
+        <button type="button" class="btn btn-outline-info" onclick="location.href='login.html';">
+          <i class="material-icons md-14">logout</i>
+          Log Out
         </button>
       </div>
     </div>
+  </div>
 
-    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-      <div class="container py-3" id="footer">
-        <a class="material-icons md-light" href="main.html">home</a>
-        <a
-          class="material-icons md-light md-36"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasBottom"
-          aria-controls="offcanvasBottom"
-          >add_circle_outline</a
-        >
-        <a class="material-icons md-light" href="calendar.html">event</a>
-      </div>
-    </footer>
+  <br />
+  <h2>Tasks Due Today</h2>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+  <br>
 
-    <!-- Javascript -->
-    <script>
-      function insertName() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid);
-            //get the document for current user.
-            currentUser.get().then((userDoc) => {
-              var user_Name = userDoc.data().name;
-              console.log(user_Name);
-              document.getElementById("profilename").innerText = user_Name;
-            });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      insertName();
+  <div id="add-after-me"></div>
 
-      function displayCourseList() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentCourses = db
-              .collection("users")
-              .doc(user.uid)
-              .collection("courses");
+  <div class="toast bg-primary text-white fade show" id="myToast">
+    <div class="toast-header bg-primary text-white">
+      <strong class="me-auto"><i class="bi-gift-fill"></i> Important Feature</strong>
+      <small>10 mins ago</small>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" id="hideBtn"></button>
+    </div>
+    <div class="toast-body">
+      Check out the calendar!
+      <a href="calendar.html" class="text-white">Click here!</a>
+    </div>
+  </div>
 
-            const location = document.getElementById("courseList");
-            //get the document for current user.
-            currentCourses
-              .get()
-              .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
-                  var cour = document.createElement("a");
-                  cour.textContent += doc.data().name;
-                  cour.setAttribute(
-                    "class",
-                    "list-group-item list-group-item-action"
-                  );
-                  console.log(cour);
-                  location.appendChild(cour);
-                });
-              })
-              .catch(function (error) {
-                console.log("Error getting documents: " + error);
-              });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      displayCourseList();
+  <br /><br /><br /><br />
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+        Type of Event?
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small" id="eventSelector">
+      <button type="button" class="btn btn-primary" id="eventSelect1" onclick="location.href='add-event.html';">
+        Single Event (Deadlines)
+      </button>
+      <button type="button" class="btn btn-secondary" id="eventSelect2" onclick="location.href='add-recurring.html';">
+        Recurring Events (Lectures/Labs)
+      </button>
+    </div>
+  </div>
 
-      $(document).ready(function () {
-        $("#hideBtn").click(function () {
-          $("#myToast").toast("hide");
-        });
+  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+    <div class="container py-3" id="footer">
+      <a class="material-icons md-light" href="main.html">home</a>
+      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">add_circle_outline</a>
+      <a class="material-icons md-light" href="calendar.html">event</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- Javascript -->
+  <script>
+    function insertName() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentUser = db.collection("users").doc(user.uid);
+          //get the document for current user.
+          currentUser.get().then((userDoc) => {
+            var user_Name = userDoc.data().name;
+            console.log(user_Name);
+            document.getElementById("profilename").innerText = user_Name;
+          });
+        } else {
+          // No user is signed in.
+        }
       });
-    </script>
-  </body>
+    }
+    insertName();
+
+    function displayCourseList() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentCourses = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses");
+
+          const location = document.getElementById("courseList");
+          //get the document for current user.
+          currentCourses
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " => ", doc.data());
+                var cour = document.createElement("a");
+                cour.textContent += doc.data().name;
+                cour.setAttribute(
+                  "class",
+                  "list-group-item list-group-item-action"
+                );
+                console.log(cour);
+                location.appendChild(cour);
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: " + error);
+            });
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    displayCourseList();
+
+    function setAlert() {
+      let increment = 0;
+      firebase.auth().onAuthStateChanged((user) => {
+        db.collection("users").doc(user.uid).collection("events").get().then(snap => {
+
+          snap.forEach(doc => {
+            if (doc.data().dueDate.toDate().getDay() == firebase.firestore.Timestamp.now().toDate().getDay()) {
+              let title = doc.data().title;
+              let time = doc.data().dueDate;
+              let course = doc.data().courseLink;
+              addAlert(title, time, course, increment);
+              increment++;
+            } else {
+              console.log("doesn't run");
+            }
+          })
+        })
+      })
+    }
+    setAlert();
+
+    function addAlert(title, time, course, increment) {
+      var tag = document.createElement("div");
+
+      tag.innerHTML =
+        '<div class="alert alert-info" role="alert">' +
+        '<h4 class="alert-heading title-goes-here">URGENT!</h4>' +
+        '<p class="course-goes-here">COMP-1800 Projects 1 - Clickable Wireframe - Start coding.</p>' +
+        '<hr />' +
+        '<p style="float: left; margin-right: 6px"> Due Today: <p class="mb-0 date-goes-here"> </p> </p>' +
+        '</div>'
+
+      var element = document.getElementById("add-after-me");
+
+      element.appendChild(tag);
+
+      console.log("function ran");
+
+      var titlePlace =
+        document.getElementsByClassName("title-goes-here")[increment];
+
+      var datePlace =
+        document.getElementsByClassName("date-goes-here")[increment];
+
+      var coursePlace = document.getElementsByClassName("course-goes-here")[increment];
+
+      titlePlace.innerHTML = title;
+
+      datePlace.innerHTML = time.toDate().toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+      coursePlace.innerHTML = course;
+
+    }
+
+    $(document).ready(function () {
+      $("#hideBtn").click(function () {
+        $("#myToast").toast("hide");
+      });
+    });
+  </script>
+</body>
+
 </html>
