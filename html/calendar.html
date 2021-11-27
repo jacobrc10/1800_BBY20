@@ -9,9 +9,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<<<<<<< HEAD
     <!-- Bootstrap CSS -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" /> -->
+=======
+<head>
+  <meta charset="utf-8" />
+  <title>Know-It-All Notifier - Calendar Page</title>
+  <meta name="comp1800 boilerplate code" content="my bcit project" />
+  <meta name="author" content="BCIT" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+>>>>>>> 39e5dc713bee46117f5fcf4f28e96d5a828efb39
 
     <!-- Google Icons (Material Design)-->
     <link
@@ -22,6 +37,7 @@
     <!-- My CSS Stylesheet-->
     <link rel="stylesheet" href="/styles/my_style.css" />
 
+<<<<<<< HEAD
     <!-- Firebase 8 CDNs-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script
@@ -32,6 +48,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+=======
+  <!-- Firebase 8 CDNs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+>>>>>>> 39e5dc713bee46117f5fcf4f28e96d5a828efb39
 
     <!-- Link to api keys for Firebase project -->
     <script src="/scripts/firebaseAPI_BBY20.js"></script>
@@ -173,6 +199,10 @@
       </div>
     </div>
 
+    <h1 id="clock" style="text-align: center;">
+
+    </h1>
+
     <div class="contents">
       <div id="myCalendar" class="calendar"></div>
     </div>
@@ -228,11 +258,8 @@
       </div>
     </footer>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+
+
 
     <script>
       function insertName() {
@@ -286,10 +313,16 @@
 
                   var icoColour;
 
+<<<<<<< HEAD
                   switch (doc.data().color) {
                     case "red":
                       icoColour = "/images/iconRed.png";
                       break;
+=======
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+>>>>>>> 39e5dc713bee46117f5fcf4f28e96d5a828efb39
 
                     case "yellow":
                       icoColour = "/images/iconYellow.png";
@@ -325,6 +358,7 @@
               .catch(function (error) {
                 console.log("Error getting documents: " + error);
               });
+<<<<<<< HEAD
           } else {
             // No user is signed in.
           }
@@ -341,6 +375,146 @@
         showTimesInMainCalendarEvents: true,
         minimumDayHeight: 0,
         visibleDays: [0, 1, 2, 3, 4, 5, 6],
+=======
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: " + error);
+            });
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    displayCourseList();
+
+
+    // calendarJs(id, options, startDateTime)
+    var calendarInstance = new calendarJs("myCalendar", {
+      // options here
+      exportEventsEnabled: false,
+      manualEditingEnabled: false,
+      maximumEventsPerDayDisplay: 0,
+      showTimesInMainCalendarEvents: true,
+      minimumDayHeight: 0,
+      visibleDays: [0, 1, 2, 3, 4, 5, 6],
+    });
+
+
+    // calendarInstance.addEvents(getEvents());
+    getEvents();
+
+    function getEvents() {
+
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentEvents = db.collection("users").doc(user.uid).collection("events");
+          //get the document for current user.
+          currentEvents.get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              var eventTitle = doc.data().title;
+              var eventTime = doc.data().dueDate.toDate();
+              var eventCourse = doc.data().courseLink;
+              var colour;
+              var eventColor;
+              var newEvent;
+
+              var courseColor = db.collection("users").doc(user.uid).collection("courses");
+
+
+              courseColor.get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  // console.log("EventCourse", eventCourse);
+                  // console.log("Name", doc.data().name);
+                  if (doc.data().name == (eventCourse)) {
+                    colour = doc.data().color;
+                    switch (colour) {
+                    case "red":
+                      console.log("red");
+                      eventColor = "rgb(220, 53, 69)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                      break;
+                    case "blue":
+                      console.log("blue");
+                      eventColor = "rgb(13, 110, 253)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                      break;
+                    case "yellow":
+                      console.log("yellow");
+                      eventColor = "rgb(255, 193, 7)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                      break;
+                    case "green":
+                      console.log("green");
+                      eventColor = "rgb(40, 167, 69)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                      break;
+                    case "cyan":
+                      console.log("cyan");
+                      eventColor = "rgb(23, 162, 184)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                      break;
+                    default:
+                      console.log("default");
+                      eventColor = "rgb(0, 0, 0)";
+                      newEvent = {
+                        from: eventTime,
+                        to: eventTime,
+                        title: eventTitle,
+                        color: eventColor
+                      }
+                      calendarInstance.addEvent(newEvent);
+                  }
+
+                  
+                  } else {
+                    eventColor = "rbg(0, 0, 0)";
+                    
+                  }
+
+                })
+              })
+
+
+            });
+          })
+        } else {
+          // No user is signed in.
+        }
+>>>>>>> 39e5dc713bee46117f5fcf4f28e96d5a828efb39
       });
 
       // calendarInstance.addEvents(getEvents());
@@ -369,6 +543,7 @@
                   title: eventTitle,
                 };
 
+<<<<<<< HEAD
                 calendarInstance.addEvent(newEvent);
               });
             });
@@ -380,3 +555,34 @@
     </script>
   </body>
 </html>
+=======
+    function addClock() {
+
+      let dateTemp = new Date();
+      var evSmTxt;
+      var evSmMins;
+      if (dateTemp.getMinutes() < 10) {
+        evSmMins = "0" + dateTemp.getMinutes();
+      } else {
+        evSmMins = dateTemp.getMinutes();
+      }
+      if (dateTemp.getHours() > 11) {
+        evSmTxt = document.createTextNode(
+          (dateTemp.getHours() - 12) + ":" + evSmMins + " PM"
+        );
+      } else {
+        evSmTxt = document.createTextNode(
+          dateTemp.getHours() + ":" + evSmMins + " AM"
+        );
+
+      }
+      console.log("Clock: ", evSmTxt.data);
+      document.getElementById('clock').innerText = evSmTxt.data;
+      setTimeout(addClock, 60000);
+    }
+    addClock();
+  </script>
+</body>
+
+</html>
+>>>>>>> 39e5dc713bee46117f5fcf4f28e96d5a828efb39
