@@ -612,25 +612,29 @@
 
         db.collection("Messages").doc(incrementString).collection("Reply Thread").get().then(function (querySnapshot) {
           count = querySnapshot.size;
+
+          count++;
+          console.log("count: " + count);
+
+
+
+          let replyIncrementString = "Reply#: " + count;
+
+          let messageName = document.getElementById("profilename").textContent;
+
+          //Relays back the message, user ID, timestamp of date and the message number
+          db.collection("Messages").doc(incrementString).collection("Reply Thread").doc(replyIncrementString).set({
+            Message: Message,
+            UserID: userID,
+            Date: firebase.firestore.Timestamp.now(),
+            Name: messageName,
+          });
+
+          insertReply(incrementString, Message, userID, count, messageName);
         });
-        count++;
-        console.log("count: " + count);
 
 
 
-        let replyIncrementString = "Reply#: " + count;
-
-        let messageName = document.getElementById("profilename").textContent;
-
-        //Relays back the message, user ID, timestamp of date and the message number
-        db.collection("Messages").doc(incrementString).collection("Reply Thread").doc(replyIncrementString).set({
-          Message: Message,
-          UserID: userID,
-          Date: firebase.firestore.Timestamp.now(),
-          Name: messageName,
-        });
-
-        insertReply(incrementString, Message, userID, count, messageName);
 
       });
     }
