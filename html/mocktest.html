@@ -1,408 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Know-It-All Notifier - Mock Test</title>
+    <meta name="comp1800 boilerplate code" content="my bcit project" />
+    <meta name="author" content="BCIT" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8" />
-  <title>Know-It-All Notifier - Mock Test</title>
-  <meta name="comp1800 boilerplate code" content="my bcit project" />
-  <meta name="author" content="BCIT" />
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- Google Icons (Material Design)-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
-  <!-- Google Icons (Material Design)-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- My CSS Stylesheet-->
+    <link rel="stylesheet" href="/styles/my_style.css" />
 
-  <!-- My CSS Stylesheet-->
-  <link rel="stylesheet" href="/styles/my_style.css" />
+    <!-- Firebase 8 CDNs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <!-- Firebase 8 CDNs-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- Link to api keys for Firebase project -->
+    <script src="/scripts/firebaseAPI_BBY20.js"></script>
 
-  <!-- Link to api keys for Firebase project -->
-  <script src="/scripts/firebaseAPI_BBY20.js"></script>
+    <!-- Library for timer-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
+  </head>
 
-  <!-- Library for timer-->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js"></script>
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Mock Test</a>
-      <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-        account_circle
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="calendar.html">Calendar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="to-do.html">To-Do List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="links.html">Class Links</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="mocktest.html" tabindex="-1" aria-disabled="true">Mock Test
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="help.html" tabindex="-1" aria-disabled="true">Help
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <br />
-
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-      <img id="accountimg" src="/images/account.png" />
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <b class="list-group-item-heading">Profile Name</b>
-        </li>
-        <a href="#" class="list-group-item" id="profilename">John Doe</a>
-      </ul>
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <b class="list-group-item-heading">Courses</b>
-        </li>
-        <div id="courseList"></div>
-        <li class="list-group-item list-group-item-action">
-          <i class="material-icons md-14">add</i>
-          <a href="add-class.html">Add another course</a>
-        </li>
-      </ul>
-
-      <br />
-      <ul class="list-group list-group-flush">
-        <a href="profile.html" class="list-group-item list-group-item-action">My Account</a>
-        <a href="#" class="list-group-item list-group-item-action">Connections</a>
-        <a href="settings.html" class="list-group-item list-group-item-action">App Settings</a>
-      </ul>
-
-      <div class="logout">
-        <button type="button" class="btn btn-outline-info" onclick="location.href='login.html';">
-          <i class="material-icons md-14">logout</i>
-          Log Out
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand" href="#">Mock Test</a>
+        <button
+          class="material-icons md-light md-36"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+        >
+          account_circle
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="main.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calendar.html">Calendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="to-do.html">To-Do List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="links.html">Class Links</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="mocktest.html"
+                tabindex="-1"
+                aria-disabled="true"
+                >Mock Test
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="help.html"
+                tabindex="-1"
+                aria-disabled="true"
+                >Help
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="container" id="demo">
-    <h1 class="display-4" style="text-align: center">Create Mock Test</h1>
-
-    <br /><br /><br />
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Test Name</label>
-      <input type="text" class="form-control" id="test" placeholder="Ex: COMP 1113 Midterm" />
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
-      <textarea class="form-control" id="notes" rows="3"></textarea>
-    </div>
-    <p>Choose class:</p>
-    <select class="form-select" aria-label="Default select example" id="course">
-      <option selected>Class:</option>
-
-    </select>
+    </nav>
 
     <br />
-    <div class="text-center card-body" id="chronoExample">
-      <div class="values" id="time">00:00:00</div>
-      <div>
-        <button class="startButton btn btn-success btn-lg mb-1">Start</button>
-        <button class="pauseButton btn btn-warning btn-lg mb-1">Pause</button>
-        <button class="stopButton btn btn-danger btn-lg mb-1">Stop</button>
-        <br><br>
-        <button class="btn btn-primary btn-lg mb-1" onclick="addTest()">
-          Submit Time
-        </button>
+
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <img id="accountimg" src="/images/account.png" />
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
       </div>
-      <br />
-      <div>
-        <button class="btn btn-primary btn-lg mb-1" onclick="insertTests()">
-          View Tests
-        </button>
+      <div class="offcanvas-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <b class="list-group-item-heading">Profile Name</b>
+          </li>
+          <a href="#" class="list-group-item" id="profilename">John Doe</a>
+        </ul>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <b class="list-group-item-heading">Courses</b>
+          </li>
+          <div id="courseList"></div>
+          <li class="list-group-item list-group-item-action">
+            <i class="material-icons md-14">add</i>
+            <a href="add-class.html">Add another course</a>
+          </li>
+        </ul>
+
+        <br />
+        <ul class="list-group list-group-flush">
+          <a href="profile.html" class="list-group-item list-group-item-action"
+            >My Account</a
+          >
+          <a href="#" class="list-group-item list-group-item-action"
+            >Connections</a
+          >
+          <a href="settings.html" class="list-group-item list-group-item-action"
+            >App Settings</a
+          >
+        </ul>
+
+        <div class="logout">
+          <button
+            type="button"
+            class="btn btn-outline-info"
+            onclick="location.href='login.html';"
+          >
+            <i class="material-icons md-14">logout</i>
+            Log Out
+          </button>
+        </div>
       </div>
-      <table id="testview" class="table table-bordered" style="font-size: large;"></table>
     </div>
 
-    
-  </div>
-  
+    <div class="container" id="demo">
+      <h1 class="display-4" style="text-align: center">Create Mock Test</h1>
+
+      <br /><br /><br />
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Test Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="test"
+          placeholder="Ex: COMP 1113 Midterm"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Notes</label
+        >
+        <textarea class="form-control" id="notes" rows="3"></textarea>
+      </div>
+      <p>Choose class:</p>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="course"
+      >
+        <option selected>Class:</option>
+      </select>
+
+      <br />
+      <div class="text-center card-body" id="chronoExample">
+        <div class="values" id="time">00:00:00</div>
+        <div>
+          <button class="startButton btn btn-success btn-lg mb-1">Start</button>
+          <button class="pauseButton btn btn-warning btn-lg mb-1">Pause</button>
+          <button class="stopButton btn btn-danger btn-lg mb-1">Stop</button>
+          <br /><br />
+          <button class="btn btn-primary btn-lg mb-1" onclick="addTest()">
+            Submit Time
+          </button>
+        </div>
+        <br />
+        <div>
+          <button class="btn btn-primary btn-lg mb-1" onclick="insertTests()">
+            View Tests
+          </button>
+        </div>
+        <table
+          id="testview"
+          class="table table-bordered"
+          style="font-size: large"
+        ></table>
+      </div>
+    </div>
+
     <br /><br /><br /><br /><br />
 
-  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasBottomLabel">
-        Type of Event?
-      </h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div
+      class="offcanvas offcanvas-bottom"
+      tabindex="-1"
+      id="offcanvasBottom"
+      aria-labelledby="offcanvasBottomLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+          Type of Event?
+        </h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body small" id="eventSelector">
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="eventSelect1"
+          onclick="location.href='add-event.html';"
+        >
+          Single Event (Deadlines)
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="eventSelect2"
+          onclick="location.href='add-recurring.html';"
+        >
+          Recurring Events (Lectures/Labs)
+        </button>
+      </div>
     </div>
-    <div class="offcanvas-body small" id="eventSelector">
-      <button type="button" class="btn btn-primary" id="eventSelect1" onclick="location.href='add-event.html';">
-        Single Event (Deadlines)
-      </button>
-      <button type="button" class="btn btn-secondary" id="eventSelect2" onclick="location.href='add-recurring.html';">
-        Recurring Events (Lectures/Labs)
-      </button>
-    </div>
-  </div>
 
-  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-    <div class="container py-3" id="footer">
-      <a class="material-icons md-light" href="main.html">home</a>
-      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
-        aria-controls="offcanvasBottom">add_circle_outline</a>
-      <a class="material-icons md-light" href="calendar.html">event</a>
-    </div>
-  </footer>
+    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+      <div class="container py-3" id="footer">
+        <a class="material-icons md-light" href="main.html">home</a>
+        <a
+          class="material-icons md-light md-36"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasBottom"
+          aria-controls="offcanvasBottom"
+          >add_circle_outline</a
+        >
+        <a class="material-icons md-light" href="calendar.html">event</a>
+      </div>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-  </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Javascript -->
-  <script>
-    function insertName() {
-      firebase.auth().onAuthStateChanged((user) => {
-        // Check if user is signed in:
-        if (user) {
-          // Do something for the current logged-in user here:
-          console.log(user.uid);
-          //go to the correct user document by referencing to the user uid
-          currentUser = db.collection("users").doc(user.uid);
-          //get the document for current user.
-          currentUser.get().then((userDoc) => {
-            var user_Name = userDoc.data().name;
-            console.log(user_Name);
-            document.getElementById("profilename").innerText = user_Name;
-          });
-        } else {
-          // No user is signed in.
-        }
-      });
-    }
-    insertName();
+    <!-- Javascript -->
+    <script>
+      function insertName() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid);
+            //get the document for current user.
+            currentUser.get().then((userDoc) => {
+              var user_Name = userDoc.data().name;
+              console.log(user_Name);
+              document.getElementById("profilename").innerText = user_Name;
+            });
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+      insertName();
 
-    function displayCourseList() {
-      firebase.auth().onAuthStateChanged((user) => {
-        // Check if user is signed in:
-        if (user) {
-          // Do something for the current logged-in user here:
-          console.log(user.uid);
-          //go to the correct user document by referencing to the user uid
-          currentCourses = db
-            .collection("users")
-            .doc(user.uid)
-            .collection("courses");
+      function displayCourseList() {
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentCourses = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("courses");
 
-          const location = document.getElementById("courseList");
-          //get the document for current user.
-          currentCourses
-            .get()
-            .then(function (querySnapshot) {
-              querySnapshot.forEach(function (doc) {
-                console.log(doc.id, " => ", doc.data());
-                var cour = document.createElement("a");
-                cour.textContent += doc.data().name;
-                cour.setAttribute(
-                  "class",
-                  "list-group-item list-group-item-action"
-                );
-                console.log(cour);
-                location.appendChild(cour);
+            const location = document.getElementById("courseList");
+            //get the document for current user.
+            currentCourses
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  console.log(doc.id, " => ", doc.data());
+                  var item = document.createElement("div");
+                  item.setAttribute(
+                    "class",
+                    "list-group-item list-group-item-action"
+                  );
+
+                  var cour = document.createElement("a");
+                  cour.textContent += doc.data().name;
+
+                  var icoColour;
+
+                  switch (doc.data().color) {
+                    case "red":
+                      icoColour = "/images/iconRed.png";
+                      break;
+
+                    case "yellow":
+                      icoColour = "/images/iconYellow.png";
+                      break;
+
+                    case "green":
+                      icoColour = "/images/iconGreen.png";
+                      break;
+
+                    case "cyan":
+                      icoColour = "/images/iconCyan.png";
+                      break;
+
+                    case "blue":
+                      icoColour = "/images/iconBlue.png";
+                      break;
+
+                    default:
+                      console.log("ERROR. CASE should not be reached");
+                      break;
+                  }
+
+                  var ico = document.createElement("img");
+                  ico.setAttribute("src", icoColour);
+                  ico.setAttribute("alt", "colour icon for the course");
+                  item.appendChild(ico);
+                  item.appendChild(cour);
+
+                  console.log(item);
+                  location.appendChild(item);
+                });
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: " + error);
               });
-            })
-            .catch(function (error) {
-              console.log("Error getting documents: " + error);
-            });
-        } else {
-          // No user is signed in.
-        }
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
+      displayCourseList();
+
+      var timer = new Timer();
+
+      $("#chronoExample .startButton").click(function () {
+        timer.start();
       });
-    }
-    displayCourseList();
 
-    var timer = new Timer();
-
-    $("#chronoExample .startButton").click(function () {
-      timer.start();
-    });
-
-    $("#chronoExample .pauseButton").click(function () {
-      timer.pause();
-    });
-
-    $("#chronoExample .stopButton").click(function () {
-      timer.stop();
-    });
-
-    timer.addEventListener("secondsUpdated", function (e) {
-      $("#chronoExample .values").html(timer.getTimeValues().toString());
-    });
-
-    timer.addEventListener("started", function (e) {
-      $("#chronoExample .values").html(timer.getTimeValues().toString());
-    });
-
-    timer.addEventListener("reset", function (e) {
-      $("#chronoExample .values").html(timer.getTimeValues().toString());
-    });
-
-    function addTest() {
-      var testTime = document.getElementById("time").innerText;
-      var testName = document.getElementById("test").value;
-      var testNotes = document.getElementById("notes").value;
-
-      var courseIndex = document.getElementById("course");
-      var courseName = courseIndex.options[courseIndex.selectedIndex].text;
-
-      console.log(time);
-      console.log(test);
-      console.log(notes);
-      console.log(course);
-
-      firebase.auth().onAuthStateChanged((user) => {
-        // Check if user is signed in:
-        if (user) {
-          // Do something for the current logged-in user here:
-          console.log(user.uid);
-          //go to the correct user document by referencing to the user uid
-          currentUser = db
-            .collection("users")
-            .doc(user.uid)
-            .collection("tests");
-          //get the document for current user.
-          currentUser.get().then((userDoc) => {
-            currentUser.add({
-              test: testName,
-              course: courseName,
-              notes: testNotes,
-              time: testTime,
-            });
-          });
-
-        } else {
-          // No user is signed in.
-        }
+      $("#chronoExample .pauseButton").click(function () {
+        timer.pause();
       });
-    }
 
-    function insertTests() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          console.log(user.uid);
+      $("#chronoExample .stopButton").click(function () {
+        timer.stop();
+      });
 
+      timer.addEventListener("secondsUpdated", function (e) {
+        $("#chronoExample .values").html(timer.getTimeValues().toString());
+      });
 
-          var courseTable = document.getElementById("testview");
-          courseTable.innerHTML = "";
-          var row = courseTable.insertRow(0);
-          row.classList.add("bg-primary");
+      timer.addEventListener("started", function (e) {
+        $("#chronoExample .values").html(timer.getTimeValues().toString());
+      });
 
-          // Creates td's for the table (they're technically bolded td's)
-          var cell = row.insertCell(0);
-          cell.innerHTML = "<b style='color: white;'> Test </b>";
+      timer.addEventListener("reset", function (e) {
+        $("#chronoExample .values").html(timer.getTimeValues().toString());
+      });
 
-          var cell = row.insertCell(1);
-          cell.innerHTML = "<b style='color: white;'> Course </b>";
+      function addTest() {
+        var testTime = document.getElementById("time").innerText;
+        var testName = document.getElementById("test").value;
+        var testNotes = document.getElementById("notes").value;
 
-          var cell = row.insertCell(2);
-          cell.innerHTML = "<b style='color: white;'> Notes </b>";
+        var courseIndex = document.getElementById("course");
+        var courseName = courseIndex.options[courseIndex.selectedIndex].text;
 
-          var cell = row.insertCell(3);
-          cell.innerHTML = "<b style='color: white;'> Time </b>";
+        console.log(time);
+        console.log(test);
+        console.log(notes);
+        console.log(course);
 
-          var courseCounter = 1;
-
-          db.collection("users")
-            .doc(user.uid)
-            .collection("tests")
-            .get()
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.data());
-                var testName = doc.data().test;
-                var testCourse = doc.data().course;
-                var testNotes = doc.data().notes;
-                var testTime = doc.data().time;
-
-                row = courseTable.insertRow(courseCounter);
-
-                cell = row.insertCell(0);
-                cell.innerHTML = testName;
-
-                cell = row.insertCell(1);
-                cell.innerHTML = testCourse;
-
-                cell = row.insertCell(2);
-                cell.innerHTML = testNotes;
-
-                cell = row.insertCell(3);
-                cell.innerHTML = testTime;
-
-                courseCounter++;
-
+        firebase.auth().onAuthStateChanged((user) => {
+          // Check if user is signed in:
+          if (user) {
+            // Do something for the current logged-in user here:
+            console.log(user.uid);
+            //go to the correct user document by referencing to the user uid
+            currentUser = db
+              .collection("users")
+              .doc(user.uid)
+              .collection("tests");
+            //get the document for current user.
+            currentUser.get().then((userDoc) => {
+              currentUser.add({
+                test: testName,
+                course: courseName,
+                notes: testNotes,
+                time: testTime,
               });
             });
-        }
-      });
-    }
+          } else {
+            // No user is signed in.
+          }
+        });
+      }
 
-    function addClassToDropdown() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          db.collection("users").doc(user.uid).collection("courses").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              var option = document.createElement("option");
-              option.value = doc.data().name;
-              option.innerText = doc.data().name;
-              console.log(option);
-              var classDropdown = document.getElementById("course");
-              classDropdown.appendChild(option);
-            })
-          })
-        }
-      })
-    }
+      function insertTests() {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            console.log(user.uid);
 
-    addClassToDropdown();
-  </script>
-</body>
+            var courseTable = document.getElementById("testview");
+            courseTable.innerHTML = "";
+            var row = courseTable.insertRow(0);
+            row.classList.add("bg-primary");
 
+            // Creates td's for the table (they're technically bolded td's)
+            var cell = row.insertCell(0);
+            cell.innerHTML = "<b style='color: white;'> Test </b>";
+
+            var cell = row.insertCell(1);
+            cell.innerHTML = "<b style='color: white;'> Course </b>";
+
+            var cell = row.insertCell(2);
+            cell.innerHTML = "<b style='color: white;'> Notes </b>";
+
+            var cell = row.insertCell(3);
+            cell.innerHTML = "<b style='color: white;'> Time </b>";
+
+            var courseCounter = 1;
+
+            db.collection("users")
+              .doc(user.uid)
+              .collection("tests")
+              .get()
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  // doc.data() is never undefined for query doc snapshots
+                  console.log(doc.data());
+                  var testName = doc.data().test;
+                  var testCourse = doc.data().course;
+                  var testNotes = doc.data().notes;
+                  var testTime = doc.data().time;
+
+                  row = courseTable.insertRow(courseCounter);
+
+                  cell = row.insertCell(0);
+                  cell.innerHTML = testName;
+
+                  cell = row.insertCell(1);
+                  cell.innerHTML = testCourse;
+
+                  cell = row.insertCell(2);
+                  cell.innerHTML = testNotes;
+
+                  cell = row.insertCell(3);
+                  cell.innerHTML = testTime;
+
+                  courseCounter++;
+                });
+              });
+          }
+        });
+      }
+
+      function addClassToDropdown() {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            db.collection("users")
+              .doc(user.uid)
+              .collection("courses")
+              .get()
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                  var option = document.createElement("option");
+                  option.value = doc.data().name;
+                  option.innerText = doc.data().name;
+                  console.log(option);
+                  var classDropdown = document.getElementById("course");
+                  classDropdown.appendChild(option);
+                });
+              });
+          }
+        });
+      }
+
+      addClassToDropdown();
+    </script>
+  </body>
 </html>

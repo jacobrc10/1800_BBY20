@@ -387,14 +387,51 @@
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                   console.log(doc.id, " => ", doc.data());
-                  var cour = document.createElement("a");
-                  cour.textContent += doc.data().name;
-                  cour.setAttribute(
+                  var item = document.createElement("div");
+                  item.setAttribute(
                     "class",
                     "list-group-item list-group-item-action"
                   );
-                  console.log(cour);
-                  location.appendChild(cour);
+
+                  var cour = document.createElement("a");
+                  cour.textContent += doc.data().name;
+
+                  var icoColour;
+
+                  switch (doc.data().color) {
+                    case "red":
+                      icoColour = "/images/iconRed.png";
+                      break;
+
+                    case "yellow":
+                      icoColour = "/images/iconYellow.png";
+                      break;
+
+                    case "green":
+                      icoColour = "/images/iconGreen.png";
+                      break;
+
+                    case "cyan":
+                      icoColour = "/images/iconCyan.png";
+                      break;
+
+                    case "blue":
+                      icoColour = "/images/iconBlue.png";
+                      break;
+
+                    default:
+                      console.log("ERROR. CASE should not be reached");
+                      break;
+                  }
+
+                  var ico = document.createElement("img");
+                  ico.setAttribute("src", icoColour);
+                  ico.setAttribute("alt", "colour icon for the course");
+                  item.appendChild(ico);
+                  item.appendChild(cour);
+
+                  console.log(item);
+                  location.appendChild(item);
                 });
               })
               .catch(function (error) {
