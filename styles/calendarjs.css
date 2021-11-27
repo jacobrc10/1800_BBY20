@@ -258,6 +258,15 @@ div.calendar div.row {
   color: #282828;
 }
 
+.row>* {
+  flex-shrink: 1;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y);
+}
+
 div.calendar div.row div.cell-1 {
   width: calc(100% - (20px + 1px));
 }

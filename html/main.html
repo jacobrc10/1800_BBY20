@@ -438,7 +438,7 @@
                 }
                 if (dateTemp.getHours() > 11) {
                   evSmTxt = document.createTextNode(
-                    dateTemp.getHours() + ":" + evSmMins + " PM"
+                    (dateTemp.getHours() -12) + ":" + evSmMins + " PM"
                   );
                 } else {
                   evSmTxt = document.createTextNode(
