@@ -206,21 +206,6 @@
           <li id="add_after_me"></li>
         </ul>
       </div>
-      <div class="chat-message clearfix">
-        <div class="input-group mb-0">
-          <div class="input-group-prepend" style="align-self: center">
-            <a onclick="sendMessage();addMessage();addContent()"
-              ><span class="input-group-text"><i class="fa fa-send"></i></span
-            ></a>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            id="message"
-            placeholder="Enter text here..."
-          />
-        </div>
-      </div>
     </div>
 
     <br />
@@ -229,6 +214,26 @@
     <div id="bottom"></div>
 
     <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+      <div
+        class="chat-message clearfix"
+        style="margin-top: -4em; width: 100%; background-color: white"
+      >
+        <div class="input-group mb-0">
+          <div class="input-group-prepend" style="align-self: center">
+            <a
+              onclick="sendMessage();addMessage();addContent();clearMessageBox()"
+              ><span class="input-group-text"><i class="fa fa-send"></i></span
+            ></a>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="message"
+            placeholder="Enter a new thread here..."
+          />
+        </div>
+      </div>
+
       <div class="container py-3" id="footer">
         <a class="material-icons md-light" href="main.html">home</a>
         <a
@@ -414,14 +419,19 @@
         console.log(increment + " send");
       }
 
+      function clearMessageBox() {
+        document.getElementById("message").value = "";
+      }
+
       function addMessage() {
         let idIncrement = "message-goes-here" + increment;
-        console.log(idIncrement);
 
         var tag = document.createElement("div");
         let incrementString = "Message#: " + increment;
 
         let dateString = "date-goes-here" + increment;
+
+        console.log(increment);
 
         tag.innerHTML =
           '<li class="clearfix">' +
@@ -429,12 +439,12 @@
           "<br />" +
           "<br />" +
           '<div class="container"' +
-          'style="border: black 1px solid; padding: 40px; float: right; background-color: #1d8fcd23; border-radius: 3%;">' +
+          'style="border: black 1px solid; padding: 40px; float: right; background-color: #1d8fcd23">' +
           '<div class="row">' +
           '<div class="col-md-8">' +
           '<div class="media g-mb-30 media-comment">' +
           '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
-          'src="/images/account.png" alt="Image Description" style="width: 4vw">' +
+          'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4em">' +
           '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
           '<div class ="g-mb-15">' +
           '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
@@ -442,15 +452,21 @@
           "</div>" +
           "<br>" +
           '<p style="font-size: 20px" class ="message-goes-here"></p>' +
-          '<a><button type="button" style="color: #0096FF" id="showReply' +
+          '<a><button type="button" style="color: #0096FF; margin-left: -0.3em" id="showReply' +
           increment +
           '" class="showReplyClass" onclick="showReplies(' +
           increment +
           ')">Show Replies</button></a>' +
           "<br>" +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          '<div class="add-message-after-me"></div>' +
           '<ul class ="list-inline d-sm-flex my-0">' +
           '<li class ="list-inline-item ml-auto">' +
-          '<button class ="u-link-v5 replyButton" onclick="findReplyClicked(' +
+          '<button style="margin-left: 0.4em" class ="u-link-v5 replyButton' +
+          increment +
+          '" onclick="findReplyClicked(' +
           increment +
           ')">' +
           '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
@@ -460,12 +476,7 @@
           "</ul> " +
           "</div>" +
           "</div>" +
-          "</div>" +
-          "</div>" +
-          "</div>" +
           "</li>";
-
-        messagesArray.push(tag);
 
         var element = document.getElementById("add_after_me");
         element.appendChild(tag);
@@ -495,11 +506,18 @@
 
             var name = document.getElementsByClassName("messageName")[i - 1];
 
+            var today = new Date();
             //Inserts the real time to HTML
-            date.innerHTML = doc
-              .data()
-              .Date.toDate()
-              .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+            if (
+              doc.data().Date.toDate().toDateString() == today.toDateString()
+            ) {
+              date.innerHTML = doc
+                .data()
+                .Date.toDate()
+                .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+            } else {
+              date.innerHTML = doc.data().Date.toDate().toLocaleString();
+            }
 
             name.innerHTML = doc.data().Name;
           });
@@ -534,12 +552,12 @@
                 "<br />" +
                 "<br />" +
                 '<div class="container"' +
-                'style="border: black 1px solid; padding: 40px; float: right; background-color: #1d8fcd23; border-radius: 3%;">' +
+                'style="border: black 1px solid; padding: 40px; float: right; background-color: #ddd; border-color: #ccc; border-radius: 10px">' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
                 '<div class="media g-mb-30 media-comment">' +
                 '<img class="d-flex g-width-10 g-height-10 rounded-circle g-mt-3 g-mr-15" ' +
-                'src="/images/account.png" alt="Image Description" style="width: 4em">' +
+                'src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Image Description" style="width: 4em">' +
                 '<div class ="media-body u-shadow-v18 g-bg-secondary g-pa-30">' +
                 '<div class ="g-mb-15">' +
                 '<h5 class ="h5 g-color-gray-dark-v1 mb-0 messageName"></h5>' +
@@ -547,15 +565,21 @@
                 "</div>" +
                 "<br>" +
                 '<p style="font-size: 20px" class ="message-goes-here"></p>' +
-                '<a style="margin-left: 0vw"><button type="button" style="color: #0096FF" id="showReply' +
+                '<a><button type="button" style="color: #0096FF; margin-left: -0.3em" id="showReply' +
                 increment +
                 '" class="showReplyClass" onclick="showReplies(' +
                 increment +
                 ')">Show Replies</button></a>' +
                 "<br>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                '<div class="add-message-after-me"></div>' +
                 '<ul class ="list-inline d-sm-flex my-0">' +
                 '<li class ="list-inline-item ml-auto">' +
-                '<button class ="u-link-v5 replyButton" onclick="findReplyClicked(' +
+                '<button style="margin-left: 0.4em" class ="u-link-v5 replyButton' +
+                increment +
+                '" onclick="findReplyClicked(' +
                 increment +
                 ')">' +
                 '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
@@ -563,9 +587,6 @@
                 "</button>" +
                 "</li>" +
                 "</ul> " +
-                "</div>" +
-                "</div>" +
-                "</div>" +
                 "</div>" +
                 "</div>" +
                 "</li>";
@@ -576,7 +597,7 @@
                 "<br />" +
                 "<br />" +
                 '<div class="container"' +
-                'style="border: black 1px solid; padding: 40px; float: left; background-color: #d3d3d35e; border-radius: 3%;">' +
+                'style="border: black 1px solid; padding: 40px; float: left; background-color: #f1f1f1; border: 2px solid #dedede;  border-radius: 10px;">' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
                 '<div class="media g-mb-30 media-comment">' +
@@ -589,15 +610,23 @@
                 "</div>" +
                 "<br>" +
                 '<p style="font-size: 20px" class ="message-goes-here"></p>' +
-                '<a><button type="button" style="color: #0096FF" id="showReply' +
+                "<ul>" +
+                '<button type="button" style="color: #0096FF; margin-left: -0.3em" id="showReply' +
                 increment +
                 '" class="showReplyClass" onclick="showReplies(' +
                 increment +
-                ')">Show Replies</button></a>' +
+                ')"><a>Show Replies</a></button>' +
                 "<br>" +
+                "</ul>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                '<div class="add-message-after-me"></div>' +
                 '<ul class ="list-inline d-sm-flex my-0">' +
                 '<li class ="list-inline-item ml-auto">' +
-                '<button class ="u-link-v5 replyButton" onclick="findReplyClicked(' +
+                '<button style="margin-left: 0.4em" class ="u-link-v5 replyButton' +
+                increment +
+                '" onclick="findReplyClicked(' +
                 increment +
                 ')">' +
                 '<i class ="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>' +
@@ -605,9 +634,6 @@
                 "</button>" +
                 "</li>" +
                 "</ul> " +
-                "</div>" +
-                "</div>" +
-                "</div>" +
                 "</div>" +
                 "</div>" +
                 "</li>";
@@ -622,9 +648,7 @@
                   element.appendChild(tagElse);
                 }
               });
-
               console.log(incrementString);
-
               increment++;
             });
           });
@@ -653,10 +677,18 @@
               message.innerHTML = doc.data().Message;
 
               //Inserts the real time to HTML
-              date.innerHTML = doc
-                .data()
-                .Date.toDate()
-                .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+              var today = new Date();
+
+              if (
+                doc.data().Date.toDate().toDateString() == today.toDateString()
+              ) {
+                date.innerHTML = doc
+                  .data()
+                  .Date.toDate()
+                  .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+              } else {
+                date.innerHTML = doc.data().Date.toDate().toLocaleString();
+              }
 
               name.innerHTML = doc.data().Name;
               i++;
@@ -666,7 +698,17 @@
       updatePreviousChat();
 
       function findReplyClicked(messageNum) {
-        var element = document.getElementsByClassName("u-link-v5")[messageNum];
+        var element = document.getElementsByClassName("add-message-after-me")[
+          messageNum
+        ];
+
+        replyButton = document.getElementsByClassName(
+          "replyButton" + messageNum
+        );
+
+        replyButton.enabled = true;
+
+        replyButton.style = "display: none";
 
         element.classList.add("activeMessage");
 
@@ -690,45 +732,33 @@
 
       let count = 0;
 
-      function insertReply(incrementString, Message, userID, replyCount, name) {
+      function insertReply(messageNum, Message, userID, replyCount, name) {
+        incrementString = "Message#: " + messageNum;
+
         document.getElementById("remove-reply").remove();
+
+        // tag.innerHTML = '<li class="clearfix ' + incrementString +
+        //   '" style="border: black 1px solid; background-color: #FFFFFF; padding-right: 5em; justify-itens: left">' +
+        //   '<div class="message-data">' +
+        //   '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width: 2em;padding-top: 1em">' +
+        //   '<span class="message-data-name" id="temporaryNameTarget"></span>' +
+
+        //   '<p class="reply-time-goes-here" id="temporaryTimeTarget" style="padding-left: 2em; margin-top: -1em; margin-left: 0vw"></p>' +
+        //   '</div>' +
+        //   '<div class="reply-goes-here" style="padding-bottom: 1em; padding-left: 2em" id="temporaryMessageTarget"> hello </div >' +
+        //   '</li>';
 
         tag.innerHTML =
           '<li class="clearfix ' +
           incrementString +
-          '" style="border: black 1px solid; background-color: #FFFFFF; padding-right: 5em; justify-itens: left">' +
-          '<div class="message-data">' +
-          '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width: 2em;padding-top: 1em">' +
-          '<span class="message-data-name" id="temporaryNameTarget"></span>' +
-          '<p class="reply-time-goes-here" id="temporaryTimeTarget" style="padding-left: 2em; margin-top: -1em; margin-left: 0vw"></p>' +
-          "</div>" +
-          '<div class="reply-goes-here" style="padding-bottom: 1em; padding-left: 2em" id="temporaryMessageTarget"> hello </div >' +
-          "</li>";
+          '<div class="alert alert-success" style="color: #50C878">' +
+          "Reply Sent!";
+        "</div >" + "</li>";
 
         var element = document.getElementsByClassName("activeMessage")[0];
         element.insertAdjacentElement("afterend", tag);
 
-        var messageElement = document.getElementById("temporaryMessageTarget");
-
-        var nameElement = document.getElementById("temporaryNameTarget");
-
-        var timeElement = document.getElementById("temporaryTimeTarget");
-
-        messageElement.innerHTML = Message;
-
-        nameElement.innerHTML = name;
-
-        timeElement.innerHTML = firebase.firestore.Timestamp.now()
-          .toDate()
-          .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-
         element.classList.remove("activeMessage");
-
-        messageElement.removeAttribute("id");
-
-        nameElement.removeAttribute("id");
-
-        timeElement.removeAttribute("id");
       }
 
       function sendReplyInfo(messageNum) {
@@ -766,7 +796,7 @@
                   Name: messageName,
                 });
 
-              insertReply(incrementString, Message, userID, count, messageName);
+              insertReply(messageNum, Message, userID, count, messageName);
             });
         });
       }
@@ -794,24 +824,23 @@
               var tag = document.createElement("div");
 
               tag.innerHTML =
-                '<li class="clearfix ' +
+                '<li class="' +
                 incrementString +
-                '" style="border: black 1px solid; background-color: #FFFFFF; padding-right: 5em">' +
-                '<div class="message-data">' +
-                '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width: 2em;padding-top: 1em">' +
-                '<span class="message-data-name reply-name-goes-here"></span>' +
-                '<p class="reply-time-goes-here" style="padding-left: 2em; margin-top: -1em"></p>' +
-                "</div>" +
-                '<div class="reply-goes-here" style="padding-bottom: 1em; padding-left: 2em"> hello </div >' +
+                '" style="border: #D3D3D3 1px solid; background-color: white; padding-right: 5em; width: 100%; float: left; border-radius: 10px; margin-top: 10px">' +
+                '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width: 2em;padding-top: 1em; margin-left: 1em">' +
+                '<span class="message-data-name reply-name-goes-here" style="color: gray; margin-left: 0.4em; white-space: nowrap; position: relative"></span>' +
+                '<p class="reply-time-goes-here" style="padding-left: 2em; margin-top: -1em; color: gray; margin-left: 1.4em"></p>' +
+                '<div class="reply-goes-here" style="padding-bottom: 1em; padding-left: 2em; color:#36454F; font-size: 20px"> hello </div >' +
                 "</li>";
 
-              element.appendChild(tag);
+              element.insertAdjacentElement("beforebegin", tag);
             });
           });
-        updateShowReply(incrementString);
+        updateShowReply(replyNum);
       }
 
-      function updateShowReply(incrementString) {
+      function updateShowReply(replyNum) {
+        var incrementString = "Message#: " + replyNum;
         db.collection("Messages")
           .doc(incrementString)
           .collection("Reply Thread")
@@ -835,12 +864,18 @@
 
               //Inserts the message to HTML
               message.innerHTML = doc.data().Message;
-
+              var today = new Date();
               //Inserts the real time to HTML
-              date.innerHTML = doc
-                .data()
-                .Date.toDate()
-                .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+              if (
+                doc.data().Date.toDate().toDateString() == today.toDateString()
+              ) {
+                date.innerHTML = doc
+                  .data()
+                  .Date.toDate()
+                  .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+              } else {
+                date.innerHTML = doc.data().Date.toDate().toLocaleString();
+              }
 
               name.innerHTML = doc.data().Name;
 
@@ -879,6 +914,12 @@
                 }
               });
           });
+        hideShowReply(replyNum);
+      }
+
+      function hideShowReply(replyNum) {
+        replyButton = document.getElementById("showReply" + (replyNum - 1));
+        replyButton.style = "display: none";
       }
     </script>
   </body>
