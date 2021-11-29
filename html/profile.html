@@ -1,292 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Know-It-All Notifier - Profile Page</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project" />
-    <meta name="author" content="BCIT" />
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="utf-8" />
+  <title>Know-It-All Notifier - Profile Page</title>
+  <meta name="comp1800 boilerplate code" content="my bcit project" />
+  <meta name="author" content="BCIT" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Google Icons (Material Design)-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-    <!-- My CSS Stylesheet-->
-    <link rel="stylesheet" href="/styles/my_style.css" />
+  <!-- Google Icons (Material Design)-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <!-- Firebase 8 CDNs-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- My CSS Stylesheet-->
+  <link rel="stylesheet" href="/styles/my_style.css" />
 
-    <!-- Link to api keys for Firebase project -->
-    <script src="/scripts/firebaseAPI_BBY20.js"></script>
-  </head>
+  <!-- Firebase 8 CDNs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">User Profile</a>
-        <button
-          class="material-icons md-light md-36"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          account_circle
-        </button>
+  <!-- Link to api keys for Firebase project -->
+  <script src="/scripts/firebaseAPI_BBY20.js"></script>
+</head>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="main.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="calendar.html">Calendar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="to-do.html">To-Do List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="links.html">Class Links</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="mocktest.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Mock Test
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="help.html"
-                tabindex="-1"
-                aria-disabled="true"
-                >Help
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">User Profile</a>
+      <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        account_circle
+      </button>
 
-    <br />
-
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasRight"
-      aria-labelledby="offcanvasRightLabel"
-    >
-      <div class="offcanvas-header">
-        <img id="accountimg" src="/images/account.png" />
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Profile Name</b>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="main.html">Home</a>
           </li>
-          <a href="#" class="list-group-item" id="profilename">John Doe</a>
-        </ul>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b class="list-group-item-heading">Courses</b>
+          <li class="nav-item">
+            <a class="nav-link" href="calendar.html">Calendar</a>
           </li>
-          <div id="courseList"></div>
-          <li class="list-group-item list-group-item-action">
-            <i class="material-icons md-14">add</i>
-            <a href="add-class.html">Add another course</a>
+          <li class="nav-item">
+            <a class="nav-link" href="to-do.html">To-Do List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="links.html">Class Links</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chat.html" tabindex="-1">Chat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mocktest.html" tabindex="-1" aria-disabled="true">Mock Test
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="help.html" tabindex="-1" aria-disabled="true">Help
+            </a>
           </li>
         </ul>
-
-        <br />
-        <ul class="list-group list-group-flush">
-          <a href="profile.html" class="list-group-item list-group-item-action"
-            >My Account</a
-          >
-          <a href="#" class="list-group-item list-group-item-action"
-            >Connections</a
-          >
-          <a href="settings.html" class="list-group-item list-group-item-action"
-            >App Settings</a
-          >
-        </ul>
-
-        <div class="logout">
-          <button
-            type="button"
-            class="btn btn-outline-info"
-            onclick="location.href='login.html';"
-          >
-            <i class="material-icons md-14">logout</i>
-            Log Out
-          </button>
-        </div>
       </div>
     </div>
+  </nav>
 
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-          <h2 class="h3 mb-4 page-title">Profile Settings</h2>
-          <div class="my-4">
-            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  id="home-tab"
-                  data-toggle="tab"
-                  href="#"
-                  role="tab"
-                  aria-controls="home"
-                  aria-selected="false"
-                  >Profile</a
-                >
-              </li>
-            </ul>
-            <form>
-              <div class="row mt-5 align-items-center">
-                <div class="col-md-3 text-center mb-5">
-                  <div class="avatar avatar-xl">
-                    <div id="accountImage"></div>
+  <br />
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <img id="accountimg" src="/images/account.png" />
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Profile Name</b>
+        </li>
+        <a href="#" class="list-group-item" id="profilename">John Doe</a>
+      </ul>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <b class="list-group-item-heading">Courses</b>
+        </li>
+        <div id="courseList"></div>
+        <li class="list-group-item list-group-item-action">
+          <i class="material-icons md-14">add</i>
+          <a href="add-class.html">Add another course</a>
+        </li>
+      </ul>
+
+      <br />
+      <ul class="list-group list-group-flush">
+        <a href="profile.html" class="list-group-item list-group-item-action">My Account</a>
+        <a href="#" class="list-group-item list-group-item-action">Connections</a>
+        <a href="settings.html" class="list-group-item list-group-item-action">App Settings</a>
+      </ul>
+
+      <div class="logout">
+        <button type="button" class="btn btn-outline-info" onclick="location.href='login.html';">
+          <i class="material-icons md-14">logout</i>
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+        <h2 class="h3 mb-4 page-title">Profile Settings</h2>
+        <div class="my-4">
+          <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#" role="tab" aria-controls="home"
+                aria-selected="false">Profile</a>
+            </li>
+          </ul>
+          <form>
+            <div class="row mt-5 align-items-center">
+              <div class="col-md-3 text-center mb-5">
+                <div class="avatar avatar-xl">
+                  <div id="accountImage"></div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row align-items-center">
+                  <div class="col-md-7">
+                    <h4 class="mb-1" id="usernamesetting">
+                      Name placeholder
+                    </h4>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="row align-items-center">
-                    <div class="col-md-7">
-                      <h4 class="mb-1" id="usernamesetting">
-                        Name placeholder
-                      </h4>
-                    </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+
+            <div class="form-group">
+              <label for="inputEmail3">Username</label>
+              <input type="name" class="form-control" id="username" />
+            </div>
+            <div class="form-group">
+              <label for="inputEmail4">Upload profile picture</label>
+              <input type="file" class="form-control" id="uploadimage" accept="image/png, image/jpeg" />
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary" onclick="saveChanges()">
+              Save Changes
+            </button>
+            <button type="submit" class="btn btn-danger">Cancel</button>
+          </form>
+          <br /><br />
+          <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="myBtn">
+              Delete My Account
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Are you sure you want to delete your account?
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                </div>
-              </div>
-              <hr class="my-4" />
-
-              <div class="form-group">
-                <label for="inputEmail3">Username</label>
-                <input type="name" class="form-control" id="username" />
-              </div>
-              <div class="form-group">
-                <label for="inputEmail4">Upload profile picture</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="uploadimage"
-                  accept="image/png, image/jpeg"
-                />
-              </div>
-
-              <br />
-              <button
-                type="submit"
-                class="btn btn-primary"
-                onclick="saveChanges()"
-              >
-                Save Changes
-              </button>
-              <button type="submit" class="btn btn-danger">Cancel</button>
-            </form>
-            <br /><br />
-            <div>
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="btn btn-danger"
-                data-toggle="modal"
-                data-target="#exampleModal"
-                id="myBtn"
-              >
-                Delete My Account
-              </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="myModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                        Are you sure you want to delete your account?
-                      </h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      WARNING! Your account will be permanently deleted with all
-                      of your data.
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        onclick="deleteAccount()"
-                      >
-                        DELETE
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
+                  <div class="modal-body">
+                    WARNING! Your account will be permanently deleted with all
+                    of your data.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="deleteAccount()">
+                      DELETE
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                      Close
+                    </button>
                   </div>
                 </div>
               </div>
@@ -295,231 +199,206 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <br /><br /><br />
+  <br /><br /><br />
 
-    <div
-      class="offcanvas offcanvas-bottom"
-      tabindex="-1"
-      id="offcanvasBottom"
-      aria-labelledby="offcanvasBottomLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomLabel">
-          Type of Event?
-        </h5>
-        <button
-          type="button"
-          class="btn-close text-reset"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body small" id="eventSelector">
-        <button
-          type="button"
-          class="btn btn-primary"
-          id="eventSelect1"
-          onclick="location.href='add-event.html';"
-        >
-          Single Event (Deadlines)
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          id="eventSelect2"
-          onclick="location.href='add-recurring.html';"
-        >
-          Recurring Events (Lectures/Labs)
-        </button>
-      </div>
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+        Type of Event?
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    <div class="offcanvas-body small" id="eventSelector">
+      <button type="button" class="btn btn-primary" id="eventSelect1" onclick="location.href='add-event.html';">
+        Single Event (Deadlines)
+      </button>
+      <button type="button" class="btn btn-secondary" id="eventSelect2" onclick="location.href='add-recurring.html';">
+        Recurring Events (Lectures/Labs)
+      </button>
+    </div>
+  </div>
 
-    <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
-      <div class="container py-3" id="footer">
-        <a class="material-icons md-light" href="main.html">home</a>
-        <a
-          class="material-icons md-light md-36"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasBottom"
-          aria-controls="offcanvasBottom"
-          >add_circle_outline</a
-        >
-        <a class="material-icons md-light" href="calendar.html">event</a>
-      </div>
-    </footer>
+  <footer class="navbar justify-content-evenly bg-primary fixed-bottom">
+    <div class="container py-3" id="footer">
+      <a class="material-icons md-light" href="main.html">home</a>
+      <a class="material-icons md-light md-36" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">add_circle_outline</a>
+      <a class="material-icons md-light" href="calendar.html">event</a>
+    </div>
+  </footer>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <!-- Javascript -->
-    <script>
-      function insertName() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid);
-            //get the document for current user.
-            currentUser.get().then((userDoc) => {
-              var user_Name = userDoc.data().name;
-              var user_UserName = userDoc.data().username;
-              var user_image = userDoc.data().profileImage;
+  <!-- Javascript -->
+  <script>
+    function insertName() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentUser = db.collection("users").doc(user.uid);
+          //get the document for current user.
+          currentUser.get().then((userDoc) => {
+            var user_Name = userDoc.data().name;
+            var user_UserName = userDoc.data().username;
+            var user_image = userDoc.data().profileImage;
 
-              var img = document.createElement("img");
-              var src = document.getElementById("accountImage");
-              img.src = "/images/account.png";
-              img.style = "width: 50%";
-              src.appendChild(img);
+            var img = document.createElement("img");
+            var src = document.getElementById("accountImage");
+            img.src = "/images/account.png";
+            img.style = "width: 50%";
+            src.appendChild(img);
 
-              console.log(user_Name);
-              document.getElementById("profilename").innerText = user_Name;
+            console.log(user_Name);
+            document.getElementById("profilename").innerText = user_Name;
 
-              if (user_UserName) {
-                document.getElementById("usernamesetting").innerText =
-                  user_UserName;
-                document.getElementById("username").placeholder = user_UserName;
-              } else {
-                document.getElementById("usernamesetting").innerText =
-                  "Enter username below";
-                document.getElementById("username").placeholder = "Username";
-              }
+            if (user_UserName) {
+              document.getElementById("usernamesetting").innerText =
+                user_UserName;
+              document.getElementById("username").placeholder = user_UserName;
+            } else {
+              document.getElementById("usernamesetting").innerText =
+                "Enter username below";
+              document.getElementById("username").placeholder = "Username";
+            }
 
-              // if (user_Image){
-              //   src.appendChild(img);
-              // } else {
-              //   src.appendChild(img);
+            // if (user_Image){
+            //   src.appendChild(img);
+            // } else {
+            //   src.appendChild(img);
 
-              // }
-            });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      insertName();
-
-      function displayCourseList() {
-        firebase.auth().onAuthStateChanged((user) => {
-          // Check if user is signed in:
-          if (user) {
-            // Do something for the current logged-in user here:
-            console.log(user.uid);
-            //go to the correct user document by referencing to the user uid
-            currentCourses = db
-              .collection("users")
-              .doc(user.uid)
-              .collection("courses");
-
-            const location = document.getElementById("courseList");
-            //get the document for current user.
-            currentCourses
-              .get()
-              .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
-                  var item = document.createElement("div");
-                  item.setAttribute(
-                    "class",
-                    "list-group-item list-group-item-action"
-                  );
-
-                  var cour = document.createElement("a");
-                  cour.textContent += doc.data().name;
-
-                  var icoColour;
-
-                  switch (doc.data().color) {
-                    case "red":
-                      icoColour = "/images/iconRed.png";
-                      break;
-
-                    case "yellow":
-                      icoColour = "/images/iconYellow.png";
-                      break;
-
-                    case "green":
-                      icoColour = "/images/iconGreen.png";
-                      break;
-
-                    case "cyan":
-                      icoColour = "/images/iconCyan.png";
-                      break;
-
-                    case "blue":
-                      icoColour = "/images/iconBlue.png";
-                      break;
-
-                    default:
-                      console.log("ERROR. CASE should not be reached");
-                      break;
-                  }
-
-                  var ico = document.createElement("img");
-                  ico.setAttribute("src", icoColour);
-                  ico.setAttribute("alt", "colour icon for the course");
-                  item.appendChild(ico);
-                  item.appendChild(cour);
-
-                  console.log(item);
-                  location.appendChild(item);
-                });
-              })
-              .catch(function (error) {
-                console.log("Error getting documents: " + error);
-              });
-          } else {
-            // No user is signed in.
-          }
-        });
-      }
-      displayCourseList();
-
-      function saveChanges() {
-        let userUsername = document.getElementById("username").value;
-        let userImage = document.getElementById("uploadimage").value;
-
-        currentUser
-          .update({
-            username: userUsername,
-            profileImage: userImage,
-          })
-          .then(() => {
-            console.log("Save succesful!");
-            insertName();
+            // }
           });
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        var btn = document.getElementById("myBtn");
-
-        btn.addEventListener("click", function () {
-          var myModal = new bootstrap.Modal(document.getElementById("myModal"));
-          myModal.show();
-        });
+        } else {
+          // No user is signed in.
+        }
       });
+    }
+    insertName();
 
-      function deleteAccount() {
-        const user = firebase.auth().currentUser;
+    function displayCourseList() {
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here:
+          console.log(user.uid);
+          //go to the correct user document by referencing to the user uid
+          currentCourses = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses");
 
-        db.collection("users")
-          .doc(user.uid)
-          .delete()
-          .then(() => {
-            // User deleted.
-            user.delete();
-            window.location.href = "index.html";
-          })
-          .catch((error) => {
-            // An error ocurred
-            // ...
-          });
-      }
-    </script>
-  </body>
+          const location = document.getElementById("courseList");
+          //get the document for current user.
+          currentCourses
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " => ", doc.data());
+                var item = document.createElement("div");
+                item.setAttribute(
+                  "class",
+                  "list-group-item list-group-item-action"
+                );
+
+                var cour = document.createElement("a");
+                cour.textContent += doc.data().name;
+
+                var icoColour;
+
+                switch (doc.data().color) {
+                  case "red":
+                    icoColour = "/images/iconRed.png";
+                    break;
+
+                  case "yellow":
+                    icoColour = "/images/iconYellow.png";
+                    break;
+
+                  case "green":
+                    icoColour = "/images/iconGreen.png";
+                    break;
+
+                  case "cyan":
+                    icoColour = "/images/iconCyan.png";
+                    break;
+
+                  case "blue":
+                    icoColour = "/images/iconBlue.png";
+                    break;
+
+                  default:
+                    console.log("ERROR. CASE should not be reached");
+                    break;
+                }
+
+                var ico = document.createElement("img");
+                ico.setAttribute("src", icoColour);
+                ico.setAttribute("alt", "colour icon for the course");
+                item.appendChild(ico);
+                item.appendChild(cour);
+
+                console.log(item);
+                location.appendChild(item);
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: " + error);
+            });
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    displayCourseList();
+
+    function saveChanges() {
+      let userUsername = document.getElementById("username").value;
+      let userImage = document.getElementById("uploadimage").value;
+
+      currentUser
+        .update({
+          username: userUsername,
+          profileImage: userImage,
+        })
+        .then(() => {
+          console.log("Save succesful!");
+          insertName();
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.getElementById("myBtn");
+
+      btn.addEventListener("click", function () {
+        var myModal = new bootstrap.Modal(document.getElementById("myModal"));
+        myModal.show();
+      });
+    });
+
+    function deleteAccount() {
+      const user = firebase.auth().currentUser;
+
+      db.collection("users")
+        .doc(user.uid)
+        .delete()
+        .then(() => {
+          // User deleted.
+          user.delete();
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          // An error ocurred
+          // ...
+        });
+    }
+  </script>
+</body>
+
 </html>
