@@ -491,7 +491,7 @@
       firebase.auth().onAuthStateChanged((user) => {
         db.collection("users")
           .doc(user.uid)
-          .collection("events")
+          .collection("events").orderBy("dueDate")
           .get()
           .then((snap) => {
             snap.forEach((doc) => {
