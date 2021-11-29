@@ -438,7 +438,7 @@
                 }
                 if (dateTemp.getHours() > 11) {
                   evSmTxt = document.createTextNode(
-                    (dateTemp.getHours() -12) + ":" + evSmMins + " PM"
+                    dateTemp.getHours() - 12 + ":" + evSmMins + " PM"
                   );
                 } else {
                   evSmTxt = document.createTextNode(
@@ -479,6 +479,10 @@
             // No user is signed in.
           }
         });
+      }
+
+      function goEditEvent(courseID) {
+        var url = "edit-class.html?" + courseID;
       }
 
       function insertName() {
@@ -525,6 +529,8 @@
                   );
 
                   var cour = document.createElement("a");
+                  cour.setAttribute("href", "edit-class.html?" + doc.id);
+                  console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;

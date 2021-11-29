@@ -336,6 +336,8 @@
                   );
 
                   var cour = document.createElement("a");
+                  cour.setAttribute("href", "edit-class.html?" + doc.id);
+                  console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
