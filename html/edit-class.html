@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Know-It-All Notifier - Add Course</title>
+  <title>Know-It-All Notifier - Edit Course</title>
   <meta name="comp1800 boilerplate code" content="my bcit project" />
   <meta name="author" content="BCIT" />
   <!-- Required meta tags -->
@@ -37,7 +37,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Add Course</a>
+      <a class="navbar-brand" href="#">Edit Course</a>
       <button class="material-icons md-light md-36" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         account_circle
@@ -169,19 +169,19 @@
                 </select> -->
               <br />
               <div class="btn-group-vertical" id="colours">
-                <input type="radio" class="btn-check" name="btncolour" id="btnBlue" autocomplete="off" checked />
+                <input type="radio" class="btn-check" name="btncolour" id="btnblue" autocomplete="off" checked />
                 <label class="btn btn-outline-primary" for="btnBlue">Blue</label>
 
-                <input type="radio" class="btn-check" name="btncolour" id="btnGreen" autocomplete="off" />
+                <input type="radio" class="btn-check" name="btncolour" id="btngreen" autocomplete="off" />
                 <label class="btn btn-outline-success" for="btnGreen">Green</label>
 
-                <input type="radio" class="btn-check" name="btncolour" id="btnRed" autocomplete="off" />
+                <input type="radio" class="btn-check" name="btncolour" id="btnred" autocomplete="off" />
                 <label class="btn btn-outline-danger" for="btnRed">Red</label>
 
-                <input type="radio" class="btn-check" name="btncolour" id="btnYellow" autocomplete="off" />
+                <input type="radio" class="btn-check" name="btncolour" id="btnyellow" autocomplete="off" />
                 <label class="btn btn-outline-warning" for="btnYellow">Yellow</label>
 
-                <input type="radio" class="btn-check" name="btncolour" id="btnCyan" autocomplete="off" />
+                <input type="radio" class="btn-check" name="btncolour" id="btncyan" autocomplete="off" />
                 <label class="btn btn-outline-info" for="btnCyan">Cyan</label>
               </div>
               <div class="invalid-feedback">
@@ -192,8 +192,12 @@
 
           <br />
 
-          <div class="end">
-            <button class="btn btn-primary end-0" type="button" onclick="classCreate()">
+          <div class="justify-content-md-end" id="submitBtns">
+            <button class="btn-sm btn-outline-secondary" id="cancelButton" type="button"
+              onclick="location.href='main.html';">
+              Cancel
+            </button>
+            <button class="btn btn-primary" id="confirmBtn" type="button" onclick="classUpdate()">
               Confirm
             </button>
           </div>
@@ -258,6 +262,39 @@
       });
     }
     insertName();
+
+    function receiveCourse() {
+      var url = document.location.href;
+      var courseRef = url.split("?")[1];
+      console.log(courseRef);
+
+      firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:
+        if (user) {
+          currentCourse = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses")
+            .doc(courseRef);
+
+          currentCourse.get().then((courseDoc) => {
+            document.getElementById("className").value =
+              courseDoc.data().name;
+            document.getElementById("classLink").value =
+              courseDoc.data().link;
+            document.getElementById("lectureStat").value =
+              courseDoc.data().lectureDelivery;
+            document.getElementById("labStat").value =
+              courseDoc.data().labDelivery;
+            change = document.getElementById("btn" + courseDoc.data().color);
+            change.setAttribute("checked", true);
+          });
+        } else {
+          // No user is signed in.
+        }
+      });
+    }
+    receiveCourse();
 
     function displayCourseList() {
       firebase.auth().onAuthStateChanged((user) => {
@@ -337,7 +374,7 @@
     }
     displayCourseList();
 
-    function classCreate() {
+    function classUpdate() {
       let nameToAdd = document.getElementById("className").value;
       let linkToAdd = document.getElementById("classLink").value;
       let lectureStatus = document.getElementById("lectureStat").value;
@@ -373,19 +410,21 @@
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
 
-          currentUser = db
+          var url = document.location.href;
+          var courseRef = url.split("?")[1];
+
+          currentCourse = db
             .collection("users")
             .doc(user.uid)
-            .collection("courses");
+            .collection("courses")
+            .doc(courseRef);
 
-          currentUser.get().then((userDoc) => {
-            currentUser.add({
-              name: nameToAdd,
-              link: linkToAdd,
-              lectureDelivery: lectureStatus,
-              labDelivery: labStatus,
-              color: selectedColour,
-            });
+          currentCourse.update({
+            name: nameToAdd,
+            link: linkToAdd,
+            lectureDelivery: lectureStatus,
+            labDelivery: labStatus,
+            color: selectedColour,
           });
         } else {
           // User is signed out
