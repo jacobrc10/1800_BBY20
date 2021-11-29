@@ -496,8 +496,8 @@
           .then((snap) => {
             snap.forEach((doc) => {
               if (
-                doc.data().dueDate.toDate().getDay() ==
-                firebase.firestore.Timestamp.now().toDate().getDay()
+                doc.data().dueDate.toDate().getUTCDate() ==
+                firebase.firestore.Timestamp.now().toDate().getUTCDate()
               ) {
                 let title = doc.data().title;
                 let time = doc.data().dueDate;
@@ -515,37 +515,94 @@
 
     function addAlert(title, time, course, increment) {
       var tag = document.createElement("div");
+      var eventColor;
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          var courseColor = db
+            .collection("users")
+            .doc(user.uid)
+            .collection("courses");
 
-      tag.innerHTML =
-        '<div class="alert alert-info" role="alert">' +
-        '<h4 class="alert-heading title-goes-here">URGENT!</h4>' +
-        '<p class="course-goes-here">COMP-1800 Projects 1 - Clickable Wireframe - Start coding.</p>' +
-        "<hr />" +
-        '<p style="float: left; margin-right: 6px"> Due Today: <p class="mb-0 date-goes-here"> </p> </p>' +
-        "</div>";
+          courseColor.get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
 
-      var element = document.getElementById("add-after-me");
+              if (doc.data().name == course) {
+                colour = doc.data().color;
+                switch (colour) {
+                  case "red":
+                    eventColor = "rgb(220, 53, 69)";
+                    break;
+                  case "blue":
+                    eventColor = "rgb(13, 110, 253)";
+                    break;
+                  case "yellow":
+                    eventColor = "rgb(255, 193, 7)";
+                    break;
+                  case "green":
+                    eventColor = "rgb(40, 167, 69)";
+                    break;
+                  case "cyan":
+                    eventColor = "rgb(23, 162, 184)";
+                    break;
+                  default:
+                    console.log("default");
+                    eventColor = "rgb(0, 0, 0)";
+                }
+                console.log("Color: ", eventColor);
+                var colorClass;
 
-      element.appendChild(tag);
+                if (eventColor == "rgb(220, 53, 69)") {
+                  colorClass = '<div class="alert alert-danger" role="alert">';
+                } else if (eventColor == "rgb(13, 110, 253)"){
+                  colorClass = '<div class="alert alert-primary" role="alert">';
+                } else if (eventColor == "rgb(255, 193, 7)"){
+                  colorClass = '<div class="alert alert-warning" role="alert">';
+                } else if (eventColor == "rgb(40, 167, 69)"){
+                  colorClass = '<div class="alert alert-success" role="alert">';
+                } else {
+                  colorClass = '<div class="alert alert-info" role="alert">';
+                }
 
-      console.log("function ran");
+                tag.innerHTML =
+                  colorClass +
+                  '<h4 class="alert-heading title-goes-here">URGENT!</h4>' +
+                  '<p class="course-goes-here">COMP-1800 Projects 1 - Clickable Wireframe - Start coding.</p>' +
+                  "<hr />" +
+                  '<p style="float: left; margin-right: 6px"> Due Today: <p class="mb-0 date-goes-here"> </p> </p>' +
+                  "</div>";
 
-      var titlePlace =
-        document.getElementsByClassName("title-goes-here")[increment];
+                var element = document.getElementById("add-after-me");
 
-      var datePlace =
-        document.getElementsByClassName("date-goes-here")[increment];
+                element.appendChild(tag);
 
-      var coursePlace =
-        document.getElementsByClassName("course-goes-here")[increment];
+                console.log("function ran");
 
-      titlePlace.innerHTML = title;
+                var titlePlace =
+                  document.getElementsByClassName("title-goes-here")[increment];
 
-      datePlace.innerHTML = time
-        .toDate()
-        .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+                var datePlace =
+                  document.getElementsByClassName("date-goes-here")[increment];
 
-      coursePlace.innerHTML = course;
+                var coursePlace =
+                  document.getElementsByClassName("course-goes-here")[increment];
+
+                titlePlace.innerHTML = title;
+
+                datePlace.innerHTML = time
+                  .toDate()
+                  .toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+                coursePlace.innerHTML = course;
+              } else {
+                eventColor = "rbg(0, 0, 0)";
+              }
+
+            });
+          });
+
+        }
+      })
+
     }
 
     $(document).ready(function () {
