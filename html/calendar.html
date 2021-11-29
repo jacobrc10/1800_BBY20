@@ -471,13 +471,17 @@
         } else {
           evSmMins = dateTemp.getMinutes();
         }
-        if (dateTemp.getHours() > 11) {
+        if (dateTemp.getHours() > 11 && dateTemp.getHours() != 12) {
           evSmTxt = document.createTextNode(
             dateTemp.getHours() - 12 + ":" + evSmMins + " PM"
           );
-        } else {
+        } else if (dateTemp.getHours() == 12) {
           evSmTxt = document.createTextNode(
-            dateTemp.getHours() + ":" + evSmMins + " AM"
+            dateTemp.getHours() + ":" + evSmMins + " PM"
+          );
+        } else if (dateTemp.getHours() == 0) {
+          evSmTxt = document.createTextNode(
+            dateTemp.getHours() + 12 + ":" + evSmMins + " AM"
           );
         }
         console.log("Clock: ", evSmTxt.data);
