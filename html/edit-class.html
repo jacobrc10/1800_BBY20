@@ -121,13 +121,13 @@
         <div class="row g-3">
           <div class="col-sm-6">
             <label class="form-label">Class Name</label>
-            <input type="text" class="form-control" id="className" placeholder="COMP 1234" value="" required="" />
+            <input type="text" class="form-control" id="className" placeholder="Ex: COMP 1234" value="" required="" />
             <div class="invalid-feedback">Valid name is required.</div>
           </div>
 
           <div class="col-sm-6">
             <label class="form-label">Class Link</label>
-            <input type="text" class="form-control" id="classLink" placeholder="www.zwoosh.ca/room12e3432w2123?valid"
+            <input type="text" class="form-control" id="classLink" placeholder="Ex: https://www.zwoosh.ca/room12e3432w2123?valid"
               value="" required="" />
             <div class="invalid-feedback">Valid link is required.</div>
           </div>
@@ -159,17 +159,9 @@
             </div>
             <div class="col-md-5">
               <label class="form-label">Course colour</label>
-              <!-- <select class="form-select" id="color" required="">
-                  <option value="">Choose...</option>
-                  <option class ="bg-primary">Blue</option>
-                  <option class ="bg-success">Green</option>
-                  <option class ="bg-danger">Red</option>
-                  <option class ="bg-warning">Yellow</option>
-                  <option class ="bg-info">Cyan</option>
-                </select> -->
               <br />
-              <div class="btn-group-vertical" id="colours">
-                <input type="radio" class="btn-check" name="btncolour" id="btnblue" autocomplete="off" checked />
+              <div class="btn-group-horizontal" id="colours">
+                <input type="radio" class="btn-check" name="btncolour" id="btnblue" autocomplete="off" />
                 <label class="btn btn-outline-primary" for="btnBlue">Blue</label>
 
                 <input type="radio" class="btn-check" name="btncolour" id="btngreen" autocomplete="off" />
