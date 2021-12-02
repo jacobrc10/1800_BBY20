@@ -122,15 +122,6 @@
 
   <div id="add-after-me"></div>
 
-  <div class="toast bg-primary text-white fade show" id="myToast">
-    <div class="toast-header bg-primary text-white">
-      <strong class="me-auto"><i class="bi-gift-fill"></i>Remember to add your courses!</strong>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" id="hideBtn"></button>
-    </div>
-    <div class="toast-body">
-      Click the account icon in the top right!
-    </div>
-  </div>
 
   <div aria-live="polite" aria-atomic="true" id="toastContain">
     <!-- Position it: -->
@@ -609,11 +600,6 @@
       });
     }
 
-    $(document).ready(function () {
-      $("#hideBtn").click(function () {
-        $("#myToast").toast("hide");
-      });
-    });
   </script>
 </body>
 
