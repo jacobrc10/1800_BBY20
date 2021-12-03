@@ -280,6 +280,7 @@
     }
     displayCourseList();
 
+    //This function adds all of the events stored in firebase and organizes them by the time
     function addTab() {
       firebase.auth().onAuthStateChanged((user) => {
         db.collection("users")
