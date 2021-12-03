@@ -191,6 +191,7 @@
 
   <!-- Javascript -->
   <script>
+    //Counter Increment for the message number
     var increment = 1;
 
     function insertName() {
@@ -290,6 +291,7 @@
     }
     displayCourseList();
 
+    //Sends the details of the thread which are the contents, userID, date, name of sender and message number
     function sendMessage() {
       let Message = document.getElementById("message").value;
 
@@ -299,7 +301,7 @@
         if (user) {
           var userID = user.uid;
 
-          //The collection name
+
           let incrementString = "Message#: " + increment;
 
           //Relays back the message, user ID, timestamp of date and the message number
@@ -316,13 +318,14 @@
         }
       });
       increment++;
-      console.log(increment + " send");
     }
 
+    //This functions clears the thread input which is invoked after sending a thread
     function clearMessageBox() {
       document.getElementById("message").value = "";
     }
 
+    //This function uses DOM to add a whole new thread
     function addMessage() {
       let idIncrement = "message-goes-here" + increment;
 
@@ -330,8 +333,6 @@
       let incrementString = "Message#: " + increment;
 
       let dateString = "date-goes-here" + increment;
-
-      console.log(increment);
 
       tag.innerHTML =
         '<li class="clearfix">' +
@@ -382,10 +383,9 @@
       element.appendChild(tag);
     }
 
+    //Adds the contents of the newly inserted message from firebase
     function addContent() {
       let incrementString = "Message#: " + increment;
-
-      console.log(incrementString);
 
       db.collection("Messages")
         .doc(incrementString)
@@ -398,8 +398,6 @@
 
           var date =
             document.getElementsByClassName("date-goes-here")[increment - 1];
-          //Tests if the inserted message has the same increment as the sent message
-          console.log(increment + " insert");
 
           //Inserts the message to HTML
           message.innerHTML = doc.data().Message;
@@ -423,15 +421,13 @@
         });
     }
 
+    //This functions inserts the template of the messages sent previously
     function loadPreviousChat() {
       db.collection("Messages")
         .get()
         .then((snap) => {
           size = snap.size; // will return the collection size
           localStorage.setItem("collectionSize", size);
-          console.log(
-            "Collection size: " + localStorage.getItem("collectionSize")
-          );
         });
 
       db.collection("Messages")
@@ -446,6 +442,7 @@
 
             let dateString = "date-goes-here" + increment;
 
+            //Message sent by the user
             tagSelf.innerHTML =
               '<li class="clearfix">' +
               "<br />" +
@@ -491,6 +488,7 @@
               "</div>" +
               "</li>";
 
+            //Message sent by other users
             tagElse.innerHTML =
               '<li class="clearfix">' +
               "<br />" +
@@ -548,7 +546,7 @@
                 element.appendChild(tagElse);
               }
             });
-            console.log(incrementString);
+
             increment++;
           });
         });
@@ -556,6 +554,7 @@
     }
     loadPreviousChat();
 
+    //This function updates the blank templates with values from firestore
     function updatePreviousChat() {
       db.collection("Messages")
         .orderBy("Date")
@@ -568,8 +567,6 @@
 
             var date =
               document.getElementsByClassName("date-goes-here")[i - 1];
-            //Tests if the inserted message has the same increment as the sent message
-            console.log(i + " insert");
 
             var name = document.getElementsByClassName("messageName")[i - 1];
 
@@ -597,6 +594,7 @@
     }
     updatePreviousChat();
 
+    //This function finds which reply button has been clicked and displays a reply message form
     function findReplyClicked(messageNum) {
       var element = document.getElementsByClassName("add-message-after-me")[
         messageNum
@@ -632,21 +630,11 @@
 
     let count = 0;
 
-    function insertReply(messageNum, Message, userID, replyCount, name) {
+    //This displays "Reply Sent" once the submit button has been sent
+    function insertReply(messageNum) {
       incrementString = "Message#: " + messageNum;
 
       document.getElementById("remove-reply").remove();
-
-      // tag.innerHTML = '<li class="clearfix ' + incrementString +
-      //   '" style="border: black 1px solid; background-color: #FFFFFF; padding-right: 5em; justify-itens: left">' +
-      //   '<div class="message-data">' +
-      //   '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="width: 2em;padding-top: 1em">' +
-      //   '<span class="message-data-name" id="temporaryNameTarget"></span>' +
-
-      //   '<p class="reply-time-goes-here" id="temporaryTimeTarget" style="padding-left: 2em; margin-top: -1em; margin-left: 0vw"></p>' +
-      //   '</div>' +
-      //   '<div class="reply-goes-here" style="padding-bottom: 1em; padding-left: 2em" id="temporaryMessageTarget"> hello </div >' +
-      //   '</li>';
 
       tag.innerHTML =
         '<li class="clearfix ' +
@@ -661,12 +649,13 @@
       element.classList.remove("activeMessage");
     }
 
+    //This sends the data from the reply to firestore which includes the message, userID, date and name of user
     function sendReplyInfo(messageNum) {
       let Message = document.getElementById("inputReply").value;
       messageNum++;
       firebase.auth().onAuthStateChanged((user) => {
         var userID = user.uid;
-        //The collection name
+
         let incrementString = "Message#: " + messageNum;
 
         db.collection("Messages")
@@ -677,7 +666,6 @@
             count = querySnapshot.size;
 
             count++;
-            console.log("count: " + count);
 
             let replyIncrementString = "Reply#: " + count;
 
@@ -696,17 +684,17 @@
                 Name: messageName,
               });
 
-            insertReply(messageNum, Message, userID, count, messageName);
+            insertReply(messageNum);
           });
       });
     }
 
+    //When clicked on, this inserts templates of all of the previous replies
     function showReplies(replyNum) {
       var element =
         document.getElementsByClassName("showReplyClass")[replyNum];
       replyNum++;
       var button = document.getElementsByClassName("u-link-v5")[0];
-      console.log(replyNum);
 
       button.disabled = false;
 
@@ -739,6 +727,7 @@
       updateShowReply(replyNum);
     }
 
+    //This function updates the templates with the reply message, name of user and date
     function updateShowReply(replyNum) {
       var incrementString = "Message#: " + replyNum;
       db.collection("Messages")
@@ -759,8 +748,6 @@
             var name = document.getElementsByClassName(
               "reply-name-goes-here"
             )[i - 1];
-            //Tests if the inserted message has the same increment as the sent message
-            console.log(i + " insert");
 
             //Inserts the message to HTML
             message.innerHTML = doc.data().Message;
@@ -789,7 +776,6 @@
             .then((snap) => {
               count = snap.size;
               while (count > 0) {
-                console.log("works first try");
 
                 let messageRemove =
                   document.getElementsByClassName("reply-goes-here")[
@@ -817,10 +803,18 @@
       hideShowReply(replyNum);
     }
 
+    //This functions removes the show reply button after it has been clicked once
     function hideShowReply(replyNum) {
       replyButton = document.getElementById("showReply" + (replyNum - 1));
       replyButton.style = "display: none";
     }
+
+    //Throws an alert if the enter key is pressed
+    $(document).on("keypress", "input", function (e) {
+      if (e.which == 13) {
+        alert("Click the send button on the left to enter a thread.");
+      }
+    });
   </script>
 </body>
 
