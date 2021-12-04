@@ -370,15 +370,19 @@
             .orderBy("dueDate")
             .onSnapshot((snap) => {
               var i = 0;
+              var count = 0;
 
               snap.forEach((doc) => {
                 //iterate thru each doc
 
                 var title = doc.data().title;
                 var dueDate = doc.data().dueDate;
+                var course = doc.data().courseLink;
                 let newcard = CardTemplate.content.cloneNode(true);
-
+                
+                
                 newcard.querySelector(".title").innerHTML = title;
+                
                 newcard.querySelector(".dueDate").innerHTML =
                   "Due date:  " +
                   dueDate.toDate().toLocaleString([], {
@@ -388,14 +392,57 @@
                     hour: "2-digit",
                     minute: "2-digit",
                   });
+                  
 
                 document.getElementById("add_after_me").appendChild(newcard);
+                var li = document.getElementsByClassName("list-group-item list-group-item-primary");
+                li = li[count];
+                li.setAttribute("id", count);
+
+
+                var changeClass = document.getElementById(count);
+                
+                var allCourses = db.collection("users").doc(user.uid).collection("courses");
+                allCourses.get().then(function (querySnapshot) {
+                  querySnapshot.forEach(function (doc) {
+                    var name = doc.data().name;
+                    if (course == name){
+                      switch (doc.data().color){
+                        case "yellow":
+                          changeClass.classList.remove("list-group-item-primary");
+                          changeClass.classList.add("list-group-item-warning");
+                          break;
+                        case "red":
+                          changeClass.classList.remove();
+                          changeClass.classList.add("list-group-item-danger");                         
+                          break;
+                        case "cyan":
+                          changeClass.classList.remove();
+                          changeClass.classList.add("list-group-item-info");                          
+                          break;
+                        case "green":
+                          changeClass.classList.remove();
+                          changeClass.classList.add("list-group-item-success");
+                          break;
+                        case "blue":
+                          changeClass.classList.remove();
+                          changeClass.classList.add("list-group-item-primary");
+                          break;
+                      }
+                    }
+                  })
+                })
+
+                count++;
               });
               i++;
             });
         });
+        
       }
       addTab();
+
+
     </script>
   </body>
 </html>
