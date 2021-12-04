@@ -302,13 +302,13 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+           // console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
             currentUser.get().then((userDoc) => {
               var user_Name = userDoc.data().name;
-              console.log(user_Name);
+              //console.log(user_Name);
               document.getElementById("profilename").innerText = user_Name;
             });
           } else {
@@ -318,12 +318,13 @@
       }
       insertName();
 
+      // Displays courses in side bar
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -336,7 +337,7 @@
               .get()
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " => ", doc.data());
                   var item = document.createElement("div");
                   item.setAttribute(
                     "class",
@@ -345,11 +346,12 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
 
+                  // Sets icon image to course color
                   switch (doc.data().color) {
                     case "red":
                       icoColour = "/images/iconRed.png";
@@ -382,7 +384,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -396,16 +398,20 @@
       }
       displayCourseList();
 
+      // Creates stopwatch timer for mocktest
       var timer = new Timer();
 
+      // Starts timer
       $("#chronoExample .startButton").click(function () {
         timer.start();
       });
 
+      // Pauses timer
       $("#chronoExample .pauseButton").click(function () {
         timer.pause();
       });
 
+      // Stops timer
       $("#chronoExample .stopButton").click(function () {
         timer.stop();
       });
@@ -422,6 +428,7 @@
         $("#chronoExample .values").html(timer.getTimeValues().toString());
       });
 
+      // Adds test to firebase
       function addTest() {
         var testTime = document.getElementById("time").innerText;
         var testName = document.getElementById("test").value;
@@ -429,15 +436,15 @@
         var courseIndex = document.getElementById("course");
         var courseName = courseIndex.options[courseIndex.selectedIndex].text;
 
-        console.log(time);
-        console.log(test);
-        console.log(course);
+        //console.log(time);
+        //console.log(test);
+        //console.log(course);
 
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentUser = db
               .collection("users")
@@ -457,17 +464,18 @@
         });
       }
 
+      // Inserts tests into a table
       function insertTests() {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            console.log(user.uid);
+            //console.log(user.uid);
 
             var courseTable = document.getElementById("testview");
             courseTable.innerHTML = "";
             var row = courseTable.insertRow(0);
             row.classList.add("bg-primary");
 
-            // Creates td's for the table (they're technically bolded td's)
+            // Creates th's for the table (they're technically bolded td's)
             var cell = row.insertCell(0);
             cell.innerHTML = "<b style='color: white;'> Test </b>";
 
@@ -485,12 +493,12 @@
               .get()
               .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                  // doc.data() is never undefined for query doc snapshots
-                  console.log(doc.data());
+                  //console.log(doc.data());
                   var testName = doc.data().test;
                   var testCourse = doc.data().course;
                   var testTime = doc.data().time;
 
+                  // Adds test info to the table
                   row = courseTable.insertRow(courseCounter);
 
                   cell = row.insertCell(0);
@@ -509,6 +517,7 @@
         });
       }
 
+      // Adds courses to the Choose class dropdown
       function addClassToDropdown() {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -521,7 +530,7 @@
                   var option = document.createElement("option");
                   option.value = doc.data().name;
                   option.innerText = doc.data().name;
-                  console.log(option);
+                 // console.log(option);
                   var classDropdown = document.getElementById("course");
                   classDropdown.appendChild(option);
                 });
@@ -532,6 +541,7 @@
 
       addClassToDropdown();
 
+      // Changes the default submit function so we can take the values before the field resets
       $("#submitTest").submit(function (event) {
         addTest();
         event.preventDefault();

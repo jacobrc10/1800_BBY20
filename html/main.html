@@ -253,7 +253,7 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentEvents = db
               .collection("users")
@@ -277,6 +277,7 @@
         });
       }
 
+      // Checks if a task needs to be added to the main page
       function eventCheck() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -305,11 +306,11 @@
                     //console.log("It's time to send a reminder!");
                     createToast(doc.id);
                   } else {
-                    console.log(
-                      "It's not time to send a reminder for " +
-                        doc.data().title +
-                        "!"
-                    );
+                    // console.log(
+                    //   "It's not time to send a reminder for " +
+                    //     doc.data().title +
+                    //     "!"
+                    // );
                   }
                 });
               })
@@ -325,10 +326,11 @@
       }
       eventCheck();
 
+
       function timeToRemind(currentTime, eventTime) {
         var output = false;
 
-        console.log(currentTime + " " + eventTime);
+        //console.log(currentTime + " " + eventTime);
 
         //fairly crude method of checking if the times match up with now, in 1 hour, in 6 hours, and in 1 day
         if (currentTime >= eventTime && currentTime < eventTime + 60000) {
@@ -362,12 +364,13 @@
         return output;
       }
 
+      // Creates a notification if an event is coming up within a certain time.
       function createToast(eventID) {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentEvent = db
               .collection("users")
@@ -380,13 +383,14 @@
             currentEvent
               .get()
               .then(function (currentEvent) {
+                // Creates toast with default toast attributes
                 var ev = document.createElement("div");
                 ev.setAttribute("class", "toast");
                 ev.setAttribute("role", "alert");
                 ev.setAttribute("aria-live", "assertive");
                 ev.setAttribute("aria-atomic", "true");
                 ev.setAttribute("data-bs-autohide", "false");
-                console.log(ev);
+               // console.log(ev);
                 var evHead = document.createElement("div");
                 evHead.setAttribute("class", "toast-header");
                 var evImg = document.createElement("img");
@@ -404,6 +408,8 @@
                 let dateTemp = new Date();
                 var evSmTxt;
                 var evSmMins;
+
+                // Sets time to AM/PM time as its default is 24hour
                 if (dateTemp.getMinutes() < 10) {
                   evSmMins = "0" + dateTemp.getMinutes();
                 } else {
@@ -419,6 +425,7 @@
                   );
                 }
 
+                // Creates the button to remove the toast
                 evSm.appendChild(evSmTxt);
                 var evBut = document.createElement("button");
                 evBut.setAttribute("type", "button");
@@ -442,6 +449,8 @@
 
                 location.appendChild(ev);
 
+
+                // Shows toast
                 var toast = new bootstrap.Toast(ev);
                 toast.show();
               })
@@ -477,7 +486,7 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -490,7 +499,7 @@
               .get()
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " => ", doc.data());
                   var item = document.createElement("div");
                   item.setAttribute(
                     "class",
@@ -499,7 +508,7 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
@@ -536,7 +545,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                 // console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -552,6 +561,8 @@
 
       function setAlert() {
         let increment = 0;
+       
+
         firebase.auth().onAuthStateChanged((user) => {
           db.collection("users")
             .doc(user.uid)
@@ -560,9 +571,13 @@
             .get()
             .then((snap) => {
               snap.forEach((doc) => {
+                var today = firebase.firestore.Timestamp.now().toDate();
+                today.setHours(today.getHours() - 8);
+                var eventDay = doc.data().dueDate.toDate();
+                eventDay.setHours(eventDay.getHours() - 8);
                 if (
-                  doc.data().dueDate.toDate().getUTCDate() ==
-                  firebase.firestore.Timestamp.now().toDate().getUTCDate()
+                  eventDay.getUTCDate() ==
+                  today.getUTCDate()
                 ) {
                   let title = doc.data().title;
                   let time = doc.data().dueDate;
@@ -570,7 +585,7 @@
                   addAlert(title, time, course, increment);
                   increment++;
                 } else {
-                  console.log("doesn't run");
+
                 }
               });
             });
@@ -578,6 +593,7 @@
       }
       setAlert();
 
+      // Adds alert to page showing a task that is due today
       function addAlert(title, time, course, increment) {
         var tag = document.createElement("div");
         var eventColor;
@@ -588,6 +604,7 @@
               .doc(user.uid)
               .collection("courses");
 
+              // Goes through user's courses to find the course that matches the event. Then sets the color to the color of the course.
             courseColor.get().then(function (querySnapshot) {
               querySnapshot.forEach(function (doc) {
                 if (doc.data().name == course) {
@@ -609,12 +626,13 @@
                       eventColor = "rgb(23, 162, 184)";
                       break;
                     default:
-                      console.log("default");
+                     // console.log("default");
                       eventColor = "rgb(0, 0, 0)";
                   }
-                  console.log("Color: ", eventColor);
+                 // console.log("Color: ", eventColor);
                   var colorClass;
 
+                  // Changes the class to show the correct color.
                   if (eventColor == "rgb(220, 53, 69)") {
                     colorClass =
                       '<div class="alert alert-danger" role="alert">';
@@ -643,7 +661,7 @@
 
                   element.appendChild(tag);
 
-                  console.log("function ran");
+                  //console.log("function ran");
 
                   var titlePlace =
                     document.getElementsByClassName("title-goes-here")[

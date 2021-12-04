@@ -236,13 +236,13 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
             currentUser.get().then((userDoc) => {
               var user_Name = userDoc.data().name;
-              console.log(user_Name);
+              //console.log(user_Name);
               document.getElementById("profilename").innerText = user_Name;
             });
           } else {
@@ -252,12 +252,13 @@
       }
       insertName();
 
+      // Displays list of courses in side bar
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -270,7 +271,7 @@
               .get()
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " => ", doc.data());
                   var item = document.createElement("div");
                   item.setAttribute(
                     "class",
@@ -279,11 +280,12 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                 // console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
 
+                  // Sets the icon image to the color of the course
                   switch (doc.data().color) {
                     case "red":
                       icoColour = "/images/iconRed.png";
@@ -316,7 +318,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -330,6 +332,7 @@
       }
       displayCourseList();
 
+      // Creates calendar
       // calendarJs(id, options, startDateTime)
       var calendarInstance = new calendarJs("myCalendar", {
         // options here
@@ -341,15 +344,15 @@
         visibleDays: [0, 1, 2, 3, 4, 5, 6],
       });
 
-      // calendarInstance.addEvents(getEvents());
       getEvents();
 
+      // Gets events and adds them to the calendar.
       function getEvents() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentEvents = db
               .collection("users")
@@ -374,11 +377,13 @@
                   querySnapshot.forEach(function (doc) {
                     // console.log("EventCourse", eventCourse);
                     // console.log("Name", doc.data().name);
+
+                    // Finds the course that corresponds with the event and finds the color of the course
                     if (doc.data().name == eventCourse) {
                       colour = doc.data().color;
                       switch (colour) {
                         case "red":
-                          console.log("red");
+                          //console.log("red");
                           eventColor = "rgb(220, 53, 69)";
                           newEvent = {
                             from: eventTime,
@@ -386,10 +391,11 @@
                             title: eventTitle,
                             color: eventColor,
                           };
+                          // Creates event on calendar coloured red
                           calendarInstance.addEvent(newEvent);
                           break;
                         case "blue":
-                          console.log("blue");
+                          //console.log("blue");
                           eventColor = "rgb(13, 110, 253)";
                           newEvent = {
                             from: eventTime,
@@ -397,10 +403,11 @@
                             title: eventTitle,
                             color: eventColor,
                           };
+                          // Creates event on calendar coloured blue
                           calendarInstance.addEvent(newEvent);
                           break;
                         case "yellow":
-                          console.log("yellow");
+                          //console.log("yellow");
                           eventColor = "rgb(255, 193, 7)";
                           newEvent = {
                             from: eventTime,
@@ -408,10 +415,11 @@
                             title: eventTitle,
                             color: eventColor,
                           };
+                          // Creates event on calendar coloured yellow
                           calendarInstance.addEvent(newEvent);
                           break;
                         case "green":
-                          console.log("green");
+                          //console.log("green");
                           eventColor = "rgb(40, 167, 69)";
                           newEvent = {
                             from: eventTime,
@@ -419,10 +427,11 @@
                             title: eventTitle,
                             color: eventColor,
                           };
+                          // Creates event on calendar coloured green
                           calendarInstance.addEvent(newEvent);
                           break;
                         case "cyan":
-                          console.log("cyan");
+                          //console.log("cyan");
                           eventColor = "rgb(23, 162, 184)";
                           newEvent = {
                             from: eventTime,
@@ -430,10 +439,11 @@
                             title: eventTitle,
                             color: eventColor,
                           };
+                          // Creates event on calendar coloured cyan
                           calendarInstance.addEvent(newEvent);
                           break;
                         default:
-                          console.log("default");
+                         // console.log("default");
                           eventColor = "rgb(0, 0, 0)";
                           newEvent = {
                             from: eventTime,
@@ -456,15 +466,19 @@
         });
       }
 
+      // Adds a clock to the top of the calendar
       function addClock() {
         let dateTemp = new Date();
         var evSmTxt;
         var evSmMins;
+        // Adds a zero so the format is 11:01 instead of 11:1
         if (dateTemp.getMinutes() < 10) {
           evSmMins = "0" + dateTemp.getMinutes();
         } else {
           evSmMins = dateTemp.getMinutes();
         }
+
+        //Sets time to AM/PM time instead of 24hr
         if (dateTemp.getHours() > 11 && dateTemp.getHours() != 12) {
           evSmTxt = document.createTextNode(
             dateTemp.getHours() - 12 + ":" + evSmMins + " PM"
@@ -482,7 +496,9 @@
             dateTemp.getHours() + ":" + evSmMins + " AM"
           );
         }
-        console.log("Clock: ", evSmTxt.data);
+        //console.log("Clock: ", evSmTxt.data);
+
+        // Updates clock time every minute
         document.getElementById("clock").innerText = evSmTxt.data;
         setTimeout(addClock, 60000);
       }
