@@ -375,7 +375,7 @@
             //get the document for current user.
             currentUser.get().then((userDoc) => {
               var user_Name = userDoc.data().name;
-              console.log(user_Name);
+              //console.log(user_Name);
               document.getElementById("profilename").innerText = user_Name;
             });
           } else {
@@ -385,6 +385,7 @@
       }
       insertName();
 
+      //Grabs the course that was send via the url, and displays that course's info.
       function receiveCourse() {
         var url = document.location.href;
         var courseRef = url.split("?")[1];
@@ -418,12 +419,13 @@
       }
       receiveCourse();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -445,7 +447,7 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
@@ -482,7 +484,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -496,6 +498,7 @@
       }
       displayCourseList();
 
+      //Updates the current course in the database to properly reflect the input field.
       function classUpdate() {
         let nameToAdd = document.getElementById("className").value;
         let linkToAdd = document.getElementById("classLink").value;
@@ -521,11 +524,13 @@
           }
         }
 
+        /*
         console.log(nameToAdd);
         console.log(linkToAdd);
         console.log(lectureStatus);
         console.log(labStatus);
         console.log(selectedColour);
+        */
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
