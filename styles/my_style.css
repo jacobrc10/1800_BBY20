@@ -85,3 +85,7 @@ table {
 #eventSelector > button {
   margin: 1em;
 }
+
+#accountPageLink {
+  border: solid gainsboro 1pt;
+}

@@ -6,7 +6,7 @@
 
 ## General Info
 
-This browser based web application to ...
+This browser based web application to provide students with a simple and intuitive calendar and reminder system.
 
 - Hi, my name is Simar. I am excited about this project since I will learn many things about programming and gain insight on how developers work together
 - Hi my name is Jacob. I'm excited about this project because I get to learn more about how to create web applications.
@@ -34,6 +34,22 @@ Content of the project folder:
 
 It has the following subfolders and files:
 ├── .git                            # Folder for git repo
+├── html                            # Folder for html pages
+    /about.html                     # About page with development team descriptions
+    /add-class.html                 # Field entry for adding a course to the database
+    /add-event.html                 # Field entry for adding an event to the database
+    /add-recurring.html             # Field entry for adding a recurring event to database
+    /calendar.html                  # Calendar system, displays the events from the database
+    /chat.html                      # Online chat forum system, reads/writes to database
+    /edit-class.html                # Reads the chosen course from the database and updates the doc
+    /help.html                      # FAQ page for users
+    /index.html                     # Landing page for introduction of app to non-users
+    /links.html                     # Dynamically displays current courses of user
+    /main.html                      # Landing page for returning users
+    /mocktest.html                  # Page for the timer/practice test function
+    /outline.html                   # Template containing the key elements of every page within the app
+    /profile.html                   # Settings for the user's account, with option of deletion.
+    /to-do.html                     # List-view of user's events.
 ├── images                          # Folder for images
     /account.png                    # Default account picture
     /Coming Soon.png                # Placeholder image for incomplete pages
