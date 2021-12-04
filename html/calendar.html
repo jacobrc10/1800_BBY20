@@ -405,6 +405,10 @@
         evSmTxt = document.createTextNode(
           dateTemp.getHours() + 12 + ":" + evSmMins + " AM"
         );
+      } else {
+        evSmTxt = document.createTextNode(
+          dateTemp.getHours() + ":" + evSmMins + " AM"
+        );
       }
       console.log("Clock: ", evSmTxt.data);
       document.getElementById("clock").innerText = evSmTxt.data;
