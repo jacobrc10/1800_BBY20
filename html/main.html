@@ -572,9 +572,15 @@
             .then((snap) => {
               snap.forEach((doc) => {
                 var today = firebase.firestore.Timestamp.now().toDate();
-                today.setHours(today.getHours() - 8);
+
+                // Converts to PST as events after 4pm count as the next day because it adds 8 hours due to UTC time
+                if (today.getHours() > 8) {
+                  today.setHours(today.getHours() - 8);
+                }
                 var eventDay = doc.data().dueDate.toDate();
-                eventDay.setHours(eventDay.getHours() - 8);
+                if (eventDay.getHours() > 8){
+                  eventDay.setHours(eventDay.getHours() - 8);
+                }
                 if (
                   eventDay.getUTCDate() ==
                   today.getUTCDate()
