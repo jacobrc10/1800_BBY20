@@ -384,7 +384,7 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
@@ -428,7 +428,7 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
@@ -465,7 +465,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -498,6 +498,7 @@
 
         let userToAdd;
 
+        /*
         console.log(nameToAdd);
         console.log(typeToAdd);
         console.log(courseToAdd);
@@ -506,6 +507,7 @@
         console.log(timeStartToAdd);
         console.log(timeEndToAdd);
         console.log(daysArrayToAdd);
+        */
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -544,7 +546,7 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -557,10 +559,10 @@
               .get()
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " => ", doc.data());
                   var cour = document.createElement("option");
                   cour.textContent += doc.data().name;
-                  console.log(cour);
+                  //console.log(cour);
                   location.appendChild(cour);
                 });
               })

@@ -322,12 +322,14 @@
 
         let userToAdd;
 
+        /*
         console.log(nameToAdd);
         console.log(typeToAdd);
         console.log(courseToAdd);
         console.log(dateToAdd);
         console.log(timeToAdd);
         console.log(dueToAdd);
+        */
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -384,7 +386,7 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
@@ -421,7 +423,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -457,7 +459,7 @@
                   console.log(doc.id, " => ", doc.data());
                   var cour = document.createElement("option");
                   cour.textContent += doc.data().name;
-                  console.log(cour);
+                  //console.log(cour);
                   location.appendChild(cour);
                 });
               })

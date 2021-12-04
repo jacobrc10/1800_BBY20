@@ -392,7 +392,7 @@
               .get()
               .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
-                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " => ", doc.data());
                   var item = document.createElement("div");
                   item.setAttribute(
                     "class",
@@ -478,11 +478,13 @@
           }
         }
 
+        /*
         console.log(nameToAdd);
         console.log(linkToAdd);
         console.log(lectureStatus);
         console.log(labStatus);
         console.log(selectedColour);
+        */
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {

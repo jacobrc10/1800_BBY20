@@ -375,7 +375,7 @@
             //get the document for current user.
             currentUser.get().then((userDoc) => {
               var user_Name = userDoc.data().name;
-              console.log(user_Name);
+              //console.log(user_Name);
               document.getElementById("profilename").innerText = user_Name;
             });
           } else {
@@ -425,7 +425,7 @@
           // Check if user is signed in:
           if (user) {
             // Do something for the current logged-in user here:
-            console.log(user.uid);
+            //console.log(user.uid);
             //go to the correct user document by referencing to the user uid
             currentCourses = db
               .collection("users")
@@ -447,7 +447,7 @@
 
                   var cour = document.createElement("a");
                   cour.setAttribute("href", "edit-class.html?" + doc.id);
-                  console.log(cour);
+                  //console.log(cour);
                   cour.textContent += doc.data().name;
 
                   var icoColour;
@@ -484,7 +484,7 @@
                   item.appendChild(ico);
                   item.appendChild(cour);
 
-                  console.log(item);
+                  //console.log(item);
                   location.appendChild(item);
                 });
               })
@@ -524,11 +524,13 @@
           }
         }
 
+        /*
         console.log(nameToAdd);
         console.log(linkToAdd);
         console.log(lectureStatus);
         console.log(labStatus);
         console.log(selectedColour);
+        */
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
