@@ -373,6 +373,7 @@
       }
       insertName();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -403,8 +404,8 @@
                   console.log(cour);
                   cour.textContent += doc.data().name;
 
+                  //Grabs an icon to display with the name depending on the course colour.
                   var icoColour;
-
                   switch (doc.data().color) {
                     case "red":
                       icoColour = "/images/iconRed.png";
@@ -451,6 +452,7 @@
       }
       displayCourseList();
 
+      //Takes the input from the input field and updates the database under "courses".
       function classCreate() {
         let nameToAdd = document.getElementById("className").value;
         let linkToAdd = document.getElementById("classLink").value;

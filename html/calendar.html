@@ -252,6 +252,7 @@
       }
       insertName();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -344,6 +345,7 @@
       // calendarInstance.addEvents(getEvents());
       getEvents();
 
+      //Grabs events based on the "events" database and prepares a list of events.
       function getEvents() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -456,6 +458,7 @@
         });
       }
 
+      //Grabs the current time using Date objects and displays the current time.
       function addClock() {
         let dateTemp = new Date();
         var evSmTxt;

@@ -385,6 +385,7 @@
       }
       insertName();
 
+      //Grabs the course that was send via the url, and displays that course's info.
       function receiveCourse() {
         var url = document.location.href;
         var courseRef = url.split("?")[1];
@@ -418,6 +419,7 @@
       }
       receiveCourse();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -496,6 +498,7 @@
       }
       displayCourseList();
 
+      //Updates the current course in the database to properly reflect the input field.
       function classUpdate() {
         let nameToAdd = document.getElementById("className").value;
         let linkToAdd = document.getElementById("classLink").value;

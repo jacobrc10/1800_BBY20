@@ -311,6 +311,7 @@
       }
       insertName();
 
+      //Creates an event in the "events" database under the user. Writes in the database based on the input field.
       function eventCreate() {
         let nameToAdd = document.getElementById("eventName").value;
         let typeToAdd = document.getElementById("eventType").value;
@@ -355,6 +356,7 @@
         });
       }
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -433,6 +435,7 @@
       }
       displayCourseList();
 
+      //Grabs the courses in database and display the names as options in the input field.
       function retrieveCourses() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:

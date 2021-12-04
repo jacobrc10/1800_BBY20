@@ -252,6 +252,7 @@
       }
       insertName();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:

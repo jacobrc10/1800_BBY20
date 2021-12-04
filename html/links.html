@@ -248,6 +248,7 @@
       }
       insertName();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -326,6 +327,7 @@
       }
       displayCourseList();
 
+      //Grabs all of the courses, and extracts the link element. Creates a list with all the hrefs to display to user.
       function displayCourseLinks() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:

@@ -197,7 +197,6 @@
                 </div>
               </div>
               <hr class="my-4" />
-
             </form>
 
             <div>
@@ -338,7 +337,6 @@
             currentUser.get().then((userDoc) => {
               var user_Name = userDoc.data().name;
 
-
               var img = document.createElement("img");
               var src = document.getElementById("accountImage");
               img.src = "/images/account.png";
@@ -347,9 +345,7 @@
 
               console.log(user_Name);
               document.getElementById("profilename").innerText = user_Name;
-              document.getElementById("usernamesetting").innerText = user_Name
-
-
+              document.getElementById("usernamesetting").innerText = user_Name;
             });
           } else {
             // No user is signed in.
@@ -358,6 +354,7 @@
       }
       insertName();
 
+      //Grabs the list of courses from user's database and produces the names in a list.
       function displayCourseList() {
         firebase.auth().onAuthStateChanged((user) => {
           // Check if user is signed in:
@@ -436,7 +433,7 @@
       }
       displayCourseList();
 
-
+      //Listens to check if a button has been clicked, if it is then it displays a templated element.
       document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById("myBtn");
 
@@ -446,6 +443,7 @@
         });
       });
 
+      //Deletes the user's account from the database, sends the user to the landing page.
       function deleteAccount() {
         const user = firebase.auth().currentUser;
 
